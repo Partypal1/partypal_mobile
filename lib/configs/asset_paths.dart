@@ -10,6 +10,6 @@ class AssetPaths {
   static String userIcon = 'assets/icons/user.svg';
 
   // png images
-  static String logoImave = 'assets/images/logo.png';
+  static String logoImage = 'assets/images/logo.png';
   static String welcomeImage = 'assets/images/welcome.png';
 }
