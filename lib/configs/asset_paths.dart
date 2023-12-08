@@ -12,4 +12,5 @@ class AssetPaths {
   // png images
   static String logoImage = 'assets/images/logo.png';
   static String welcomeImage = 'assets/images/welcome.png';
+  static String splashScreenBackgroundImage = 'assets/images/splash_screen_background.png';
 }
