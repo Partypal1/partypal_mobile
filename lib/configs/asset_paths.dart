@@ -13,4 +13,7 @@ class AssetPaths {
   static String logoImage = 'assets/images/logo.png';
   static String welcomeImage = 'assets/images/welcome.png';
   static String splashScreenBackgroundImage = 'assets/images/splash_screen_background.png';
+  static String onboardingBackgroundImage1 = 'assets/images/onboarding_background_1.png';
+  static String onboardingBackgroundImage2 = 'assets/images/onboarding_background_2.png';
+  static String onboardingBackgroundImage3 = 'assets/images/onboarding_background_3.png';
 }

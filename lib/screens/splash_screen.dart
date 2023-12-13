@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:partypal/configs/asset_paths.dart';
+import 'package:partypal/configs/route_paths.dart';
+import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/configs/session_manager.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,11 +15,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState(){
     super.initState();
-    Future.delayed(
-      const Duration(seconds: 1),
+    Future.delayed( //TODO: preload assets here instead
+      const Duration(seconds: 2),
       () async{
         if(await SessionManager.isFirstRun){  
-          //TODO: pushReplacement to onboaring_screen
+          routerConfig.pushReplacement(RoutePaths.onboaringScreen);
         } else {
           //TODO: pushReplacement to auth or home screen depending on authentication state
         }
