@@ -8,6 +8,7 @@ class AssetPaths {
   static String searchIcon = 'assets/icons/search.svg';
   static String tickIcon = 'assets/icons/tick.svg';
   static String userIcon = 'assets/icons/user.svg';
+  static String googleIcon = 'assets/icons/google.svg';
 
   // png images
   static String logoImage = 'assets/images/logo.png';
