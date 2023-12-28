@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+//TODO: switch to the hive package
 class SessionManager{
 
   static Future<bool> get isFirstRun async {
