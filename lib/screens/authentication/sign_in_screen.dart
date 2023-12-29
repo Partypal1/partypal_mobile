@@ -24,11 +24,11 @@ class _SignInScreenState extends State<SignInScreen> {
   bool passwordVisible = false;
   final _formKey = GlobalKey<FormState>();
 
+  FocusNode emailFocus = FocusNode();
+  FocusNode passwordFocus = FocusNode();
+
   @override
   Widget build(BuildContext context) {
-    FocusNode emailFocus = FocusNode();
-    FocusNode passwordFocus = FocusNode();
-
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(0.05.sw),
@@ -73,7 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     10.horizontalSpace,
                     Text(
                       'Partypal',
-                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onSurface
                       ),

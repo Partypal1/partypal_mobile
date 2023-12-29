@@ -31,6 +31,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String countryCode = '+234';
   String password = '';
 
+  FocusNode firstNameFocus = FocusNode();
+  FocusNode lastNameFocus = FocusNode();
+  FocusNode emailFocus = FocusNode();
+  FocusNode phoneNumberFocus = FocusNode();
+  FocusNode passwordFocus = FocusNode();
+
   late AuthProider auth;
 
   @override
@@ -43,11 +49,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    FocusNode firstNameFocus = FocusNode();
-    FocusNode lastNameFocus = FocusNode();
-    FocusNode emailFocus = FocusNode();
-    FocusNode phoneNumberFocus = FocusNode();
-    FocusNode passwordFocus = FocusNode();
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(0.05.sw),
@@ -380,6 +381,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       log(countryCode + phoneNumber);
       log(password);
       log(widget.userType.name);
+      routerConfig.push(RoutePaths.verificationScreen, extra: {'email': email});
     }
   }
 }
