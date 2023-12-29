@@ -92,71 +92,75 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 0.05.sh.verticalSpace,
 
-                TextFormField( // email
-                  focusNode: emailFocus,
-                  autofillHints: const [AutofillHints.email],
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    hintText: 'Enter your email',
-                    hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
+                AutofillGroup(
+                  child: TextFormField( // email
+                    focusNode: emailFocus,
+                    autofillHints: const [AutofillHints.email, AutofillHints.username],
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      hintText: 'Enter your email',
+                      hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20)
+                      ),
+                      
                     ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20)
-                    ),
-                    
+                    validator: (value){
+                
+                      if (value == null || value.isEmpty){
+                        return 'Email is required';
+                      }
+                      email = value;
+                      return null;
+                    },
+                    onFieldSubmitted: (value){
+                      FocusScope.of(context).requestFocus(passwordFocus);
+                    },
                   ),
-                  validator: (value){
-
-                    if (value == null || value.isEmpty){
-                      return 'Email is required';
-                    }
-                    email = value;
-                    return null;
-                  },
-                  onFieldSubmitted: (value){
-                    FocusScope.of(context).requestFocus(passwordFocus);
-                  },
                 ),
 
                 0.02.sh.verticalSpace,
 
-                TextFormField( // password
-                  focusNode: passwordFocus,
-                  autocorrect: false,
-                  autofillHints: const [AutofillHints.password],
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: passwordVisible,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    hintText: 'Enter your password',
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          passwordVisible = !passwordVisible;
-                        });
-                      },
-                      child: Icon(
-                        passwordVisible
-                        ? Icons.visibility_outlined
-                        : Icons.visibility_off_outlined,
+                AutofillGroup(
+                  child: TextFormField( // password
+                    focusNode: passwordFocus,
+                    autocorrect: false,
+                    autofillHints: const [AutofillHints.password],
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: passwordVisible,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      hintText: 'Enter your password',
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            passwordVisible = !passwordVisible;
+                          });
+                        },
+                        child: Icon(
+                          passwordVisible
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
+                        ),
                       ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20)
+                      )
                     ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20)
-                    )
+                    validator: (value){
+                      if(value == null || value.isEmpty){
+                        return 'Password is required';
+                      }
+                      password = value;
+                      return null;
+                    },
+                    onFieldSubmitted: (value){
+                      FocusScope.of(context).requestFocus(FocusNode());
+                    },
                   ),
-                  validator: (value){
-                    if(value == null || value.isEmpty){
-                      return 'Password is required';
-                    }
-                    password = value;
-                    return null;
-                  },
-                  onFieldSubmitted: (value){
-                    FocusScope.of(context).requestFocus(FocusNode());
-                  },
                 ),
 
                 0.03.sh.verticalSpace,
