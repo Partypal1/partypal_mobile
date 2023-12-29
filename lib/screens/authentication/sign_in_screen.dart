@@ -27,7 +27,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
   late FocusNode emailFocus = FocusNode();
   late FocusNode passwordFocus = FocusNode();
-  
   late AuthProider auth;
 
   @override
@@ -42,11 +41,12 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   void dispose(){
+    auth.dispose();
     emailFocus.dispose();
     passwordFocus.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

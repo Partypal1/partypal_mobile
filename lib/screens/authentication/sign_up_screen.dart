@@ -36,7 +36,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late FocusNode emailFocus;
   late FocusNode phoneNumberFocus;
   late FocusNode passwordFocus;
-
   late AuthProider auth;
 
   @override
@@ -54,6 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   void dispose(){
+    auth.dispose();
     firstNameFocus.dispose();
     lastNameFocus.dispose();
     emailFocus.dispose();
