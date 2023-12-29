@@ -7,6 +7,7 @@ import 'package:partypal/configs/asset_paths.dart';
 import 'package:partypal/configs/route_paths.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/models/user_model.dart';
+import 'package:partypal/providers/auth_provider.dart';
 
 class SignInScreen extends StatefulWidget {
   final UserType userType;
@@ -24,9 +25,28 @@ class _SignInScreenState extends State<SignInScreen> {
   bool passwordVisible = false;
   final _formKey = GlobalKey<FormState>();
 
-  FocusNode emailFocus = FocusNode();
-  FocusNode passwordFocus = FocusNode();
+  late FocusNode emailFocus = FocusNode();
+  late FocusNode passwordFocus = FocusNode();
+  
+  late AuthProider auth;
 
+  @override
+  void initState(){
+    super.initState();
+    auth = AuthProider()..addListener(() {
+      setState(() {});
+    });
+    emailFocus = FocusNode();
+    passwordFocus = FocusNode();
+  }
+
+  @override
+  void dispose(){
+    emailFocus.dispose();
+    passwordFocus.dispose();
+    super.dispose();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

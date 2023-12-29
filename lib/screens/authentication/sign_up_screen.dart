@@ -31,11 +31,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String countryCode = '+234';
   String password = '';
 
-  FocusNode firstNameFocus = FocusNode();
-  FocusNode lastNameFocus = FocusNode();
-  FocusNode emailFocus = FocusNode();
-  FocusNode phoneNumberFocus = FocusNode();
-  FocusNode passwordFocus = FocusNode();
+  late FocusNode firstNameFocus;
+  late FocusNode lastNameFocus;
+  late FocusNode emailFocus;
+  late FocusNode phoneNumberFocus;
+  late FocusNode passwordFocus;
 
   late AuthProider auth;
 
@@ -45,6 +45,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
     auth = AuthProider()..addListener(() {
       setState(() {});
     });
+    firstNameFocus = FocusNode();
+    lastNameFocus = FocusNode();
+    emailFocus = FocusNode();
+    phoneNumberFocus = FocusNode();
+    passwordFocus = FocusNode();
+  }
+
+  @override
+  void dispose(){
+    firstNameFocus.dispose();
+    lastNameFocus.dispose();
+    emailFocus.dispose();
+    phoneNumberFocus.dispose();
+    passwordFocus.dispose();
+    super.dispose();
   }
 
   @override
