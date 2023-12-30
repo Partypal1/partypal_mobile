@@ -209,6 +209,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         )
                       ],
                     ),
+                    0.01.sh.verticalSpace,
                     GestureDetector(
                       onTap: (){
                         routerConfig.push(RoutePaths.resetPasswordScreen);
