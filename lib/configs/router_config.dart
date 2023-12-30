@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:partypal/configs/route_paths.dart';
+import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/models/user_model.dart';
 import 'package:partypal/screens/authentication/reset_password_screen.dart';
 import 'package:partypal/screens/authentication/select_user_profile_screen.dart';

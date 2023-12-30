@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:partypal/configs/asset_paths.dart';
-import 'package:partypal/configs/route_paths.dart';
+import 'package:partypal/constants/asset_paths.dart';
+import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/configs/router_config.dart';
-import 'package:partypal/configs/session_manager.dart';
+import 'package:partypal/data/session_manager.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

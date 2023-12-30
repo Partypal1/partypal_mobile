@@ -3,11 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:partypal/configs/asset_paths.dart';
-import 'package:partypal/configs/route_paths.dart';
+import 'package:partypal/constants/asset_paths.dart';
+import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/models/user_model.dart';
-import 'package:partypal/providers/auth_provider.dart';
+import 'package:partypal/services/auth_provider.dart';
 
 class SignInScreen extends StatefulWidget {
   final UserType userType;
