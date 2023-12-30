@@ -1,5 +1,7 @@
+import 'package:partypal/constants/preference_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+//TODO: switch to the hive package
 class SessionManager{
 
   static Future<bool> get isFirstRun async {
@@ -13,9 +15,4 @@ class SessionManager{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool(PreferenceKeys.isFirstRun, value);
   }
-}
-
-class PreferenceKeys{
-  // define shared preference keys here
-  static String isFirstRun = 'isFirstRun';
 }
