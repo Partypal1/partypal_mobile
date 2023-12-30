@@ -9,7 +9,7 @@ import 'package:partypal/screens/authentication/select_user_profile_screen.dart'
 import 'package:partypal/screens/authentication/sign_in_screen.dart';
 import 'package:partypal/screens/authentication/sign_up_screen.dart';
 import 'package:partypal/screens/authentication/verification_screen.dart';
-import 'package:partypal/screens/onboarding_screen.dart';
+import 'package:partypal/screens/onboarding/onboarding_screen.dart';
 import 'package:partypal/screens/splash_screen.dart';
 
 final GoRouter routerConfig = GoRouter( // TODO: add routing animations
