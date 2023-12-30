@@ -157,19 +157,19 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         
                         : FittedBox( // resend button
                           child: SizedBox( 
-                            height: 60,
+                            height: 40,
                             child: GestureDetector(
                               onTap: _resendCode,
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
+                                  borderRadius: BorderRadius.circular(20),
                                   border: Border.all(
                                     color: Theme.of(context).colorScheme.onSurface
                                   ),
                                   
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                                  padding: const EdgeInsets.symmetric(horizontal: 24),
                                   child: Center(
                                     child: Text(
                                       'Resend code',

@@ -367,6 +367,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
   void _signUp(){
     log('signing up ...');
+    FocusScope.of(context).requestFocus(FocusNode());
     if(_formKey.currentState!.validate()){
       //TODO: implement sign up
       log(firstName);

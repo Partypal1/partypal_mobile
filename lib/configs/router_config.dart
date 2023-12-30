@@ -6,6 +6,7 @@ import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/models/user_model.dart';
 import 'package:partypal/screens/authentication/reset_password_screen.dart';
 import 'package:partypal/screens/authentication/select_user_profile_screen.dart';
+import 'package:partypal/screens/authentication/set_password_screen.dart';
 import 'package:partypal/screens/authentication/sign_in_screen.dart';
 import 'package:partypal/screens/authentication/sign_up_screen.dart';
 import 'package:partypal/screens/authentication/verification_screen.dart';
@@ -98,9 +99,17 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
     ),
 
     GoRoute(
-      path: RoutePaths.forgotPasswordScreen,
+      path: RoutePaths.resetPasswordScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const ResetPasswordScreen(),
+        key: state.pageKey,
+      ),
+    ),
+
+    GoRoute(
+      path: RoutePaths.setPasswordScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const SetPasswordScreen(),
         key: state.pageKey,
       ),
     ),

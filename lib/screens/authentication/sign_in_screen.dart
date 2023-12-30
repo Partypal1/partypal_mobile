@@ -163,7 +163,7 @@ class _SignInScreenState extends State<SignInScreen> {
           
                     0.03.sh.verticalSpace,
           
-                    SizedBox( // sign up
+                    SizedBox( // sign in
                       height: 60,
                       child: GestureDetector(
                         onTap: _signIn,
@@ -211,7 +211,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     GestureDetector(
                       onTap: (){
-                        routerConfig.push(RoutePaths.forgotPasswordScreen);
+                        routerConfig.push(RoutePaths.resetPasswordScreen);
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -284,6 +284,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
     void _signIn(){
       log('signing in ...');
+      FocusScope.of(context).requestFocus(FocusNode());
       if(_formKey.currentState!.validate()){
         //TODO: implement sign in
         log(email);

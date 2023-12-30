@@ -1,4 +1,5 @@
 class AssetPaths {
+  AssetPaths._();
   // svg icons
   static String homeIcon = 'assets/icons/home.svg';
   static String momentsIcon = 'assets/icons/moments.svg';
