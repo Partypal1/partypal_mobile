@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:partypal/configs/router_config.dart';
+import 'package:partypal/widgets/app_bar.dart';
 
 class VerificationScreen extends StatefulWidget {
   final String email;
@@ -32,7 +31,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
     digitControllers = List.generate(numDigits, (index) => TextEditingController());
     for (var cnt in digitControllers){
       cnt.addListener(() {
-        log('something changed');
         setState(() {
           String code = '';
           for(var cnt in digitControllers){
@@ -67,153 +65,131 @@ class _VerificationScreenState extends State<VerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(0.03.sw),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              0.03.sh.verticalSpace,
-            
-              Row( // appbar 
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: (){
-                      routerConfig.pop(context);
-                    },
-                    child: const SizedBox.square(
-                      dimension: 40,
-                      child: Icon(Icons.arrow_back_ios)
-                    )
-                  ),
-                  const Expanded(child: SizedBox()),
+      body: CustomScrollView(
+        slivers: [
+          SliverPersistentHeader(delegate: SliverCustomAppBarDelegate(title: 'Verification')),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(0.03.sw),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [           
                   Text(
-                    'Verification',
-                    style:  Theme.of(context).textTheme.titleMedium?.copyWith(
+                    "We've emailed you a \n$numDigits-digit code",
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold
                     ),
+                    textAlign: TextAlign.center,
                   ),
-                  const Expanded(child: SizedBox()),
-                ],
-              ),
-        
-              0.05.sh.verticalSpace,
-        
-              Text(
-                "We've emailed you a \n$numDigits-digit code",
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold
-                ),
-                textAlign: TextAlign.center,
-              ),
-        
-              0.03.sh.verticalSpace,
-        
-              Text(
-                "please check ${widget.email} and enter the otp code here",
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  fontSize: 20
-                ),
-                textAlign: TextAlign.center,
-              ),
-        
-              0.03.sh.verticalSpace,
-        
-              Row( // code input
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: List.generate(numDigits, (index){
-                  return DigitBox(
-                    focusNode: digitNodes[index],
-                    controller: digitControllers[index],
-                    previousNode: (index > 0) ? digitNodes[index-1] : null,
-                    nextNode: (index < numDigits - 1) ? digitNodes[index+1] : null,
-                    previousController: (index > 0) ? digitControllers[index-1] : null,
-                  );
-                }),
-              ),
-        
-              0.05.sh.verticalSpace,
-        
-              SizedBox( // verify button
-                height: 60,
-                child: InkWell(
-                  onTap: _verifyCode,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: codeIsValid
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.onSurface.withOpacity(0.7)
+              
+                  0.03.sh.verticalSpace,
+              
+                  Text(
+                    "please check ${widget.email} and enter the otp code here",
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontSize: 20
                     ),
-                    child: Center(
-                      child: Text(
-                        'Verify account',
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.surface
-                        )
+                    textAlign: TextAlign.center,
+                  ),
+              
+                  0.03.sh.verticalSpace,
+              
+                  Row( // code input
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: List.generate(numDigits, (index){
+                      return DigitBox(
+                        focusNode: digitNodes[index],
+                        controller: digitControllers[index],
+                        previousNode: (index > 0) ? digitNodes[index-1] : null,
+                        nextNode: (index < numDigits - 1) ? digitNodes[index+1] : null,
+                        previousController: (index > 0) ? digitControllers[index-1] : null,
+                      );
+                    }),
+                  ),
+              
+                  0.05.sh.verticalSpace,
+              
+                  SizedBox( // verify button
+                    height: 60,
+                    child: InkWell(
+                      onTap: _verifyCode,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: codeIsValid
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.onSurface.withOpacity(0.7)
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Verify account',
+                            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: Theme.of(context).colorScheme.surface
+                            )
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-
-              0.03.sh.verticalSpace,
-              
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  resendStopwatch.isRunning
-                    ? Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text('Resend code in'),
-                          5.horizontalSpace,
-                          Text( // minutes
-                            (countdownDuration - resendStopwatch.elapsed).inMinutes.toString().padLeft(2, '0'),
-                            style: Theme.of(context).textTheme.labelLarge,  
-                          ),
-                          Text(':', style: Theme.of(context).textTheme.labelLarge),
-                          Text( // seconds
-                            ((countdownDuration - resendStopwatch.elapsed).inSeconds % 60).toString().padLeft(2, '0'),
-                            style: Theme.of(context).textTheme.labelLarge,  
-                          ),
-                        ],
-                      )
-                    
-                    : FittedBox( // resend button
-                      child: SizedBox( 
-                        height: 60,
-                        child: GestureDetector(
-                          onTap: _resendCode,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(
-                                color: Theme.of(context).colorScheme.onSurface
+          
+                  0.03.sh.verticalSpace,
+                  
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      resendStopwatch.isRunning
+                        ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Text('Resend code in'),
+                              5.horizontalSpace,
+                              Text( // minutes
+                                (countdownDuration - resendStopwatch.elapsed).inMinutes.toString().padLeft(2, '0'),
+                                style: Theme.of(context).textTheme.labelLarge,  
                               ),
-                              
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 12),
-                              child: Center(
-                                child: Text(
-                                  'Resend code',
-                                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              Text(':', style: Theme.of(context).textTheme.labelLarge),
+                              Text( // seconds
+                                ((countdownDuration - resendStopwatch.elapsed).inSeconds % 60).toString().padLeft(2, '0'),
+                                style: Theme.of(context).textTheme.labelLarge,  
+                              ),
+                            ],
+                          )
+                        
+                        : FittedBox( // resend button
+                          child: SizedBox( 
+                            height: 60,
+                            child: GestureDetector(
+                              onTap: _resendCode,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  border: Border.all(
                                     color: Theme.of(context).colorScheme.onSurface
-                                  )
+                                  ),
+                                  
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                                  child: Center(
+                                    child: Text(
+                                      'Resend code',
+                                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                        color: Theme.of(context).colorScheme.onSurface
+                                      )
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
+                    ],
+                  )
                 ],
-              )
-            ],
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
