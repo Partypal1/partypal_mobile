@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:partypal/configs/asset_paths.dart';
 import 'package:partypal/configs/route_paths.dart';
 import 'package:partypal/configs/router_config.dart';
-import 'package:partypal/ui_components/onboarding_card.dart';
+import 'package:partypal/widgets/onboarding_card.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboaringScreen extends StatefulWidget {
