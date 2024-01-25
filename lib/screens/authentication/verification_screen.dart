@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:partypal/configs/router_config.dart';
+import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/widgets/app_bar.dart';
 
 class VerificationScreen extends StatefulWidget {
@@ -65,11 +67,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(delegate: SliverCustomAppBarDelegate(title: 'Verification')),
-          SliverToBoxAdapter(
-            child: Padding(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const CustomAppBar(title: 'Verification'),
+            Padding(
               padding: EdgeInsets.all(0.03.sw),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -131,7 +133,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       ),
                     ),
                   ),
-          
+            
                   0.03.sh.verticalSpace,
                   
                   Row(
@@ -188,8 +190,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -198,6 +200,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
     if(codeIsValid){
       //TODO: verify then navigate
       log('verified');
+      routerConfig.push(RoutePaths.welcomeScreen);    
     }
   }
   void _resendCode(){

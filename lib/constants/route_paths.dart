@@ -8,4 +8,10 @@ class RoutePaths {
   static const String verificationScreen = '/verification_screen';
   static const String resetPasswordScreen = '/reset_password_screen';
   static const String setPasswordScreen = '/set_password_screen';
+  static const String welcomeScreen = '/welcome_screen';
+  static const String chooseFavouriteClubsScreen = '/choose_favourite_clubs';
+  static const String setProfileScreen = '/set_profile_screen';
+  static const String home = '/home';
+  static const String exploreScreen = '/explore_screen';
+  static const String postScreen = '/post_screen';
 }

@@ -41,11 +41,11 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(delegate: SliverCustomAppBarDelegate(title: 'Set password')),
-          SliverToBoxAdapter(
-            child: Padding(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const CustomAppBar(title: 'Set password'),
+            Padding(
               padding: EdgeInsets.all(0.03.sw),
               child: Form(
                 key: formKey,
@@ -87,9 +87,9 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
                         FocusScope.of(context).requestFocus(confirmPasswordNode);
                       },
                     ),
-
+      
                     0.03.sh.verticalSpace,
-
+      
                     TextFormField( // confirm password
                       focusNode: confirmPasswordNode,
                       controller: confirmPasswordController,
@@ -150,8 +150,8 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

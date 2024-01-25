@@ -66,11 +66,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(delegate: (SliverCustomAppBarDelegate(title: 'Create your account'))),
-          SliverToBoxAdapter(
-            child: Padding(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const CustomAppBar(title: 'Create your account'),
+            Padding(
               padding: EdgeInsets.all(0.05.sw),
               child: Form(
                 key: _formKey,
@@ -360,8 +360,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 )
               )
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

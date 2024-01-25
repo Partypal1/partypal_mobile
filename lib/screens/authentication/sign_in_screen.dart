@@ -51,11 +51,11 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(delegate: SliverCustomAppBarDelegate(title: 'Sign in')),
-          SliverToBoxAdapter(
-            child: Padding(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const CustomAppBar(title: 'Sign in'),
+            Padding(
               padding: EdgeInsets.all(0.05.sw),
               child: Form(
                 key: _formKey,
@@ -80,16 +80,16 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     
                     0.01.sh.verticalSpace,
-          
+            
                     Text(
                       'Hey pal! Welcome Back.',
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         color: Theme.of(context).colorScheme.primary
                       ),
                     ),
-          
+            
                     0.05.sh.verticalSpace,
-          
+            
                     AutofillGroup(
                       child: TextFormField( // email
                         focusNode: emailFocus,
@@ -119,9 +119,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                       ),
                     ),
-          
+            
                     0.02.sh.verticalSpace,
-          
+            
                     AutofillGroup(
                       child: TextFormField( // password
                         focusNode: passwordFocus,
@@ -160,9 +160,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                       ),
                     ),
-          
+            
                     0.03.sh.verticalSpace,
-          
+            
                     SizedBox( // sign in
                       height: 60,
                       child: GestureDetector(
@@ -183,9 +183,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                     ),
-          
+            
                     0.03.sh.verticalSpace,
-          
+            
                     Row( // go to login
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -222,9 +222,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                     ),
-          
+            
                     0.03.sh.verticalSpace,
-          
+            
                     const Row( // or
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -236,9 +236,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         Expanded(child: Divider())
                       ],
                     ),
-          
+            
                     0.03.sh.verticalSpace,
-          
+            
                     InkWell( // sign in with google
                       onTap: () {
                         //TODO: sign in with google
@@ -278,8 +278,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       )
     );
   }
