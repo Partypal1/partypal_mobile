@@ -10,7 +10,7 @@ class SelectUserProfileScreen extends StatelessWidget {
   const SelectUserProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) { //TODO: work on the profile selection
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [

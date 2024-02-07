@@ -7,3 +7,8 @@ ThemeData theme = ThemeData(
   colorScheme: lightScheme,
   textTheme: textTheme,
 );
+
+ThemeData darkTheme = ThemeData(
+  colorScheme: darkScheme,
+  textTheme: textTheme,
+);

@@ -18,6 +18,8 @@ class Partypal extends StatelessWidget {
     return MaterialApp.router(
       title: 'Partypal',
       theme: theme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       routerConfig: routerConfig,
       supportedLocales: supportedLocales,

@@ -10,7 +10,13 @@ import 'package:partypal/screens/authentication/set_password_screen.dart';
 import 'package:partypal/screens/authentication/sign_in_screen.dart';
 import 'package:partypal/screens/authentication/sign_up_screen.dart';
 import 'package:partypal/screens/authentication/verification_screen.dart';
+import 'package:partypal/screens/home/home.dart';
+import 'package:partypal/screens/home/explore_screen.dart';
+import 'package:partypal/screens/home/post_screen.dart';
 import 'package:partypal/screens/onboarding/onboarding_screen.dart';
+import 'package:partypal/screens/profile/choose_favourite_clubs_screen.dart';
+import 'package:partypal/screens/profile/set_profile_screen.dart';
+import 'package:partypal/screens/profile/welcome_screen.dart';
 import 'package:partypal/screens/splash_screen.dart';
 
 final GoRouter routerConfig = GoRouter( // TODO: add routing animations
@@ -110,6 +116,54 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
       path: RoutePaths.setPasswordScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const SetPasswordScreen(),
+        key: state.pageKey,
+      ),
+    ),
+
+    GoRoute(
+      path: RoutePaths.welcomeScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const WelcomeScreen(),
+        key: state.pageKey,
+      ),
+    ),
+
+    GoRoute(
+      path: RoutePaths.chooseFavouriteClubsScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const ChooseFavouriteClubs(),
+        key: state.pageKey,
+      ),
+    ),
+
+    GoRoute(
+      path: RoutePaths.setProfileScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const SetProfileScreen(),
+        key: state.pageKey,
+      ),
+    ),
+
+    GoRoute(
+      path: RoutePaths.home,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const Home(),
+        key: state.pageKey,
+      ),
+    ),
+
+    GoRoute(
+      path: RoutePaths.exploreScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const ExploreScreen(),
+        key: state.pageKey,
+      ),
+    ),
+
+    GoRoute(
+      path: RoutePaths.postScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const PostScreen(),
         key: state.pageKey,
       ),
     ),
