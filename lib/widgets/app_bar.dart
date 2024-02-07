@@ -193,14 +193,14 @@ class HomeBar extends StatelessWidget {
           // ),
         ],
       ),
-      bottom: AppBar(title: Text('this is the bottom'),),
+      // bottom: AppBar(title: Text('this is the bottom'),),
       // flexibleSpace: FlexibleSpaceBar(
       //   // background: Container(color: Colors.blue,),
       //   title: Text('Sunkanmi'),
       // ),
       backgroundColor: Colors.black,
       floating: true,
-      pinned: true,
+      // pinned: true,
       // expandedHeight: 150,s
       
     );

@@ -19,6 +19,7 @@ class Partypal extends StatelessWidget {
       title: 'Partypal',
       theme: theme,
       darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       routerConfig: routerConfig,
       supportedLocales: supportedLocales,
