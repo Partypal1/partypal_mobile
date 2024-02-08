@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/widgets/app_bar.dart';
+import 'package:partypal/widgets/tonal_elevation.dart';
 
 class VerificationScreen extends StatefulWidget {
   final String email;
@@ -67,6 +68,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level0, context),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -166,7 +168,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   border: Border.all(
-                                    color: Theme.of(context).colorScheme.onSurface
+                                    color: Theme.of(context).colorScheme.outline
                                   ),
                                   
                                 ),
@@ -274,7 +276,7 @@ class _DigitBoxState extends State<DigitBox> {
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(
-              color: widget.focusNode.hasFocus ? Theme.of(context).colorScheme.primary : Colors.black,
+              color: widget.focusNode.hasFocus ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.outline,
               width: widget.focusNode.hasFocus ? 3 : 1,
             ),
             borderRadius: BorderRadius.circular(5)

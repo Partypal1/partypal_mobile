@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/utils/toasts.dart';
 import 'package:partypal/widgets/app_bar.dart';
+import 'package:partypal/widgets/tonal_elevation.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
@@ -31,6 +32,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level0, context),
       body: CustomScrollView(
         slivers: [
           SliverPersistentHeader(delegate: SliverCustomAppBarDelegate(title: 'Reset password')),
@@ -80,7 +82,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: Theme.of(context).colorScheme.onSurface
+                          color: Theme.of(context).colorScheme.inverseSurface
                         ),
                         child: Center(
                           child: Text(

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/configs/router_config.dart';
-import 'package:partypal/theme/color_theme.dart';
+import 'package:partypal/widgets/tonal_elevation.dart';
 
 class EditPicture extends StatelessWidget {
   const EditPicture({super.key});
@@ -12,7 +12,7 @@ class EditPicture extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        color: UIColors(darkMode: false).surface
+        color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
       ),
       child: Padding(
         padding: EdgeInsets.all(0.03.sw),
@@ -56,13 +56,13 @@ class EditPicture extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    color: UIColors().inverseSurface
+                    color: Theme.of(context).colorScheme.inverseSurface
                   ),
                   child: Center(
                     child: Text(
                       'Save Changes',
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.surface
+                        color: Theme.of(context).colorScheme.onInverseSurface
                       )
                     ),
                   ),
