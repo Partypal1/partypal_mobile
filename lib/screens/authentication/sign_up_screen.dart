@@ -10,6 +10,7 @@ import 'package:partypal/services/auth_provider.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:partypal/widgets/app_bar.dart';
+import 'package:partypal/widgets/tonal_elevation.dart';
 
 class SignUpScreen extends StatefulWidget {
   final UserType userType;
@@ -66,6 +67,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level0, context),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -291,7 +293,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                            color: Theme.of(context).colorScheme.onSurface
+                            color: Theme.of(context).colorScheme.inverseSurface
                           ),
                           child: Center(
                             child: Text(

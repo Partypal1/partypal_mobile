@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:partypal/widgets/tonal_elevation.dart';
 
 class OnboardingCard extends StatelessWidget {
   final String title;
@@ -23,7 +24,7 @@ class OnboardingCard extends StatelessWidget {
               maxWidth: 600
             ),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level4, context),
               borderRadius: BorderRadius.circular(20)
             ),
             child: Padding(

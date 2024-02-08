@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/constants/asset_paths.dart';
+import 'package:partypal/widgets/tonal_elevation.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String title;
@@ -18,7 +19,7 @@ class CustomAppBar extends StatelessWidget {
     return SizedBox(
       height: 100,
       child: Container(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level1, context),
         child: Padding(
           padding: const EdgeInsets.only(
             top: 40,

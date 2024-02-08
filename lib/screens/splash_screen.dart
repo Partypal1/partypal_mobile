@@ -3,6 +3,7 @@ import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/data/session_manager.dart';
+import 'package:partypal/widgets/tonal_elevation.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level0, context),
       body: Stack(
         children: [
           //TODO: add the background image here
@@ -44,9 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 const SizedBox(width: 10,),
                 Text(
                   'Partypal',
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onInverseSurface
-                  ),
+                  style: Theme.of(context).textTheme.headlineMedium
                 )
               ],
             ),
