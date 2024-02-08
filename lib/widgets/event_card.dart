@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:partypal/constants/elevation.dart';
+import 'package:partypal/utils/toasts.dart';
 import 'package:partypal/widgets/tonal_elevation.dart';
 
 class EventCard extends StatefulWidget {
@@ -126,9 +127,15 @@ class _EventCardState extends State<EventCard> {
                               ),
                         ),
                         10.horizontalSpace,
-                        const Icon(
-                          Icons.share,
-                          color: Colors.white,
+                        GestureDetector(
+                          onTap: (){
+                            //TODO: share
+                            Toasts.showToast('Sharing ...');
+                          },
+                          child: const Icon(
+                            Icons.share,
+                            color: Colors.white,
+                          ),
                         ),
                       ],
                     ),

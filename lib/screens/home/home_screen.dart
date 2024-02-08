@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
-          const HomeBar(name: 'Sunkanmi',),
+          const HomeAppBar(name: 'Sunkanmi',),
         
           SliverToBoxAdapter( // events happening this week
             child: Column(
