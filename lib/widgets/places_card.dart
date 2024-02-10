@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:partypal/widgets/buttons.dart';
 import 'package:partypal/widgets/tonal_elevation.dart';
 
 class PlacesCard extends StatefulWidget {
@@ -79,40 +80,15 @@ class _PlacesCardState extends State<PlacesCard> {
                 ],
               ),
             ),
-             GestureDetector(
-              onTap: _changeFollowingState,
-               child: isFollowing
-                ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Text(
-                      'Unfollow',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                        fontWeight: FontWeight.bold
-                      )
-                    ),
-                )
-                : SizedBox( // follow button
-                    height: 40,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Theme.of(context).colorScheme.inverseSurface
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Center(
-                          child: Text(
-                            'Follow',
-                            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.onInverseSurface
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-            )
+            isFollowing
+            ? CustomTextButton(
+                label: 'Unfollow',
+                onTap: _changeFollowingState,
+              )
+            : CustomFilledButton(
+                label: 'follow',
+                onTap: _changeFollowingState,
+              )
           ],
         ),
       ),

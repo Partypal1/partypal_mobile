@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/widgets/app_bar.dart';
+import 'package:partypal/widgets/buttons.dart';
 import 'package:partypal/widgets/tonal_elevation.dart';
 
 class SetPasswordScreen extends StatefulWidget {
@@ -128,26 +129,10 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
                       },
                     ),
                     0.05.sh.verticalSpace,
-                    SizedBox( // done button
-                      height: 60,
-                      child: GestureDetector(
-                        onTap: _setPassword,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Theme.of(context).colorScheme.onSurface
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Done',
-                              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                color: Theme.of(context).colorScheme.surface
-                              )
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    WideButton(
+                      label: 'Done',
+                      onTap: _setPassword,
+                    )
                   ],
                 ),
               ),

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
+import 'package:partypal/widgets/buttons.dart';
 import 'package:partypal/widgets/tonal_elevation.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -120,28 +121,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateM
                     child: child
                   );
                 },
-                child: SizedBox(
-                  height: 60,
-                  child: GestureDetector(
-                    onTap: (){
-                      routerConfig.push(RoutePaths.setProfileScreen);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Theme.of(context).colorScheme.onSurface
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Set profile',
-                          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: Theme.of(context).colorScheme.surface
-                          )
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                child: WideButton(
+                  label: 'Set profile',
+                  onTap: (){
+                    routerConfig.push(RoutePaths.setProfileScreen);
+                  },
+                )
               ),
             ),
           ],

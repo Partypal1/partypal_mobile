@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/constants/route_paths.dart';
+import 'package:partypal/utils/toasts.dart';
 import 'package:partypal/widgets/app_bar.dart';
+import 'package:partypal/widgets/buttons.dart';
 import 'package:partypal/widgets/tonal_elevation.dart';
 
 class VerificationScreen extends StatefulWidget {
@@ -112,28 +114,16 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   ),
               
                   0.05.sh.verticalSpace,
-              
-                  SizedBox( // verify button
-                    height: 60,
-                    child: GestureDetector(
-                      onTap: _verifyCode,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: codeIsValid
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.onSurface.withOpacity(0.7)
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Verify account',
-                            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                              color: Theme.of(context).colorScheme.surface
-                            )
-                          ),
-                        ),
-                      ),
-                    ),
+
+                  WideButton(
+                    label: 'Verify account',
+                    onTap: _verifyCode,
+                    backgroundColor: codeIsValid
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.inverseSurface.withOpacity(0.3),
+                    labelColor: codeIsValid
+                      ? Theme.of(context).colorScheme.onPrimary
+                      : Theme.of(context).colorScheme.onInverseSurface,
                   ),
             
                   0.03.sh.verticalSpace,
@@ -159,34 +149,10 @@ class _VerificationScreenState extends State<VerificationScreen> {
                             ],
                           )
                         
-                        : FittedBox( // resend button
-                          child: SizedBox( 
-                            height: 40,
-                            child: GestureDetector(
-                              onTap: _resendCode,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(
-                                    color: Theme.of(context).colorScheme.outline
-                                  ),
-                                  
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                                  child: Center(
-                                    child: Text(
-                                      'Resend code',
-                                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                        color: Theme.of(context).colorScheme.onSurface
-                                      )
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        : CustomOutlinedButton(
+                            label: 'Resend code',
+                            onTap: _resendCode,
+                          )
                     ],
                   )
                 ],
@@ -207,6 +173,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   }
   void _resendCode(){
     log('resending code');
+    Toasts.showToast('resending verification code ...');
     //TODO: resend code
     resendStopwatch.reset();
     resendStopwatch.start();

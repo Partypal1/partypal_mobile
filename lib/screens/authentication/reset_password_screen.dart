@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/utils/toasts.dart';
 import 'package:partypal/widgets/app_bar.dart';
+import 'package:partypal/widgets/buttons.dart';
 import 'package:partypal/widgets/tonal_elevation.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -75,26 +76,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     ),
                   ),
                   0.05.sh.verticalSpace,
-                  SizedBox( // send reset link
-                    height: 60,
-                    child: GestureDetector(
-                      onTap: _sendResetlink,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Theme.of(context).colorScheme.inverseSurface
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Send reset link',
-                            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                              color: Theme.of(context).colorScheme.surface
-                            )
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  WideButton(
+                    label: 'Send reset link',
+                    onTap: _sendResetlink,
+                  )
                 ],
               ),
             ),
