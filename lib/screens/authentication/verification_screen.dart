@@ -115,7 +115,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
               
                   SizedBox( // verify button
                     height: 60,
-                    child: InkWell(
+                    child: GestureDetector(
                       onTap: _verifyCode,
                       child: Container(
                         decoration: BoxDecoration(
