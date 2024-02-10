@@ -242,7 +242,7 @@ class _SignInScreenState extends State<SignInScreen> {
             
                     0.03.sh.verticalSpace,
             
-                    InkWell( // sign in with google
+                    GestureDetector( // sign in with google
                       onTap: () {
                         //TODO: sign in with google
                       },

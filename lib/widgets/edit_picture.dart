@@ -47,7 +47,7 @@ class EditPicture extends StatelessWidget {
             const Expanded(child: SizedBox()),
             SizedBox( // save changes button
               height: 60,
-              child: InkWell(
+              child: GestureDetector(
                 onTap: (){
                   //TODO: save changes
                   routerConfig.pop();

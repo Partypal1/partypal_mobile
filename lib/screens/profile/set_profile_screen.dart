@@ -109,7 +109,7 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
       
                   SizedBox( // done button
                     height: 60,
-                    child: InkWell(
+                    child: GestureDetector(
                       onTap: () {
                         routerConfig.push(RoutePaths.home);
                       },
