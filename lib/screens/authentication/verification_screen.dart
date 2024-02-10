@@ -121,7 +121,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     onTap: _verifyCode,
                     backgroundColor: codeIsValid
                       ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.inverseSurface.withOpacity(0.3),
+                      : Theme.of(context).colorScheme.inverseSurface.withOpacity(0.6),
                     labelColor: codeIsValid
                       ? Theme.of(context).colorScheme.onPrimary
                       : Theme.of(context).colorScheme.onInverseSurface,
