@@ -9,9 +9,9 @@ import 'package:partypal/models/user_model.dart';
 import 'package:partypal/services/auth_provider.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:partypal/widgets/app_bar.dart';
-import 'package:partypal/widgets/buttons.dart';
-import 'package:partypal/widgets/tonal_elevation.dart';
+import 'package:partypal/widgets/app_bars/app_bar.dart';
+import 'package:partypal/widgets/buttons/wide_button.dart';
+import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class SignUpScreen extends StatefulWidget {
   final UserType userType;

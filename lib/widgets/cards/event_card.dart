@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:partypal/constants/elevation.dart';
 import 'package:partypal/utils/toasts.dart';
-import 'package:partypal/widgets/tonal_elevation.dart';
+import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class EventCard extends StatefulWidget {
   final String imagePath;

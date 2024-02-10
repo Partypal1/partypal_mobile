@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:partypal/widgets/buttons.dart';
-import 'package:partypal/widgets/tonal_elevation.dart';
+import 'package:partypal/widgets/buttons/filled_button.dart';
+import 'package:partypal/widgets/buttons/text_button.dart';
+import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class PlacesCard extends StatefulWidget {
   final String placeName;

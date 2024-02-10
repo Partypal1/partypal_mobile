@@ -8,10 +8,10 @@ import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/models/user_model.dart';
 import 'package:partypal/services/auth_provider.dart';
-import 'package:partypal/widgets/app_bar.dart';
-import 'package:partypal/widgets/buttons.dart';
+import 'package:partypal/widgets/app_bars/app_bar.dart';
+import 'package:partypal/widgets/buttons/wide_button.dart';
 
-import '../../widgets/tonal_elevation.dart';
+import '../../widgets/others/tonal_elevation.dart';
 
 class SignInScreen extends StatefulWidget {
   final UserType userType;

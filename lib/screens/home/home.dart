@@ -8,7 +8,7 @@ import 'package:partypal/screens/home/home_screen.dart';
 import 'package:partypal/screens/home/moments_screen.dart';
 import 'package:partypal/screens/home/post_screen.dart';
 import 'package:partypal/screens/home/profile_screen.dart';
-import 'package:partypal/widgets/bottom_navigation_bar.dart';
+import 'package:partypal/widgets/app_bars/bottom_navigation_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

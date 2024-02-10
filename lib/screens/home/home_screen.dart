@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:partypal/constants/asset_paths.dart';
-import 'package:partypal/widgets/app_bar.dart';
-import 'package:partypal/widgets/event_card.dart';
-import 'package:partypal/widgets/places_card.dart';
-import 'package:partypal/widgets/tonal_elevation.dart';
+import 'package:partypal/widgets/app_bars/app_bar.dart';
+import 'package:partypal/widgets/cards/event_card.dart';
+import 'package:partypal/widgets/cards/places_card.dart';
+import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
