@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/utils/datetime_util.dart';
-import 'package:partypal/widgets/cards/circle_avatar.dart';
+import 'package:partypal/widgets/cards/circle_profile_image.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

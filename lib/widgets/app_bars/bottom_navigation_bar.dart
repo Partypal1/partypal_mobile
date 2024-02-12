@@ -62,7 +62,6 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> with SingleTick
         width: double.infinity,
         child: Container(
           decoration: const BoxDecoration(
-            // color: Theme.of(context).colorScheme.inverseSurface
             color: Colors.black,
             borderRadius: BorderRadius.only(topLeft: Radius.elliptical(20, 10), topRight: Radius.elliptical(20, 10))
           ),

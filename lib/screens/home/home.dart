@@ -45,14 +45,15 @@ class _HomeState extends State<Home> {
       children: [
         NotificationListener<ScrollUpdateNotification>(
           onNotification: (notification) {
-            if(notification.dragDetails != null){
-              if(notification.dragDetails!.delta.dy.isNegative && bottomNavBarIsVisible.value){
-                bottomNavBarIsVisible.value = !bottomNavBarIsVisible.value;
-              }
-              else if(!notification.dragDetails!.delta.dy.isNegative && !bottomNavBarIsVisible.value){
-                bottomNavBarIsVisible.value = !bottomNavBarIsVisible.value;
-              }
-            }
+            // // uncomment to hide bottom navigation bar on scroll
+            // if(notification.dragDetails != null){
+            //   if(notification.dragDetails!.delta.dy.isNegative && bottomNavBarIsVisible.value){
+            //     bottomNavBarIsVisible.value = !bottomNavBarIsVisible.value;
+            //   }
+            //   else if(!notification.dragDetails!.delta.dy.isNegative && !bottomNavBarIsVisible.value){
+            //     bottomNavBarIsVisible.value = !bottomNavBarIsVisible.value;
+            //   }
+            // }
             return false;
           },
           child: screens[screenIndex]
