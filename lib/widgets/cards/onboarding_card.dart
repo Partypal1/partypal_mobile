@@ -42,7 +42,7 @@ class OnboardingCard extends StatelessWidget {
                     body,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: Colors.black,
-                      fontWeight: FontWeight.bold
+                      // fontWeight: FontWeight.bold
                     ),
                   ),
                 ],
