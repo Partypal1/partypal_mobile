@@ -51,12 +51,20 @@ class Shimmer extends StatefulWidget {
 
 class ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin{
   late AnimationController _controller;
+  late Animation<double> _curvedAnimation;
   @override
   void initState(){
     super.initState();
+    
     _controller = AnimationController.unbounded(vsync: this)
-      ..repeat(min: -0.5, max: 1.5, period: const Duration(seconds: 1, milliseconds: 500));
+      ..repeat(min: -0.5, max: 1.5, period: const Duration(seconds: 1, milliseconds: 0));
+
+    _curvedAnimation = CurvedAnimation(
+      curve: Curves.easeInOut,
+      parent: _controller
+    );
   }
+  
 
   @override
   void dispose(){
@@ -72,9 +80,13 @@ class ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin{
     return (context.findRenderObject() as RenderBox).size;
   }
 
-  LinearGradient get gradients {
+  bool get isDarkMode {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
-    return mediaQueryData.platformBrightness == Brightness.light
+    return mediaQueryData.platformBrightness == Brightness.dark;
+  }
+
+  LinearGradient get gradients {
+    return !isDarkMode
     ? LinearGradient(
         colors: _shimmerGradient.colors,
         stops: _shimmerGradient.stops,
@@ -92,7 +104,7 @@ class ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin{
   }
 
   Listenable get shimmerChanges{
-    return _controller;
+    return _curvedAnimation;
   }
 
   Offset getDescendantOffset(RenderBox descendant){
@@ -163,7 +175,7 @@ class _ShimmerLoadingState extends State<ShimmerLoading> {
   
   @override
   Widget build(BuildContext context) {
-    if(!widget.isLoading){
+    if(!widget.isLoading || Shimmer.of(context)!.isDarkMode){
       return widget.child ?? const SizedBox();
     }
     if(!Shimmer.of(context)!.isSized || context.findRenderObject() == null){

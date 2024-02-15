@@ -202,16 +202,16 @@ class MomentCardLoading extends StatelessWidget {
             ),
             15.verticalSpace,
             SizedBox(
-                  height: 1.sw,
-                  width: 0.95.sw,
-                  child: Container(
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
-                    ),
-                  )
+              height: 1.sw,
+              width: 0.95.sw,
+              child: Container(
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
                 ),
+              )
+            ),
             10.verticalSpace,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -130,7 +130,7 @@ class PlacesLoadingCard extends StatelessWidget {
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
-                    color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level2, context)
+                    color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context)
                   ),
                 )
               ),
@@ -146,7 +146,7 @@ class PlacesLoadingCard extends StatelessWidget {
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(7),
-                        color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level2, context)
+                        color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context)
                       ),
                     )
                   ),
@@ -158,7 +158,7 @@ class PlacesLoadingCard extends StatelessWidget {
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(7),
-                        color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level2, context)
+                        color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context)
                       ),
                     )
                   ),
@@ -170,7 +170,7 @@ class PlacesLoadingCard extends StatelessWidget {
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(7),
-                        color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level2, context)
+                        color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context)
                       ),
                     )
                   ),

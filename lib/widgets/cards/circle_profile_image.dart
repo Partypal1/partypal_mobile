@@ -59,7 +59,7 @@ class CircleProfileImageLoading extends StatelessWidget {
               child: Icon(
                 Icons.person_rounded,
                 size: radius,
-                color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level2, context),
+                color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
               ),
             ),
           ),
