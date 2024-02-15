@@ -15,11 +15,29 @@ const _shimmerGradient = LinearGradient(
   end: Alignment(1, 0.3),
   tileMode: TileMode.clamp,
 );
+
+
+const _darkShimmerGradient = LinearGradient(
+   colors: [
+    Color(0xFFaaaaaa),
+    Color(0xFF909090),
+    Color(0xFFaaaaaa)
+  ],
+  stops: [
+    0.4,
+    0.5,
+    0.6,
+  ],
+  begin:  Alignment(-1, -0.3),
+  end: Alignment(1, 0.3),
+  tileMode: TileMode.clamp,
+);
+
 class Shimmer extends StatefulWidget {
   final LinearGradient gradient;
   final Widget child;
   const Shimmer({
-    this.gradient = _shimmerGradient,
+    this.gradient = _darkShimmerGradient,
     required this.child,
     super.key});
 
@@ -37,7 +55,13 @@ class ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin{
   void initState(){
     super.initState();
     _controller = AnimationController.unbounded(vsync: this)
-      ..repeat(min: -0.5, max: 1.5, period: const Duration(seconds: 1));
+      ..repeat(min: -0.5, max: 1.5, period: const Duration(seconds: 1, milliseconds: 500));
+  }
+
+  @override
+  void dispose(){
+    _controller.dispose();
+    super.dispose();
   }
 
   bool get isSized {
@@ -49,13 +73,22 @@ class ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin{
   }
 
   LinearGradient get gradients {
-    return LinearGradient(
-      colors: widget.gradient.colors,
-      stops: widget.gradient.stops,
-      begin: widget.gradient.begin,
-      end: widget.gradient.end,
-      transform: SlideTransform(slidePercentage: _controller.value)
-    );
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    return mediaQueryData.platformBrightness == Brightness.light
+    ? LinearGradient(
+        colors: _shimmerGradient.colors,
+        stops: _shimmerGradient.stops,
+        begin: _shimmerGradient.begin,
+        end: _shimmerGradient.end,
+        transform: SlideTransform(slidePercentage: _controller.value)
+      )
+    : LinearGradient(
+        colors: _darkShimmerGradient.colors,
+        stops: _darkShimmerGradient.stops,
+        begin: _darkShimmerGradient.begin,
+        end: _darkShimmerGradient.end,
+        transform: SlideTransform(slidePercentage: _controller.value)
+      );
   }
 
   Listenable get shimmerChanges{
