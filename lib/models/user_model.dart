@@ -7,7 +7,7 @@ class User{
   String email;
   String phoneNumber;
   UserType userType;
-  String location;
+  bool isFollowing;
 
   User({
     required this.firstName,
@@ -16,6 +16,6 @@ class User{
     required this.email,
     required this.phoneNumber,
     required this.userType,
-    required this.location,
+    required this.isFollowing,
   });
 }
