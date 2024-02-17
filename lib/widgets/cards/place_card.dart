@@ -5,13 +5,13 @@ import 'package:partypal/widgets/buttons/text_button.dart';
 import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 
-class PlacesCard extends StatefulWidget {
+class PlaceCard extends StatefulWidget {
   final String placeName;
   final String placeType;
   final String imagePath;
   final bool isPopularWithFriends; //TODO: accept a place object instead
 
-  const PlacesCard({
+  const PlaceCard({
     required this.placeName,
     required this.placeType,
     required this.imagePath,
@@ -19,10 +19,10 @@ class PlacesCard extends StatefulWidget {
     super.key});
 
   @override
-  State<PlacesCard> createState() => _PlacesCardState();
+  State<PlaceCard> createState() => _PlaceCardState();
 }
 
-class _PlacesCardState extends State<PlacesCard> {
+class _PlaceCardState extends State<PlaceCard> {
   late bool isFollowing;
 
   @override
@@ -106,8 +106,8 @@ class _PlacesCardState extends State<PlacesCard> {
   }
 }
 
-class PlacesLoadingCard extends StatelessWidget {
-  const PlacesLoadingCard({super.key});
+class PlaceLoadingCard extends StatelessWidget {
+  const PlaceLoadingCard({super.key});
 
   @override
   Widget build(BuildContext context) {

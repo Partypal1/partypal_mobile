@@ -5,13 +5,13 @@ import 'package:partypal/widgets/buttons/text_button.dart';
 import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 
-class PeopleCard extends StatefulWidget {
+class PersonCard extends StatefulWidget {
   final String fullName;
   final String userName;
   final String imagePath;
   final int partypalPoints;
 
-  const PeopleCard({
+  const PersonCard({
     required this.fullName,
     required this.userName,
     required this.imagePath,
@@ -19,10 +19,10 @@ class PeopleCard extends StatefulWidget {
     super.key});
 
   @override
-  State<PeopleCard> createState() => _PeopleCardState();
+  State<PersonCard> createState() => _PersonCardState();
 }
 
-class _PeopleCardState extends State<PeopleCard> {
+class _PersonCardState extends State<PersonCard> {
   late bool isFollowing;
 
   @override
