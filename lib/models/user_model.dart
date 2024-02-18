@@ -1,13 +1,13 @@
 enum UserType {user, promoter}
 
 class User{
-  String firstName;
-  String lastName;
-  String userId;
-  String email;
-  String phoneNumber;
-  UserType userType;
-  bool isFollowing;
+  final String firstName;
+  final String lastName;
+  final String userId;
+  final String email;
+  final String phoneNumber;
+  final UserType userType;
+  final bool isFollowing;
 
   User({
     required this.firstName,
