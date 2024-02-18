@@ -1,13 +1,15 @@
 class Place{
   final String name;
   final String type;
-  final String imagePath;
+  final String imageUrl;
+  final bool isPopularWithFriends;
   final bool isFollowing;
   
   Place({
     required this.name,
     required this.type,
-    required this.imagePath,
+    required this.imageUrl,
+    required this.isPopularWithFriends,
     required this.isFollowing,
   });
 }

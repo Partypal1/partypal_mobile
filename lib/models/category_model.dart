@@ -1,11 +1,11 @@
 class Category{
   final String name;
   final String desciption;
-  final String imagePath;
+  final String imageUrl;
 
   Category({
     required this.name,
     required this.desciption,
-    required this.imagePath
+    required this.imageUrl
   });
 }

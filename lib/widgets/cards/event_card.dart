@@ -1,22 +1,18 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:partypal/models/event_model.dart';
 import 'package:partypal/utils/toasts.dart';
+import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class EventCard extends StatefulWidget {
-  final String imagePath;
-  final DateTime date;
-  final String title;
-  final String location;
-  final String creator; // change this to User
+  final Event event;
+
   const EventCard({
-    required this.imagePath,
-    required this.date,
-    required this.title,
-    required this.location,
-    required this.creator,
+    required this.event,
     super.key});
 
   @override
@@ -42,19 +38,37 @@ class _EventCardState extends State<EventCard> {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Image.asset(
-                widget.imagePath,
+              CachedNetworkImage(
+                imageUrl: widget.event.imageUrl,
+                imageBuilder: (context, imageProvider){
+                  return Container(
+                    decoration: BoxDecoration(
+                      // gradient: const LinearGradient(
+                      //   colors: [Colors.transparent,  Color.fromRGBO(0, 0, 0, 0.9)],
+                      //   begin: Alignment.topCenter,
+                      //   end: Alignment.bottomCenter
+                      // ),
+                      image: DecorationImage(
+                        image: imageProvider,
+                        
+                        colorFilter: ColorFilter.mode(Color.fromRGBO(0, 0, 0, 0.5), BlendMode.colorBurn),
+                        fit: BoxFit.cover
+                      )
+                    ),
+                  );
+                },
+                placeholder: (context, url) => const ImagePlaceholder(),
                 fit: BoxFit.cover,
               ),
-              Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.transparent,  Color.fromRGBO(0, 0, 0, 0.9)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter
-                  )
-                ),
-              ),
+              // Container(
+              //   decoration: const BoxDecoration(
+              //     gradient: LinearGradient(
+              //       colors: [Colors.transparent,  Color.fromRGBO(0, 0, 0, 0.9)],
+              //       begin: Alignment.topCenter,
+              //       end: Alignment.bottomCenter
+              //     )
+              //   ),
+              // ),
              
               Align(
                 alignment: Alignment.bottomCenter,
@@ -65,14 +79,14 @@ class _EventCardState extends State<EventCard> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        widget.title,
+                        widget.event.name,
                         style: Theme.of(context).textTheme.displaySmall?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: Colors.white
                         ),
                       ),
                       Text(
-                        DateFormat('hh:mm a - d MMM, yyyy').format(widget.date),
+                        DateFormat('hh:mm a - d MMM, yyyy').format(widget.event.dateTime),
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.white
                         ),
@@ -88,7 +102,7 @@ class _EventCardState extends State<EventCard> {
                           ),
                           5.horizontalSpace,
                           Text(
-                            widget.location,
+                            widget.event.location,
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: Colors.white
                             ),
@@ -106,7 +120,7 @@ class _EventCardState extends State<EventCard> {
                           ),
                           5.horizontalSpace,
                           Text(
-                            widget.creator,
+                            widget.event.creator.userId,
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: Colors.white
                             ),

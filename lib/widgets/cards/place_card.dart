@@ -1,21 +1,18 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:partypal/models/place_model.dart';
 import 'package:partypal/widgets/buttons/filled_button.dart';
 import 'package:partypal/widgets/buttons/text_button.dart';
+import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class PlaceCard extends StatefulWidget {
-  final String placeName;
-  final String placeType;
-  final String imagePath;
-  final bool isPopularWithFriends; //TODO: accept a place object instead
+  final Place place;
 
   const PlaceCard({
-    required this.placeName,
-    required this.placeType,
-    required this.imagePath,
-    this.isPopularWithFriends = false,
+    required this.place,
     super.key});
 
   @override
@@ -28,8 +25,7 @@ class _PlaceCardState extends State<PlaceCard> {
   @override
   void initState(){
     super.initState();
-    //TOOD: get isFollowing from backend
-    isFollowing = false;
+    isFollowing = widget.place.isFollowing;
   }
 
   @override
@@ -52,10 +48,11 @@ class _PlaceCardState extends State<PlaceCard> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                   ),
-                  child: Image.asset(
-                    widget.imagePath,
+                  child: CachedNetworkImage(
+                    imageUrl: widget.place.imageUrl,
+                    placeholder: (context, url) => const ImagePlaceholder(),
                     fit: BoxFit.cover,
-                  ),
+                  )
                 ),
               ),
               10.horizontalSpace,
@@ -64,14 +61,14 @@ class _PlaceCardState extends State<PlaceCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.placeName,
+                      widget.place.name,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Text(
-                      widget.placeType,
+                      widget.place.type,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    widget.isPopularWithFriends //TODO: check for: (num friends going / num total friends) instead
+                    widget.place.isPopularWithFriends //TODO: check for: (num friends going / num total friends) instead
                       ? Text(
                           'popular with friends',
                           style: Theme.of(context).textTheme.bodySmall,

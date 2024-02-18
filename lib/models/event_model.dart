@@ -5,7 +5,7 @@ class Event{
   final DateTime dateTime;
   final String location;
   final User creator;
-  final String imagePath;
+  final String imageUrl;
   final bool isLiked;
 
   Event({
@@ -13,7 +13,7 @@ class Event{
     required this.dateTime,
     required this.location,
     required this.creator,
-    required this.imagePath,
+    required this.imageUrl,
     required this.isLiked
   });
 }

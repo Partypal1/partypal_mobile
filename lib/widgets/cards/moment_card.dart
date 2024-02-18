@@ -1,26 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/constants/asset_paths.dart';
+import 'package:partypal/models/moment_model.dart';
 import 'package:partypal/utils/datetime_util.dart';
 import 'package:partypal/widgets/cards/circle_profile_image.dart';
+import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class MomentCard extends StatefulWidget {
-  final String username;
-  final String profilePicturePath;
-  final DateTime timeStamp;
-  final List<String> imagePaths;
-  final String? caption;
+  final Moment moment;
 
   const MomentCard({
-    required this.username,
-    required this.profilePicturePath,
-    required this.timeStamp,
-    required this.imagePaths,
-    this.caption,
+    required this.moment,
     super.key});
 
   @override
@@ -28,8 +23,15 @@ class MomentCard extends StatefulWidget {
 }
 
 class _MomentCardState extends State<MomentCard> {
-  bool isFavourite = false;
+  late bool isLiked;
   int activeIndex = 0;
+
+  @override
+  void initState(){
+    super.initState();
+    isLiked = widget.moment.isLiked;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,14 +42,14 @@ class _MomentCardState extends State<MomentCard> {
             CircleProfileImage(imagePath: AssetPaths.onboardingBackgroundImage2),
             10.horizontalSpace,
             Text(
-              widget.username,
+              widget.moment.creator.userId,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold
               ),
             ),
             10.horizontalSpace,
             Text(
-              DateTimeUtils.timeDifference(widget.timeStamp),
+              DateTimeUtils.timeDifference(widget.moment.dateTime),
               style: Theme.of(context).textTheme.bodySmall
             ),
             const Expanded(child: SizedBox()),
@@ -64,7 +66,7 @@ class _MomentCardState extends State<MomentCard> {
         ),
         15.verticalSpace,
         CarouselSlider.builder(
-          itemCount: widget.imagePaths.length,
+          itemCount: widget.moment.imageUrls.length,
           itemBuilder: (context, index, realIndex) {
             return _buildImageCard(index);
           },
@@ -87,7 +89,7 @@ class _MomentCardState extends State<MomentCard> {
           padding: const EdgeInsets.all(8.0),
           child: AnimatedSmoothIndicator(
             activeIndex: activeIndex,
-            count: widget.imagePaths.length,
+            count: widget.moment.imageUrls.length,
             effect: WormEffect(
               activeDotColor: Theme.of(context).colorScheme.inverseSurface,
               dotColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level5, context),
@@ -102,11 +104,12 @@ class _MomentCardState extends State<MomentCard> {
             0.04.sw.horizontalSpace,
             GestureDetector(
               onTap: (){
+                //TODO: add a heart animation
                 setState(() {
-                  isFavourite = !isFavourite;
+                  isLiked = !isLiked;
                 });
               },
-              child: isFavourite
+              child: isLiked
                 ? const Icon(
                     Icons.favorite,
                     // color: Colors.white,
@@ -141,10 +144,11 @@ class _MomentCardState extends State<MomentCard> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
           ),
-          child: Image.asset(
-            widget.imagePaths[index],
+          child: CachedNetworkImage(
+            imageUrl: widget.moment.imageUrls[index],
+            placeholder: (context, url) => const ImagePlaceholder(),
             fit: BoxFit.cover,
-          ),
+          )
         ),
       ),
     );

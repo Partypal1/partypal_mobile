@@ -6,6 +6,8 @@ class User{
   final String userId;
   final String email;
   final String phoneNumber;
+  final String profileImageUrl;
+  final int partypalPoints;
   final UserType userType;
   final bool isFollowing;
 
@@ -15,6 +17,8 @@ class User{
     required this.userId,
     required this.email,
     required this.phoneNumber,
+    required this.profileImageUrl,
+    required this.partypalPoints,
     required this.userType,
     required this.isFollowing,
   });

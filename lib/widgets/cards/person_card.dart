@@ -1,21 +1,18 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:partypal/models/user_model.dart';
 import 'package:partypal/widgets/buttons/filled_button.dart';
 import 'package:partypal/widgets/buttons/text_button.dart';
+import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class PersonCard extends StatefulWidget {
-  final String fullName;
-  final String userName;
-  final String imagePath;
-  final int partypalPoints;
+  final User user;
 
   const PersonCard({
-    required this.fullName,
-    required this.userName,
-    required this.imagePath,
-    this.partypalPoints = 0,
+    required this.user,
     super.key});
 
   @override
@@ -24,12 +21,10 @@ class PersonCard extends StatefulWidget {
 
 class _PersonCardState extends State<PersonCard> {
   late bool isFollowing;
-
   @override
   void initState(){
     super.initState();
-    //TOOD: get isFollowing from backend
-    isFollowing = false;
+    isFollowing = widget.user.isFollowing;
   }
 
   @override
@@ -52,10 +47,11 @@ class _PersonCardState extends State<PersonCard> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                   ),
-                  child: Image.asset(
-                    widget.imagePath,
+                  child: CachedNetworkImage(
+                    imageUrl: widget.user.profileImageUrl,
+                    placeholder: (context, url) => const ImagePlaceholder(),
                     fit: BoxFit.cover,
-                  ),
+                  )
                 ),
               ),
               10.horizontalSpace,
@@ -64,15 +60,15 @@ class _PersonCardState extends State<PersonCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.fullName,
+                      "${widget.user.firstName} ${widget.user.lastName}",
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Text(
-                      widget.userName,
+                      widget.user.userId,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     Text(
-                      'Partypal points: ${widget.partypalPoints}',
+                      'Partypal points: ${widget.user.partypalPoints}',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Theme.of(context).colorScheme.secondary
                       ),

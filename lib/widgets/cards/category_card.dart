@@ -1,17 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:partypal/models/category_model.dart';
+import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class CategoryCard extends StatelessWidget {
-  final String category;
-  final String desciption;
-  final String imagePath;
+  final Category category;
 
   const CategoryCard({
     required this.category,
-    required this.desciption,
-    required this.imagePath,
     super.key});
 
   @override
@@ -28,7 +27,11 @@ class CategoryCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: Image.asset(imagePath, fit: BoxFit.cover,)
+                child: CachedNetworkImage(
+                  imageUrl: category.imageUrl,
+                  placeholder: (context, url) => const ImagePlaceholder(),
+                  fit: BoxFit.cover,
+                )
               ),
               Container(
                 decoration: const BoxDecoration(
@@ -46,14 +49,14 @@ class CategoryCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        category,
+                        category.name,
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: Colors.white
                         ),
                       ),
                       3.verticalSpace,
                       Text(
-                        desciption,
+                        category.desciption,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Colors.white.withOpacity(0.8),
                           fontWeight: FontWeight.w400
