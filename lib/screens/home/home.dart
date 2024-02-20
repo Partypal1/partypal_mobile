@@ -56,7 +56,10 @@ class _HomeState extends State<Home> {
             // }
             return false;
           },
-          child: screens[screenIndex]
+          child: IndexedStack(
+            index: screenIndex,
+            children: screens
+          )
         ),
 
         Align(
