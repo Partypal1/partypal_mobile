@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:partypal/widgets/others/tonal_elevation.dart';
-
 class ImagePlaceholder extends StatelessWidget {
   final double? width;
   final double? height;
@@ -23,7 +21,7 @@ class ImagePlaceholder extends StatelessWidget {
             borderRadius: radius != null
               ? BorderRadius.circular(radius!)
               : null,
-            color: Theme.of(context).colorScheme.secondaryContainer.tonalElevation(Elevation.level3, context)
+            color: Colors.black12
           ),
         ),
       ),
