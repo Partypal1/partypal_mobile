@@ -14,9 +14,9 @@ import 'package:partypal/screens/home/home.dart';
 import 'package:partypal/screens/home/explore_screen.dart';
 import 'package:partypal/screens/home/post_screen.dart';
 import 'package:partypal/screens/onboarding/onboarding_screen.dart';
-import 'package:partypal/screens/profile/choose_favourite_clubs_screen.dart';
-import 'package:partypal/screens/profile/set_profile_screen.dart';
-import 'package:partypal/screens/profile/welcome_screen.dart';
+import 'package:partypal/screens/profile_setup/choose_favourite_clubs_screen.dart';
+import 'package:partypal/screens/profile_setup/set_profile_screen.dart';
+import 'package:partypal/screens/profile_setup/welcome_screen.dart';
 import 'package:partypal/screens/splash_screen.dart';
 
 final GoRouter routerConfig = GoRouter( // TODO: add routing animations

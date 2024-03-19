@@ -8,7 +8,7 @@ class CategoryProvider extends ChangeNotifier{
   void fetchCategories() async{
     isFetching = true;
     notifyListeners();
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 5));
     categories = [
       Category(
         name: 'Clubs',
