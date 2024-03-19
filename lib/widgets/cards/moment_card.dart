@@ -85,20 +85,22 @@ class _MomentCardState extends State<MomentCard> {
           )
         ),
         10.verticalSpace,
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: AnimatedSmoothIndicator(
-            activeIndex: activeIndex,
-            count: widget.moment.imageUrls.length,
-            effect: WormEffect(
-              activeDotColor: Theme.of(context).colorScheme.inverseSurface,
-              dotColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level5, context),
-              dotHeight: 8,
-              dotWidth: 8,
-              strokeWidth: 0,
+        widget.moment.imageUrls.length > 1
+        ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: AnimatedSmoothIndicator(
+              activeIndex: activeIndex,
+              count: widget.moment.imageUrls.length,
+              effect: WormEffect(
+                activeDotColor: Theme.of(context).colorScheme.inverseSurface,
+                dotColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level5, context),
+                dotHeight: 8,
+                dotWidth: 8,
+                strokeWidth: 0,
+              ),
             ),
-          ),
-        ),
+          )
+        : const SizedBox.shrink(),
         Row(
           children: [
             0.04.sw.horizontalSpace,
