@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:partypal/configs/router_config.dart';
+import 'package:flutter/widgets.dart';
 import 'package:partypal/constants/asset_paths.dart';
-import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/screens/home/explore_screen.dart';
 import 'package:partypal/screens/home/home_screen.dart';
 import 'package:partypal/screens/home/moments_screen.dart';
@@ -27,7 +26,6 @@ class _HomeState extends State<Home> {
   };
   List<Widget> screens = const[
     HomeScreen(),
-    // Scaffold(),
     ExploreScreen(),
     PostScreen(),
     MomentsScreen(),
@@ -41,47 +39,38 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
-    return Stack(
+    return Column(
       children: [
-        NotificationListener<ScrollUpdateNotification>(
-          onNotification: (notification) {
-            // // uncomment to hide bottom navigation bar on scroll
-            // if(notification.dragDetails != null){
-            //   if(notification.dragDetails!.delta.dy.isNegative && bottomNavBarIsVisible.value){
-            //     bottomNavBarIsVisible.value = !bottomNavBarIsVisible.value;
-            //   }
-            //   else if(!notification.dragDetails!.delta.dy.isNegative && !bottomNavBarIsVisible.value){
-            //     bottomNavBarIsVisible.value = !bottomNavBarIsVisible.value;
-            //   }
-            // }
-            return false;
-          },
-          child: IndexedStack(
-            index: screenIndex,
-            children: screens
-          )
+        Expanded(
+          child: NotificationListener<ScrollUpdateNotification>(
+            onNotification: (notification) {
+              // // uncomment to hide bottom navigation bar on scroll
+              // if(notification.dragDetails != null){
+              //   if(notification.dragDetails!.delta.dy.isNegative && bottomNavBarIsVisible.value){
+              //     bottomNavBarIsVisible.value = !bottomNavBarIsVisible.value;
+              //   }
+              //   else if(!notification.dragDetails!.delta.dy.isNegative && !bottomNavBarIsVisible.value){
+              //     bottomNavBarIsVisible.value = !bottomNavBarIsVisible.value;
+              //   }
+              // }
+              return false;
+            },
+            child: IndexedStack(
+              index: screenIndex,
+              children: screens
+            )
+          ),
         ),
 
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: CustomBottomNavBar(
-            iconPaths: iconPaths.values.toList(),
-            labels: iconPaths.keys.toList(),
-            isVisible: bottomNavBarIsVisible,
-            onTap: (i){
-              if(i == 1){
-                routerConfig.push(RoutePaths.exploreScreen);
-              }
-              else if(i == 2){
-                routerConfig.push(RoutePaths.postScreen);
-              }
-              else{
-                setState(() {
-                  screenIndex = i;
-                });
-              }
-            },
-          ),
+        CustomBottomNavBar(
+          iconPaths: iconPaths.values.toList(),
+          labels: iconPaths.keys.toList(),
+          isVisible: bottomNavBarIsVisible,
+          onTap: (i){
+             setState(() {
+              screenIndex = i;
+            });
+          },
         ),
       ],
     );

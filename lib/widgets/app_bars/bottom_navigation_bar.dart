@@ -21,95 +21,100 @@ class CustomBottomNavBar extends StatefulWidget {
 }
 
 class _CustomBottomNavBarState extends State<CustomBottomNavBar> with SingleTickerProviderStateMixin{
-  late int currentIndex;
-  late AnimationController offsetAnimationController;
-  late Animation<Offset> offsetAnimation;
+  late int _currentIndex;
+  late AnimationController _animationController;
+  late Animation<Offset> _offsetAnimation;
+  late Animation<double> _sizeAnimation;
 
   @override
   void initState() {
     super.initState();
-    currentIndex = widget.startIndex;
-    offsetAnimationController = AnimationController(
+    _currentIndex = widget.startIndex;
+    _animationController = AnimationController(
       duration: const Duration(milliseconds: 400),
       vsync: this
     );
-    offsetAnimation = Tween<Offset>(
+    _offsetAnimation = Tween<Offset>(
       begin: const Offset(0, 0),
       end: const Offset(0, 1)
-    ).animate(offsetAnimationController);
-    
+    ).animate(_animationController);
+    _sizeAnimation = Tween<double>(
+      begin: 1,
+      end: 0
+    ).animate(_animationController);
+
     widget.isVisible.addListener(() {
       if(!widget.isVisible.value){
-        offsetAnimationController.forward();
+        _animationController.forward();
       } else{
-        offsetAnimationController.reverse();  
+        _animationController.reverse();  
       }    
     });
   }
 
   @override
   void dispose(){
-    offsetAnimationController.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return SlideTransition(
-      position: offsetAnimation,
-      child: SizedBox(
-        height: 80,
-        width: double.infinity,
-        child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.only(topLeft: Radius.elliptical(20, 10), topRight: Radius.elliptical(20, 10))
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 12, bottom: 16),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: List.generate(widget.iconPaths.length, (index) {
-                  return GestureDetector(
-                    onTap: () {
-                      widget.onTap?.call(index);
-                      if (!(index == 1 || index == 2)) {
-                        // dont change the currentIndex for i=1 or i=2 because a navigation is occouring
+      position: _offsetAnimation,
+      child: SizeTransition(
+        sizeFactor: _sizeAnimation,
+        child: SizedBox(
+          height: 80,
+          width: double.infinity,
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.only(topLeft: Radius.elliptical(20, 10), topRight: Radius.elliptical(20, 10))
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 12, bottom: 16),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(widget.iconPaths.length, (index) {
+                    return GestureDetector(
+                      onTap: () {
+                        widget.onTap?.call(index);
                         setState(() {
-                          currentIndex = index;
+                          _currentIndex = index;
                         });
-                      }
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox.square(
-                          dimension: 18,
-                          child: SvgPicture.asset(
-                            widget.iconPaths[index],
-                            colorFilter: index == currentIndex
-                                ? const ColorFilter.mode(
-                                    Colors.white, BlendMode.srcIn)
-                                : ColorFilter.mode(
-                                    Colors.white.withOpacity(0.32),
-                                    BlendMode.srcIn),
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox.square(
+                            dimension: 18,
+                            child: SvgPicture.asset(
+                              widget.iconPaths[index],
+                              colorFilter: index == _currentIndex
+                                  ? const ColorFilter.mode(
+                                      Colors.white, BlendMode.srcIn)
+                                  : ColorFilter.mode(
+                                      Colors.white.withOpacity(0.32),
+                                      BlendMode.srcIn),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          widget.labels[index],
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelMedium
-                              ?.copyWith(
-                                  color: index == currentIndex
-                                      ? Colors.white
-                                      : Colors.white.withOpacity(0.32)),
-                        )
-                      ],
-                    ),
-                  );
-                })),
+                          const SizedBox(height: 5),
+                          Text(
+                            widget.labels[index],
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium
+                                ?.copyWith(
+                                    color: index == _currentIndex
+                                        ? Colors.white
+                                        : Colors.white.withOpacity(0.32)),
+                          )
+                        ],
+                      ),
+                    );
+                  })),
+            ),
           ),
         ),
       ),
