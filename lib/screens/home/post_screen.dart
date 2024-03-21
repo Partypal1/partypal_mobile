@@ -11,13 +11,19 @@ class PostScreen extends StatefulWidget {
   State<PostScreen> createState() => _PostScreenState();
 }
 
-class _PostScreenState extends State<PostScreen> {
+class _PostScreenState extends State<PostScreen> { // TODO: pause preview when the camera screen is not in view
   CameraController? _controller;
   bool _flashOn = false;
+
   @override
   void initState() {
     super.initState();
+  }
 
+   @override
+  void dispose(){
+    _controller?.dispose();
+    super.dispose();
   }
 
   Future<List<CameraDescription>> get _availableCameras {
@@ -30,12 +36,6 @@ class _PostScreenState extends State<PostScreen> {
       _controller = CameraController(cameras.first, ResolutionPreset.high);
     }
     return _controller!;
-  }
-
-  @override
-  void dispose(){
-    _controller?.dispose();
-    super.dispose();
   }
 
   void _toggleFlash(){
