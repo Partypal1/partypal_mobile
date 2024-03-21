@@ -48,7 +48,6 @@ class _MomentsScreenState extends State<MomentsScreen> {
                   : MomentCard(moment: momentProvider.moments[index]),
               );
             }),
-            const SliverToBoxAdapter(child: SizedBox(height: 80,),) // to bridge over the bottom nav bar
           ],
         ),
       )
