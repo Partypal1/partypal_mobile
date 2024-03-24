@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:partypal/screens/home/home.dart';
 import 'package:partypal/widgets/buttons/filled_button.dart';
 
 class PostScreen extends StatefulWidget {
@@ -11,13 +12,21 @@ class PostScreen extends StatefulWidget {
   State<PostScreen> createState() => _PostScreenState();
 }
 
-class _PostScreenState extends State<PostScreen> { // TODO: pause preview when the camera screen is not in view
+class _PostScreenState extends State<PostScreen> {
   CameraController? _controller;
   bool _flashOn = false;
-
   @override
   void initState() {
     super.initState();
+    HomeState homeState = context.findAncestorStateOfType<HomeState>()!;
+    homeState.screenIndex.addListener(() {
+      if(homeState.screenIndex.value != 2){ // Pause the camera if the bottom navigation bar is not on post screen
+        _controller?.pausePreview();
+      }
+      else{
+        _controller?.resumePreview();
+      }
+    });
   }
 
    @override
