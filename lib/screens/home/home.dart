@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_lazy_indexed_stack/flutter_lazy_indexed_stack.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/screens/home/explore_screen.dart';
 import 'package:partypal/screens/home/home_screen.dart';
@@ -13,10 +15,10 @@ class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Home> createState() => HomeState();
 }
 
-class _HomeState extends State<Home> {
+class HomeState extends State<Home> {
   final Map<String, String> iconPaths = {
     'Home': AssetPaths.homeIcon,
     'Explore': AssetPaths.exploreIcon,
@@ -32,7 +34,7 @@ class _HomeState extends State<Home> {
     ProfileScreen()
   ];
 
-  int screenIndex = 0;
+  ValueNotifier<int> screenIndex = ValueNotifier(0);
 
   ValueNotifier<bool> bottomNavBarIsVisible = ValueNotifier(true);
 
@@ -55,8 +57,8 @@ class _HomeState extends State<Home> {
               // }
               return false;
             },
-            child: IndexedStack(
-              index: screenIndex,
+            child: LazyIndexedStack(
+              index: screenIndex.value,
               children: screens
             )
           ),
@@ -68,7 +70,7 @@ class _HomeState extends State<Home> {
           isVisible: bottomNavBarIsVisible,
           onTap: (i){
              setState(() {
-              screenIndex = i;
+              screenIndex.value = i;
             });
           },
         ),
