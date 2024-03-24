@@ -9,8 +9,9 @@ import 'package:partypal/models/user_model.dart';
 import 'package:partypal/services/auth_provider.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:partypal/widgets/app_bar.dart';
-import 'package:partypal/widgets/tonal_elevation.dart';
+import 'package:partypal/widgets/app_bars/app_bar.dart';
+import 'package:partypal/widgets/buttons/wide_button.dart';
+import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class SignUpScreen extends StatefulWidget {
   final UserType userType;
@@ -286,25 +287,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             
                     0.05.sh.verticalSpace,
             
-                    SizedBox( // sign up button
-                      height: 60,
-                      child: InkWell(
-                        onTap: _signUp,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Theme.of(context).colorScheme.inverseSurface
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Sign up',
-                              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                color: Theme.of(context).colorScheme.surface
-                              )
-                            ),
-                          ),
-                        ),
-                      ),
+                    WideButton(
+                      label: 'Sign up',
+                      onTap: _signUp,
                     ),
             
                     0.03.sh.verticalSpace,
@@ -323,7 +308,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             
                     0.03.sh.verticalSpace,
             
-                    InkWell( // sign up with google
+                    GestureDetector( // sign up with google
                       onTap: (){
                         // TODO: sign up with google
                       },

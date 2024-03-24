@@ -3,7 +3,7 @@ import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/data/session_manager.dart';
-import 'package:partypal/widgets/tonal_elevation.dart';
+import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

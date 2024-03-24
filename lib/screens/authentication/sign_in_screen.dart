@@ -8,9 +8,10 @@ import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/models/user_model.dart';
 import 'package:partypal/services/auth_provider.dart';
-import 'package:partypal/widgets/app_bar.dart';
+import 'package:partypal/widgets/app_bars/app_bar.dart';
+import 'package:partypal/widgets/buttons/wide_button.dart';
 
-import '../../widgets/tonal_elevation.dart';
+import '../../widgets/others/tonal_elevation.dart';
 
 class SignInScreen extends StatefulWidget {
   final UserType userType;
@@ -166,27 +167,10 @@ class _SignInScreenState extends State<SignInScreen> {
             
                     0.03.sh.verticalSpace,
             
-                    SizedBox( // sign in
-                      height: 60,
-                      child: GestureDetector(
-                        onTap: _signIn,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Theme.of(context).colorScheme.onSurface
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Sign in',
-                              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                color: Theme.of(context).colorScheme.surface
-                              )
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-            
+                    WideButton(
+                      label: 'Sign in',
+                      onTap: _signIn,
+                    ),            
                     0.03.sh.verticalSpace,
             
                     Row( // go to login
@@ -242,7 +226,7 @@ class _SignInScreenState extends State<SignInScreen> {
             
                     0.03.sh.verticalSpace,
             
-                    InkWell( // sign in with google
+                    GestureDetector( // sign in with google
                       onTap: () {
                         //TODO: sign in with google
                       },

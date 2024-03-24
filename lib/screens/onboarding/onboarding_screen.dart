@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/configs/router_config.dart';
-import 'package:partypal/widgets/onboarding_card.dart';
-import 'package:partypal/widgets/tonal_elevation.dart';
+import 'package:partypal/widgets/cards/onboarding_card.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboaringScreen extends StatefulWidget {
@@ -88,26 +87,11 @@ class _OnboaringScreenState extends State<OnboaringScreen> {
                   //TODO: setFirstRun to false in session manager
                   routerConfig.pushReplacement(RoutePaths.selectUserProfileScreen);
                 },
-                child: FittedBox(
-                  child: SizedBox(
-                    height: 40,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level5, context),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Center(
-                          child: Text(
-                            (activeIndex == titles.length - 1) ? 'Next' : 'Skip',
-                            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                              color: Theme.of(context).colorScheme.onSurface
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                child: Text(
+                  (activeIndex == titles.length - 1) ? 'Next' : 'Skip',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold
                   ),
                 ),
               ),
@@ -143,9 +127,10 @@ class _OnboaringScreenState extends State<OnboaringScreen> {
       child: AnimatedSmoothIndicator(
         activeIndex: activeIndex,
         count: count,
-        effect: WormEffect(
-          activeDotColor: Theme.of(context).colorScheme.onInverseSurface,
-          dotColor: Theme.of(context).colorScheme.inverseSurface,
+        effect: const WormEffect(
+          activeDotColor: Colors.black,
+          // activeDotColor: Theme.of(context).colorScheme.onInverseSurface,
+          // dotColor: Theme.of(context).colorScheme.inverseSurface,
           dotHeight: 12,
           dotWidth: 12,
           strokeWidth: 0,

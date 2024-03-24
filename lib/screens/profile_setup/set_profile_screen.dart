@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/constants/route_paths.dart';
-import 'package:partypal/widgets/app_bar.dart';
-import 'package:partypal/widgets/edit_picture.dart';
-import 'package:partypal/widgets/tonal_elevation.dart';
+import 'package:partypal/widgets/app_bars/app_bar.dart';
+import 'package:partypal/widgets/buttons/wide_button.dart';
+import 'package:partypal/widgets/sheets/edit_picture.dart';
+import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class SetProfileScreen extends StatefulWidget {
   const SetProfileScreen({super.key});
@@ -107,28 +108,12 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
       
                   0.05.sh.verticalSpace,
       
-                  SizedBox( // done button
-                    height: 60,
-                    child: InkWell(
-                      onTap: () {
-                        routerConfig.push(RoutePaths.home);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Theme.of(context).colorScheme.inverseSurface
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Done',
-                            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                              color: Theme.of(context).colorScheme.onInverseSurface
-                            )
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  WideButton(
+                    label: 'Done',
+                    onTap: () {
+                      routerConfig.push(RoutePaths.home);
+                    },
+                  )
                 ],
               ),
             ),

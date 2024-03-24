@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/configs/router_config.dart';
-import 'package:partypal/widgets/tonal_elevation.dart';
+import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class EditPicture extends StatelessWidget {
   const EditPicture({super.key});
@@ -47,7 +47,7 @@ class EditPicture extends StatelessWidget {
             const Expanded(child: SizedBox()),
             SizedBox( // save changes button
               height: 60,
-              child: InkWell(
+              child: GestureDetector(
                 onTap: (){
                   //TODO: save changes
                   routerConfig.pop();

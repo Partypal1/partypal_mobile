@@ -5,8 +5,8 @@ import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/models/user_model.dart';
-import 'package:partypal/widgets/app_bar.dart';
-import 'package:partypal/widgets/tonal_elevation.dart';
+import 'package:partypal/widgets/app_bars/app_bar.dart';
+import 'package:partypal/widgets/others/tonal_elevation.dart';
 class SelectUserProfileScreen extends StatelessWidget {
   const SelectUserProfileScreen({super.key});
 
