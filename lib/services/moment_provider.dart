@@ -7,6 +7,7 @@ class MomentProvider extends ChangeNotifier{
   bool isFetching = false;
   void fetchMoments() async {
     isFetching = true;
+    notifyListeners();
     await Future.delayed(const Duration(seconds: 5));
     moments = [
       Moment(
