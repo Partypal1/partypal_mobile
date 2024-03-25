@@ -42,7 +42,7 @@ class _MomentCardState extends State<MomentCard> {
             CircleProfileImage(imagePath: AssetPaths.onboardingBackgroundImage2),
             10.horizontalSpace,
             Text(
-              widget.moment.creator.userId,
+              widget.moment.creator.userName,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold
               ),

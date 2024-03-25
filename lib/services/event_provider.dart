@@ -19,7 +19,7 @@ class EventProvider extends ChangeNotifier{
         creator: User(
           firstName: 'Olasunkanmi',
           lastName: 'Beckley',
-          userId: 'Sunkanm1',
+          userName: 'Sunkanm1',
           email: 'beckleysunkanmi@gmail.com',
           phoneNumber: '09053221941',
           profileImageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLEPh3zspn0JSENlaxTjTC8SbtBtRp26M5bg&usqp=CAU",
@@ -37,7 +37,7 @@ class EventProvider extends ChangeNotifier{
         creator: User(
           firstName: 'Davey',
           lastName: 'Brownley',
-          userId: 'David',
+          userName: 'David',
           email: 'david@gmail.com',
           phoneNumber: '0901267438',
           profileImageUrl: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
@@ -55,7 +55,7 @@ class EventProvider extends ChangeNotifier{
         creator: User(
           firstName: 'Davey',
           lastName: 'Brownley',
-          userId: 'David',
+          userName: 'David',
           email: 'david@gmail.com',
           phoneNumber: '0901267438',
           profileImageUrl: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
@@ -76,7 +76,7 @@ class EventProvider extends ChangeNotifier{
         creator: User(
           firstName: 'Davey',
           lastName: 'Brownley',
-          userId: 'David',
+          userName: 'David',
           email: 'david@gmail.com',
           phoneNumber: '0901267438',
           profileImageUrl: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
@@ -94,7 +94,7 @@ class EventProvider extends ChangeNotifier{
         creator: User(
           firstName: 'Davey',
           lastName: 'Brownley',
-          userId: 'David',
+          userName: 'David',
           email: 'david@gmail.com',
           phoneNumber: '0901267438',
           profileImageUrl: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
@@ -112,7 +112,7 @@ class EventProvider extends ChangeNotifier{
         creator: User(
           firstName: 'Olasunkanmi',
           lastName: 'Beckley',
-          userId: 'Sunkanm1',
+          userName: 'Sunkanm1',
           email: 'beckleysunkanmi@gmail.com',
           phoneNumber: '09053221941',
           profileImageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLEPh3zspn0JSENlaxTjTC8SbtBtRp26M5bg&usqp=CAU",

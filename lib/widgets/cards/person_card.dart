@@ -64,7 +64,7 @@ class _PersonCardState extends State<PersonCard> {
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Text(
-                      widget.user.userId,
+                      widget.user.userName,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     Text(
