@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,9 +5,12 @@ import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/models/user_model.dart';
+import 'package:partypal/network/network.dart';
 import 'package:partypal/services/auth_provider.dart';
+import 'package:partypal/services/session_manager.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/others/tonal_elevation.dart';
 
@@ -27,6 +28,7 @@ class _SignInScreenState extends State<SignInScreen> {
   String email = '';
   String password = '';
   bool passwordVisible = false;
+  bool _isSigningIn = false;
   final _formKey = GlobalKey<FormState>();
 
   late FocusNode emailFocus = FocusNode();
@@ -166,11 +168,17 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
             
                     0.03.sh.verticalSpace,
-            
-                    WideButton(
-                      label: 'Sign in',
-                      onTap: _signIn,
-                    ),            
+
+                    _isSigningIn
+                    ? const SizedBox.square(
+                        dimension: 40,
+                        child: CircularProgressIndicator(),
+                      )
+                    : WideButton(
+                        label: 'Sign in',
+                        onTap: _signIn,
+                      ),
+
                     0.03.sh.verticalSpace,
             
                     Row( // go to login
@@ -270,14 +278,30 @@ class _SignInScreenState extends State<SignInScreen> {
       )
     );
   }
-    void _signIn(){
-      log('signing in ...');
-      FocusScope.of(context).requestFocus(FocusNode());
-      if(_formKey.currentState!.validate()){
-        //TODO: implement sign in
-        log(email);
-        log(password);
-        log(widget.userType.name);
+  void _signIn() async {
+    FocusScope.of(context).requestFocus(FocusNode());
+    if(_formKey.currentState!.validate()){
+      setState(() => _isSigningIn = true);
+      AuthProider auth = Provider.of<AuthProider>(context, listen: false);
+      NetworkResponse response = await auth.signIn(
+        email: email, 
+        password: password
+      );
+      setState(() => _isSigningIn = false);
+      if(response.successful){
+        _saveTokens(response);
+        routerConfig.push(RoutePaths.welcomeScreen);
+      }
+      else if(response.body?['data']['message'].toString().contains('not verified') ?? false){ // user not verified
+        routerConfig.push(RoutePaths.verificationScreen, extra: {'email': email, 'password': password});
+        auth.resendOTP(email: email, purpose: VerificationPurpose.registration);
       }
     }
+  }
+
+  void _saveTokens(NetworkResponse response) async{
+    SessionManager sessionManager = Provider.of<SessionManager>(context, listen: false);
+    sessionManager.setAccessToken(response.body!['data']['accessToken']);
+    sessionManager.setRefreshToken(response.body!['data']['refreshToken']);
+  }
 }

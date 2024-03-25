@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/configs/router_config.dart';
-import 'package:partypal/data/session_manager.dart';
+import 'package:partypal/services/session_manager.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,16 +17,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState(){
     super.initState();
-    Future.delayed( //TODO: preload assets here instead
-      const Duration(seconds: 2),
-      () async{
-        if(await SessionManager.isFirstRun){  
-          routerConfig.pushReplacement(RoutePaths.onboaringScreen);
-        } else {
-          //TODO: pushReplacement to auth or home screen depending on authentication state
-        }
+    Future.wait([
+      Provider.of<SessionManager>(context, listen: false).init(),
+      Future.delayed(const Duration(seconds: 2)) //TODO: preload assets here instead
+    ]).then((_) async {
+      if(await Provider.of<SessionManager>(context, listen: false).isFirstRun){  
+        routerConfig.pushReplacement(RoutePaths.onboaringScreen);
+      } else {
+        //TODO: pushReplacement to auth or home screen depending on authentication state
       }
-    );
+    });    
   }
   @override
   Widget build(BuildContext context) {
