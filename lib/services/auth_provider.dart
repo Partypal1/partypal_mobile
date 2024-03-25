@@ -2,45 +2,78 @@ import 'package:flutter/material.dart';
 import 'package:partypal/models/user_model.dart';
 import 'package:partypal/network/network.dart';
 
+enum VerificationPurpose{registration, forgotPassword}
 class AuthProider extends ChangeNotifier{
-  // User? user;
-  bool isAuthenticated = false;
 
-   void signUp(
-    String firstName,
-    String lastName,
-    String phoneNumber,
-    String email,
-    String password,
-    UserType userType,
-    String location) async {
-    NetworkResponse networkResponse = await Network.post(
-      'auth/register-user',
-      { 'firstname': firstName,
+   Future<NetworkResponse> signUp({
+    required String firstName,
+    required String lastName,
+    required String phoneNumber,
+    required String email,
+    required String password,
+    required UserType userType,
+    }) async {
+
+    NetworkResponse response = await Network.post(
+      endpoint: 'auth/register-user',
+      body: { 'firstname': firstName,
         'lastname': lastName,
         'phoneNumber': phoneNumber,      
         'email': email,
         'password': password,
         'userType': userType.name,
-        'location': location,
-        }
+      }
     );
-    if(networkResponse.successful){
-      //TODO: notify listeners
-    }
+    return response;
   }
 
-  Future signIn(String email, String password) async {
-    NetworkResponse networkResponse = await Network.post(
-      'auth/login-user',
-      { 'email': email,
-        'password': password,}
+    Future<NetworkResponse> signIn({
+      required String email,
+      required String password
+    }) async {
+    NetworkResponse response = await Network.post(
+      endpoint: 'auth/login-user',
+      body: {
+        'email': email,
+        'password': password,
+      }
     );
-    if(networkResponse.successful){
-      isAuthenticated = true;
-      notifyListeners();
-    }
+    return response;
   }
 
- 
+  Future<NetworkResponse> verifyOTP({
+    required String email,
+    required String otp,
+    required VerificationPurpose purpose
+  }) async {
+    String query = switch(purpose){
+      VerificationPurpose.registration => 'purpose=registration',
+      VerificationPurpose.forgotPassword => 'purpose=forgot-password'
+    };
+
+    NetworkResponse response = await Network.patch(
+      endpoint: 'auth/verify-otp',
+      query: query,
+      body: {
+        'email': email,
+        'otp': otp,
+      }
+    );
+    return response;
+  }
+
+  Future<NetworkResponse> resendOTP({
+    required String email,
+    required VerificationPurpose purpose
+  }) async {
+    String purposeString = switch(purpose){
+      VerificationPurpose.registration => 'registration',
+      VerificationPurpose.forgotPassword => 'forgot-password'
+    };
+    NetworkResponse response = await Network.get(
+      endpoint: 'auth/resend-otp',
+      query: 'email=$email&purpose=$purposeString'
+    );
+    return response;
+  } 
 }

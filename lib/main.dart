@@ -6,6 +6,8 @@ import 'package:partypal/services/category_provider.dart';
 import 'package:partypal/services/event_provider.dart';
 import 'package:partypal/services/moment_provider.dart';
 import 'package:partypal/services/places_provider.dart';
+import 'package:partypal/services/profile_provider.dart';
+import 'package:partypal/services/session_manager.dart';
 import 'package:partypal/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +30,9 @@ class Partypal extends StatelessWidget {
         ListenableProvider<CategoryProvider>(create: (_) => CategoryProvider()),
         ListenableProvider<EventProvider>(create: (_) => EventProvider()),
         ListenableProvider<MomentProvider>(create: (_) => MomentProvider()),
-        ListenableProvider<PlacesProvider>(create: (_) => PlacesProvider())
+        ListenableProvider<PlacesProvider>(create: (_) => PlacesProvider()),
+        ListenableProvider<SessionManager>(create: (_) => SessionManager()),
+        ListenableProvider<ProfileProvider>(create: (_) => ProfileProvider()),
       ],
       child: MaterialApp.router(
         title: 'Partypal',

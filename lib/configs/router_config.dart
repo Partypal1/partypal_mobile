@@ -18,7 +18,7 @@ import 'package:partypal/screens/profile_setup/welcome_screen.dart';
 import 'package:partypal/screens/splash_screen.dart';
 
 final GoRouter routerConfig = GoRouter( // TODO: add routing animations
-  initialLocation: RoutePaths.home,
+  initialLocation: RoutePaths.splashScreen,
   errorBuilder: (context, state) => const ErrorBuilder(),
   routes: [
     GoRoute(
@@ -91,6 +91,7 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
           return CupertinoPage<void>(
             child: VerificationScreen(
               email: args['email'] ?? '',
+              password: args['password'] ?? '',
             ),
             key: state.pageKey,
           );

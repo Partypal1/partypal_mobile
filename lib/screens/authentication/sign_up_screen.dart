@@ -1,17 +1,17 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/models/user_model.dart';
+import 'package:partypal/network/network.dart';
 import 'package:partypal/services/auth_provider.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   final UserType userType;
@@ -34,19 +34,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String countryCode = '+234';
   String password = '';
 
+  bool _isSigningUp = false;
+
   late FocusNode firstNameFocus;
   late FocusNode lastNameFocus;
   late FocusNode emailFocus;
   late FocusNode phoneNumberFocus;
   late FocusNode passwordFocus;
-  late AuthProider auth;
 
   @override
   void initState(){
     super.initState();
-    auth = AuthProider()..addListener(() {
-      setState(() {});
-    });
     firstNameFocus = FocusNode();
     lastNameFocus = FocusNode();
     emailFocus = FocusNode();
@@ -56,7 +54,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   void dispose(){
-    auth.dispose();
     firstNameFocus.dispose();
     lastNameFocus.dispose();
     emailFocus.dispose();
@@ -194,7 +191,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           
                         ),
                         validator: (value){
-                          String pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+                          String pattern = r"""(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])""";
+                          
                           RegExp regex = RegExp(pattern);
                           if (value == null || !regex.hasMatch(value)){
                             return 'Enter a valid email';
@@ -286,8 +284,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
             
                     0.05.sh.verticalSpace,
-            
-                    WideButton(
+
+                    _isSigningUp
+                    ? const SizedBox.square(
+                      dimension: 40,
+                      child: CircularProgressIndicator(),
+                    )
+                    : WideButton(
                       label: 'Sign up',
                       onTap: _signUp,
                     ),
@@ -352,18 +355,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-  void _signUp(){
-    log('signing up ...');
+  void _signUp() async {
+    AuthProider auth = Provider.of(context, listen: false);
     FocusScope.of(context).requestFocus(FocusNode());
     if(_formKey.currentState!.validate()){
-      //TODO: implement sign up
-      log(firstName);
-      log(lastName);
-      log(email);
-      log(countryCode + phoneNumber);
-      log(password);
-      log(widget.userType.name);
-      routerConfig.push(RoutePaths.verificationScreen, extra: {'email': email});
+      setState(() {_isSigningUp = true;});
+      NetworkResponse response = await auth.signUp(
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
+        email: email,
+        password: password,
+        userType: widget.userType
+      );
+      setState(() {_isSigningUp = false;});
+ 
+      if(response.successful){
+        routerConfig.push(RoutePaths.verificationScreen, extra: {'email': email, 'password': password});
+      }
     }
   }
 }

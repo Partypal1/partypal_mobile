@@ -8,7 +8,7 @@ import 'package:partypal/utils/toasts.dart';
 export 'network_response.dart';
 
 class Network{
-  static const String baseUrl = 'https://partypalbe-dev.up.railway.app/';
+  static const String baseUrl = 'https://party-pal-be.uc.r.appspot.com/';
 
   static Map<String, String> get headers {
     return {
@@ -18,11 +18,16 @@ class Network{
     };
   }
 
-  static Future<NetworkResponse> get(String endpoint) async {
+  static Future<NetworkResponse> get({required String endpoint, String? query, String? authToken}) async {
+
     if(await NetworkUtils.hasConnection()){
       try{
-        final url = Uri.parse(baseUrl + endpoint);
-        http.Response response = await http.get(url, headers: Network.headers);
+        final url = Uri.parse("$baseUrl$endpoint${query == null ? '' : '?$query'}");
+        var headers = Network.headers;
+        if(authToken != null){
+          headers = {...headers, 'Authorization': 'Bearer $authToken',};
+        }
+        http.Response response = await http.get(url, headers: headers);
         if(response.statusCode.toString().startsWith('2')){ 
           log(response.body);
           return NetworkResponse(
@@ -32,6 +37,10 @@ class Network{
         }
         else{
           NetworkErrors.handleNetworkErrors(response);
+          return NetworkResponse(
+            successful: false,
+            body: jsonDecode(response.body)
+          );
         }
       } catch(e){
         log(e.toString());
@@ -43,11 +52,15 @@ class Network{
     return NetworkResponse(successful: false);
   }
 
-  static Future<NetworkResponse> post(String endpoint, Map<String, String> body) async {
+  static Future<NetworkResponse> post({required String endpoint, String? query, required Map<String, String> body, String? authToken}) async {
     if(await NetworkUtils.hasConnection()){
       try{
         final url = Uri.parse(baseUrl + endpoint);
-        http.Response response = await http.post(url, headers: Network.headers, body: jsonEncode(body));
+        var headers = Network.headers;
+        if(authToken != null){
+          headers = {...headers, 'Authorization': 'Bearer $authToken',};
+        }
+        http.Response response = await http.post(url, headers: headers, body: jsonEncode(body));
         if(response.statusCode.toString().startsWith('2')){
           log(response.body);
           return NetworkResponse(
@@ -57,6 +70,43 @@ class Network{
         }
         else{
           NetworkErrors.handleNetworkErrors(response);
+          return NetworkResponse(
+            successful: false,
+            body: jsonDecode(response.body)
+          );
+        }
+      } catch(e){
+        log(e.toString());
+      }
+    }
+    else {
+      Toasts.showToast('No internet connection');
+    }
+    return NetworkResponse(successful: false);
+  }
+
+  static Future<NetworkResponse> patch ({required String endpoint, String? query, required Map<String, dynamic> body, String? authToken}) async {
+    if(await NetworkUtils.hasConnection()){
+      try{
+        final url = Uri.parse("$baseUrl$endpoint${query == null ? '' : '?$query'}");
+        var headers = Network.headers;
+        if(authToken != null){
+          headers = {...headers, 'Authorization': 'Bearer $authToken',};
+        }
+        http.Response response = await http.patch(url, headers: headers, body: jsonEncode(body));
+        if(response.statusCode.toString().startsWith('2')){
+          log(response.body);
+          return NetworkResponse(
+            successful: true,
+            body: jsonDecode(response.body)
+          );
+        }
+        else{
+          NetworkErrors.handleNetworkErrors(response);
+          return NetworkResponse(
+            successful: false,
+            body: jsonDecode(response.body)
+          );
         }
       } catch(e){
         log(e.toString());
