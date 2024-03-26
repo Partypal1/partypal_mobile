@@ -17,6 +17,7 @@ class EventProvider extends ChangeNotifier{
         dateTime: DateTime.now().add(const Duration(days: 15)),
         location: 'Quilox',
         creator: User(
+          id: '',
           firstName: 'Olasunkanmi',
           lastName: 'Beckley',
           userName: 'Sunkanm1',
@@ -35,6 +36,7 @@ class EventProvider extends ChangeNotifier{
         dateTime: DateTime.now().add(const Duration(days: 15)),
         location: 'Club 57',
         creator: User(
+          id: '',
           firstName: 'Davey',
           lastName: 'Brownley',
           userName: 'David',
@@ -53,6 +55,7 @@ class EventProvider extends ChangeNotifier{
         dateTime: DateTime.now().add(const Duration(days: 15)),
         location: 'Club 57',
         creator: User(
+          id: '',
           firstName: 'Davey',
           lastName: 'Brownley',
           userName: 'David',
@@ -74,6 +77,7 @@ class EventProvider extends ChangeNotifier{
         dateTime: DateTime.now().add(const Duration(days: 15)),
         location: 'Club 57',
         creator: User(
+          id: '',
           firstName: 'Davey',
           lastName: 'Brownley',
           userName: 'David',
@@ -92,6 +96,7 @@ class EventProvider extends ChangeNotifier{
         dateTime: DateTime.now().add(const Duration(days: 15)),
         location: 'Club 57',
         creator: User(
+          id: '',
           firstName: 'Davey',
           lastName: 'Brownley',
           userName: 'David',
@@ -110,6 +115,7 @@ class EventProvider extends ChangeNotifier{
         dateTime: DateTime.now().add(const Duration(days: 15)),
         location: 'Quilox',
         creator: User(
+          id: '',
           firstName: 'Olasunkanmi',
           lastName: 'Beckley',
           userName: 'Sunkanm1',

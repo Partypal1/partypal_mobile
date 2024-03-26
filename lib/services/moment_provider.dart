@@ -12,6 +12,7 @@ class MomentProvider extends ChangeNotifier{
     moments = [
       Moment(
         creator: User(
+          id: '',
           firstName: 'Olasunkanmi',
           lastName: 'Beckley',
           userName: 'Sunkanm1',
@@ -31,6 +32,7 @@ class MomentProvider extends ChangeNotifier{
       ),
       Moment(
         creator: User(
+          id: '',
           firstName: 'David',
           lastName: 'Atuluku',
           userName: 'Dave',
