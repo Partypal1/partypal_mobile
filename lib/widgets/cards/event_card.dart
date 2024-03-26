@@ -120,7 +120,7 @@ class _EventCardState extends State<EventCard> {
                           ),
                           5.horizontalSpace,
                           Text(
-                            widget.event.creator.userName,
+                            widget.event.creator.username,
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: Colors.white
                             ),

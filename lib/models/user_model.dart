@@ -4,7 +4,7 @@ class User{
   final String id;
   final String firstName;
   final String lastName;
-  final String userName;
+  final String username;
   final String email;
   final String phoneNumber;
   final String profileImageUrl;
@@ -18,7 +18,7 @@ class User{
     required this.id,
     required this.firstName,
     required this.lastName,
-    required this.userName,
+    required this.username,
     required this.email,
     required this.phoneNumber,
     required this.profileImageUrl,
@@ -34,7 +34,7 @@ class User{
       id: data['id'] ?? '',
       firstName: data['firstname'] ?? '',
       lastName: data['lastname'] ?? '',
-      userName: data['username'] ?? '',
+      username: data['username'] ?? '',
       email: data['email'] ?? '',
       phoneNumber: data['phoneNumber'] ?? '',
       profileImageUrl: data['imageUrl'] ?? '',
@@ -52,7 +52,7 @@ class User{
       'id': id,
       'firstname': firstName,
       'lastname': lastName,
-      'username': userName,
+      'username': username,
       'email': email,
       'phoneNumber': phoneNumber,
       'imageUrl': profileImageUrl,
