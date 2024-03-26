@@ -29,20 +29,20 @@ class User{
     this.location,
   });
 
-  factory User.fromMap(Map data){
+  factory User.fromMap(Map<String, dynamic> data){
     return User(
-      id: data['id'],
-      firstName: data['firstname'],
-      lastName: data['lastname'],
-      userName: data['username'],
-      email: data['email'],
-      phoneNumber: data['phoneNumber'],
-      profileImageUrl: data['imageUrl'],
+      id: data['id'] ?? '',
+      firstName: data['firstname'] ?? '',
+      lastName: data['lastname'] ?? '',
+      userName: data['username'] ?? '',
+      email: data['email'] ?? '',
+      phoneNumber: data['phoneNumber'] ?? '',
+      profileImageUrl: data['imageUrl'] ?? '',
       partypalPoints: 0,
-      userType: data['role'] == 'USER' ? UserType.user : UserType.promoter,
+      userType: (data['role'] ?? 'USER') == 'USER' ? UserType.user : UserType.promoter,
       isFollowing: false,
-      birthday: DateTime.tryParse(data['birthday']),
-      location: data['location'],
+      birthday: DateTime.tryParse(data['birthday'] ?? '') ?? DateTime.now(),
+      location: data['location'] ?? '',
     );
   }
 
