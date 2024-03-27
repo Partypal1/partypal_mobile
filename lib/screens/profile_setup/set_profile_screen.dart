@@ -198,21 +198,24 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
     );
   }
   void _uploadProfile() async{
-    // if(_formKey.currentState?.validate() ?? false){
-    //   setState(() => _isUploadingProfile = true);
-    //   ProfileProvider profile = Provider.of<ProfileProvider>(context, listen: false);
-    //   NetworkResponse response = await profile.uploadProfile(
-    //     context: context,
-    //     username: username,
-    //     location: location,
-    //     image: 'binaryImage' //TODO: upload actual image
-    //   );
-    //   setState(() => _isUploadingProfile = false);
-    //   if(response.successful){
-    //     log('uploaded sucessfully');
-    //     routerConfig.push(RoutePaths.home);
-    //   }
-    // }
-    routerConfig.push(RoutePaths.home);
+    if(_formKey.currentState?.validate() ?? false){
+      setState(() => _isUploadingProfile = true);
+      ProfileProvider profile = Provider.of<ProfileProvider>(context, listen: false);
+      NetworkResponse response = await profile.uploadProfile(
+        context: context,
+        username: username,
+        location: location,
+        image: 'binaryImage' //TODO: upload actual image
+      );
+      setState(() => _isUploadingProfile = false);
+      if(response.successful){
+        log('uploaded sucessfully');
+        routerConfig.push(RoutePaths.home);
+      }
+      else{
+        //TODO: remove this
+        routerConfig.push(RoutePaths.home);
+      }
+    }
   }
 }

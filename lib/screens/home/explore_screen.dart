@@ -9,11 +9,11 @@ class ExploreScreen extends StatefulWidget {
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
-  late GoogleMapController _googleMapController;
+  // late GoogleMapController _googleMapController;
   final LatLng _center = const LatLng(6.52704, 3.38874);
 
   void _onMapCreated(GoogleMapController controller){
-    _googleMapController = controller;
+    // _googleMapController = controller;
   }
 
   @override
