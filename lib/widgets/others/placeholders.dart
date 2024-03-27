@@ -30,9 +30,11 @@ class ImagePlaceholder extends StatelessWidget {
 
 class TextPlaceHolder extends StatelessWidget {
   final double height, width;
+  final Color? color;
   const TextPlaceHolder({
     required this.height,
     required this.width,
+    this.color,
     super.key});
 
   @override
@@ -44,7 +46,7 @@ class TextPlaceHolder extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(height/2),
-          color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context)
+          color: color ?? Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context)
         ),
       )
     );

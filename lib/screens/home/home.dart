@@ -8,7 +8,9 @@ import 'package:partypal/screens/home/home_screen.dart';
 import 'package:partypal/screens/home/moments_screen.dart';
 import 'package:partypal/screens/home/post_screen.dart';
 import 'package:partypal/screens/home/profile_screen.dart';
+import 'package:partypal/services/profile_provider.dart';
 import 'package:partypal/widgets/app_bars/bottom_navigation_bar.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -36,6 +38,14 @@ class HomeState extends State<Home> {
   ValueNotifier<int> screenIndex = ValueNotifier(0);
 
   ValueNotifier<bool> bottomNavBarIsVisible = ValueNotifier(true);
+
+  @override
+  void initState(){
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<ProfileProvider>(context, listen: false).getProfile(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

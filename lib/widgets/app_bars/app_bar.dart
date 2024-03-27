@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/constants/asset_paths.dart';
+import 'package:partypal/services/profile_provider.dart';
+import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
+import 'package:provider/provider.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String title;
@@ -99,13 +102,11 @@ class SliverCustomAppBarDelegate extends SliverPersistentHeaderDelegate {
 }
 
 class HomeAppBar extends StatelessWidget {
-  final String name;
-  const HomeAppBar({
-    required this.name,
-    super.key});
+  const HomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ProfileProvider profile = Provider.of<ProfileProvider>(context);
     return SliverAppBar(
       toolbarHeight: 75,
       leadingWidth: 75,
@@ -130,17 +131,12 @@ class HomeAppBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            'Hi $name',
+          profile.user == null
+          ? TextPlaceHolder(height: 30, width: 180, color: Colors.white.withOpacity(0.1),)
+          :Text(
+            profile.user!.firstName,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          Text(
-            'Where would you like to explore next?',
-            style: Theme.of(context)
-                .textTheme
-                .labelMedium
-                ?.copyWith(color: Colors.white),
           ),
         ],
       ),

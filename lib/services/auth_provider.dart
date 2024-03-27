@@ -46,14 +46,13 @@ class AuthProider extends ChangeNotifier{
     required String otp,
     required VerificationPurpose purpose
   }) async {
-    String query = switch(purpose){
-      VerificationPurpose.registration => 'purpose=registration',
-      VerificationPurpose.forgotPassword => 'purpose=forgot-password'
+    String purposeString = switch(purpose){
+      VerificationPurpose.registration => 'registration',
+      VerificationPurpose.forgotPassword => 'forgot-password'
     };
-
     NetworkResponse response = await Network.patch(
       endpoint: 'auth/verify-otp',
-      query: query,
+      queryParameters: {'purpose': purposeString},
       body: {
         'email': email,
         'otp': otp,
@@ -72,7 +71,10 @@ class AuthProider extends ChangeNotifier{
     };
     NetworkResponse response = await Network.get(
       endpoint: 'auth/resend-otp',
-      query: 'email=$email&purpose=$purposeString'
+      queryParameters: {
+        'email': email,
+        'purpose': purposeString
+      }
     );
     return response;
   } 

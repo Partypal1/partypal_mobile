@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:partypal/constants/asset_paths.dart';
+import 'package:partypal/services/profile_provider.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/filled_button.dart';
 import 'package:partypal/widgets/cards/circle_profile_image.dart';
+import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/scrim.dart';
+import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -30,7 +33,8 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
   }
   @override
   Widget build(BuildContext context) {
-     return Scaffold(
+    ProfileProvider profile = Provider.of<ProfileProvider>(context);
+    return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level1, context),
       body: RefreshIndicator(
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
@@ -45,78 +49,90 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
         ,
         child: Scrim(
           active: _isRefreshing,
-          child: CustomScrollView(
-            slivers: [
-              SliverPersistentHeader(
-                delegate: SliverCustomAppBarDelegate(
-                  title: 'Profile',
-                  hasBackButton: false
+          child: Shimmer(
+            child: CustomScrollView(
+              slivers: [
+                SliverPersistentHeader(
+                  delegate: SliverCustomAppBarDelegate(
+                    title: 'Profile',
+                    hasBackButton: false
+                  ),
+                  floating: true,
                 ),
-                floating: true,
-              ),
-          
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: SizedBox(
-                    height: 80,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        CircleProfileImage(imagePath: AssetPaths.onboardingBackgroundImage2, radius: 40,),
-                        10.horizontalSpace,
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              'Olasunkanmi Beckley',
-                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                fontWeight: FontWeight.bold
+            
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: SizedBox(
+                      height: 80,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          profile.user == null
+                          ? const CircleProfileImageLoading(radius: 40,)
+                          : CircleProfileImage(imageUrl: profile.user!.profileImageUrl, radius: 40,),
+                          10.horizontalSpace,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              profile.user == null
+                              ? const TextPlaceHolder(height: 16, width: 120)
+                              : Text(
+                                  '${profile.user!.firstName} ${profile.user!.lastName}',
+                                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                    fontWeight: FontWeight.bold
+                                ),
                               ),
-                            ),
-                            Text(
-                              'Sunkanmi',
-                              style: Theme.of(context).textTheme.bodySmall
-                            ),
-                            Text(
-                              'Partypal points: 0',
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.secondary
+            
+                              profile.user == null
+                              ? const TextPlaceHolder(height: 12, width: 80)
+                              : Text(
+                                profile.user!.username,
+                                style: Theme.of(context).textTheme.bodySmall
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+            
+                              profile.user == null
+                              ? const TextPlaceHolder(height: 12, width: 100)
+                              : Text(
+                                'Partypal points: ${profile.user!.partypalPoints}',
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).colorScheme.secondary
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-          
-              SliverToBoxAdapter(
-                child:  Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      const CustomFilledButton(label: 'Edit profile',),
-                      10.horizontalSpace,
-                      const CustomFilledButton(label: 'Settings',),
-                    ]
+            
+                SliverToBoxAdapter(
+                  child:  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        const CustomFilledButton(label: 'Edit profile',),
+                        10.horizontalSpace,
+                        const CustomFilledButton(label: 'Settings',),
+                      ]
+                    ),
                   ),
                 ),
-              ),
-          
-              SliverPersistentHeader(
-                delegate: PersitentProfileHeaderDelegate(tabController: _tabController),
-                pinned: true,
-              ),
-          
-              const SliverToBoxAdapter(
-                child: SizedBox(height: 2500,),
-              )
-          
-            ],
+            
+                SliverPersistentHeader(
+                  delegate: PersitentProfileHeaderDelegate(tabController: _tabController),
+                  pinned: true,
+                ),
+            
+                const SliverToBoxAdapter(
+                  child: SizedBox(height: 2500,),
+                )
+            
+              ],
+            ),
           ),
         ),
       )

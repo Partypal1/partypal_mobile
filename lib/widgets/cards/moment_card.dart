@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/models/moment_model.dart';
 import 'package:partypal/utils/datetime_util.dart';
 import 'package:partypal/widgets/cards/circle_profile_image.dart';
@@ -39,10 +38,10 @@ class _MomentCardState extends State<MomentCard> {
         Row(
           children: [
             0.04.sw.horizontalSpace,
-            CircleProfileImage(imagePath: AssetPaths.onboardingBackgroundImage2),
+            CircleProfileImage(imageUrl: widget.moment.creator.profileImageUrl),
             10.horizontalSpace,
             Text(
-              widget.moment.creator.userName,
+              widget.moment.creator.username,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold
               ),

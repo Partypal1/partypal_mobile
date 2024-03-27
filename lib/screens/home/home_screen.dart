@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
               controller: _scrollController,
               physics: _isRefreshing ? const NeverScrollableScrollPhysics() : null,
               slivers: [
-                const HomeAppBar(name: 'Sunkanmi',),
+                const HomeAppBar(),
               
                 SliverToBoxAdapter( // events happening this week
                   child: Column(
