@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? const TextPlaceHolder(height: 20, width: 200)
                         : Text(
                           'Events happening this week',
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold
                           ),
                         ),
@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ),
                
-                SliverToBoxAdapter(child: 10.verticalSpace),
+                SliverToBoxAdapter(child: 25.verticalSpace),
               
                 SliverToBoxAdapter( // events based on your location
                   child: Column(
@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ? const TextPlaceHolder(height: 20, width: 180)
                           : Text(
                             'Events based on your location',
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold
                             ),
                           ),
@@ -157,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ),
                
-                SliverToBoxAdapter(child: 10.verticalSpace),
+                SliverToBoxAdapter(child: 25.verticalSpace),
                 SliverToBoxAdapter( // categories
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? const TextPlaceHolder(height: 20, width: 120)
                         : Text(
                           'Categories',
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold
                           ),
                         ),
@@ -199,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ),
                
-                SliverToBoxAdapter(child: 10.verticalSpace),
+                SliverToBoxAdapter(child: 25.verticalSpace),
             
                 SliverToBoxAdapter( // high energy places
                   child: Column(
@@ -211,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? const TextPlaceHolder(height: 20, width: 180)
                         : Text(
                           'High energy places',
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold
                           ),
                         ),

@@ -74,13 +74,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateM
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox.square(
-                    dimension: 55,
+                    dimension: 40,
                     child: Image.asset(AssetPaths.logoImage),
                   ),
                   10.horizontalSpace,
                   Text(
                     'Partypal',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.onSurface
                     ),

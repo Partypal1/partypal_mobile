@@ -71,13 +71,13 @@ class _SignInScreenState extends State<SignInScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox.square(
-                          dimension: 55,
+                          dimension: 40,
                           child: Image.asset(AssetPaths.logoImage),
                         ),
                         10.horizontalSpace,
                         Text(
                           'Partypal',
-                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          style: Theme.of(context).textTheme.displaySmall?.copyWith(
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).colorScheme.onSurface
                           ),
@@ -89,7 +89,7 @@ class _SignInScreenState extends State<SignInScreen> {
             
                     Text(
                       'Hey pal! Welcome Back.',
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Theme.of(context).colorScheme.primary
                       ),
                     ),
