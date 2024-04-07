@@ -7,6 +7,7 @@ import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/network/network.dart';
 import 'package:partypal/services/auth_provider.dart';
 import 'package:partypal/services/session_manager.dart';
+import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/outlined_button.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
@@ -194,7 +195,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
       setState(() => _isVerifying = false);
       if(response.successful){
         _saveTokens(response);
-        routerConfig.push(RoutePaths.welcomeScreen);
+        routerConfig.clearAndNavigate(RoutePaths.welcomeScreen);
       }
     }
   }

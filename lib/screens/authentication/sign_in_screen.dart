@@ -8,6 +8,7 @@ import 'package:partypal/models/user_model.dart';
 import 'package:partypal/network/network.dart';
 import 'package:partypal/services/auth_provider.dart';
 import 'package:partypal/services/session_manager.dart';
+import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
 import 'package:provider/provider.dart';
@@ -290,7 +291,7 @@ class _SignInScreenState extends State<SignInScreen> {
       setState(() => _isSigningIn = false);
       if(response.successful){
         _saveTokens(response);
-        routerConfig.push(RoutePaths.welcomeScreen);
+        routerConfig.clearAndNavigate(RoutePaths.welcomeScreen);
       }
       else if(response.body?['data']['message'].toString().contains('not verified') ?? false){ // user not verified
         routerConfig.push(RoutePaths.verificationScreen, extra: {'email': email, 'password': password});

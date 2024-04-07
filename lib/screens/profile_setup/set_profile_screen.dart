@@ -7,6 +7,7 @@ import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/network/network_response.dart';
 import 'package:partypal/services/profile_provider.dart';
+import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
@@ -210,11 +211,11 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
       setState(() => _isUploadingProfile = false);
       if(response.successful){
         log('uploaded sucessfully');
-        routerConfig.push(RoutePaths.home);
+        routerConfig.clearAndNavigate(RoutePaths.home);
       }
       else{
         //TODO: remove this
-        routerConfig.push(RoutePaths.home);
+        routerConfig.clearAndNavigate(RoutePaths.home);
       }
     }
   }
