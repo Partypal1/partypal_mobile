@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
     PlacesProvider placeProvider = Provider.of<PlacesProvider>(context);
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level0, context),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Shimmer(
         child: RefreshIndicator(
             onRefresh: () async{
@@ -80,11 +80,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.only(left: 20, top: 20),
                         child: eventProvider.isFetching 
                         ? const TextPlaceHolder(height: 20, width: 200)
-                        : Text(
-                          'Events happening this week',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold
-                          ),
+                        : Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                              child: Text(
+                                'Events happening this week',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                ),
+                              ),
+                            ),
                         ),
                       ),
                       15.verticalSpace,
@@ -124,12 +132,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: 
                           eventProvider.isFetching
                           ? const TextPlaceHolder(height: 20, width: 180)
-                          : Text(
-                            'Events based on your location',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold
+                          : Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
                             ),
-                          ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                              child: Text(
+                                'Events based on your location',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                ),
+                              ),
+                            ),
+                        ),
                       ),
                       15.verticalSpace,
                       SizedBox(
@@ -166,10 +182,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.only(left: 20, top: 20),
                         child: categoryProvider.isFetching
                         ? const TextPlaceHolder(height: 20, width: 120)
-                        : Text(
-                          'Categories',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold
+                        : Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                              child: Text(
+                                'Categories',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                ),
+                              ),
                           ),
                         ),
                       ),
@@ -209,15 +233,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.only(left: 20, top: 20),
                         child: placeProvider.isFetching 
                         ? const TextPlaceHolder(height: 20, width: 180)
-                        : Text(
-                          'High energy places',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold
-                          ),
-                        ),
+                        : Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                              child: Text(
+                                'High energy places',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                ),
+                              ),
+                            ),
+                          )
                       ),
                       15.verticalSpace,
-            
                     ]
                   )
                 ),

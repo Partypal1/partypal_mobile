@@ -5,7 +5,7 @@ MaterialColor primaryColor = createColorSwatch(const Color(0xff8F0C65));
 MaterialColor secondaryColor = createColorSwatch(const Color(0xff470A69));
 MaterialColor tertiaryColor = createColorSwatch(const Color(0xff3C1BE3));
 MaterialColor errorColor = createColorSwatch(const Color(0xffb90e0a));
-MaterialColor neutralColor = createColorSwatch(const Color(0xff6D6C6D));
+MaterialColor neutralColor = createColorSwatch(const Color(0xff222021));
 MaterialColor neutralVariantColor = createColorSwatch(const Color(0xff333333));
 Color shadowColor = const Color(0xff373737);
 
