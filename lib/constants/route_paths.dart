@@ -14,4 +14,5 @@ class RoutePaths {
   static const String home = '/home';
   static const String exploreScreen = '/explore_screen';
   static const String postScreen = '/post_screen';
+  static const String settingsScreen = '/settings_screen';
 }

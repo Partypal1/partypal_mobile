@@ -11,6 +11,7 @@ import 'package:partypal/screens/authentication/sign_in_screen.dart';
 import 'package:partypal/screens/authentication/sign_up_screen.dart';
 import 'package:partypal/screens/authentication/verification_screen.dart';
 import 'package:partypal/screens/home/home.dart';
+import 'package:partypal/screens/home/settings_screen.dart';
 import 'package:partypal/screens/onboarding/onboarding_screen.dart';
 import 'package:partypal/screens/profile_setup/choose_favourite_clubs_screen.dart';
 import 'package:partypal/screens/profile_setup/set_profile_screen.dart';
@@ -147,6 +148,14 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
       path: RoutePaths.home,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const Home(),
+        key: state.pageKey,
+      ),
+    ),
+
+    GoRoute(
+      path: RoutePaths.settingsScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const SettingsScreen(),
         key: state.pageKey,
       ),
     ),
