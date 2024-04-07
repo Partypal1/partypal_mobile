@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
-import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/widgets/cards/onboarding_card.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -85,7 +85,7 @@ class _OnboaringScreenState extends State<OnboaringScreen> {
               child: GestureDetector(
                 onTap: (){
                   //TODO: setFirstRun to false in session manager
-                  routerConfig.pushReplacement(RoutePaths.selectUserProfileScreen);
+                  GoRouter.of(context).pushReplacement(RoutePaths.selectUserProfileScreen);
                 },
                 child: Text(
                   (activeIndex == titles.length - 1) ? 'Next' : 'Skip',

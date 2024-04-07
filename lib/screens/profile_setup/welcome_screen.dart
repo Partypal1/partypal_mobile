@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:partypal/configs/router_config.dart';
+import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
@@ -124,7 +124,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateM
                 child: WideButton(
                   label: 'Set profile',
                   onTap: (){
-                    routerConfig.push(RoutePaths.setProfileScreen);
+                    GoRouter.of(context).push(RoutePaths.setProfileScreen);
                   },
                 )
               ),

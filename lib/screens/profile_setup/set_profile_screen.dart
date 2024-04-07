@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:partypal/configs/router_config.dart';
+import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/network/network_response.dart';
 import 'package:partypal/services/profile_provider.dart';
@@ -97,7 +97,7 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
                                         label: 'Save changes',
                                         onTap: (){
                                           //TODO: save changes
-                                          routerConfig.pop();
+                                          GoRouter.of(context).pop();
                                         },
                                       ),
                                       0.03.sw.verticalSpace
@@ -211,11 +211,15 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
       setState(() => _isUploadingProfile = false);
       if(response.successful){
         log('uploaded sucessfully');
-        routerConfig.clearAndNavigate(RoutePaths.home);
+        if(mounted){
+          GoRouter.of(context).clearAndNavigate(RoutePaths.home);
+        }
       }
       else{
         //TODO: remove this
-        routerConfig.clearAndNavigate(RoutePaths.home);
+        if(mounted){
+          GoRouter.of(context).clearAndNavigate(RoutePaths.home);
+        }
       }
     }
   }

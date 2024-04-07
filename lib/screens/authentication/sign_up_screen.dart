@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
-import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/models/user_model.dart';
 import 'package:partypal/network/network.dart';
 import 'package:partypal/services/auth_provider.dart';
@@ -86,7 +86,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         GestureDetector(
                           onTap: (){
-                            routerConfig.pushReplacement(RoutePaths.signInScreen, extra: {'userType': widget.userType});
+                            GoRouter.of(context).pushReplacement(
+                              RoutePaths.signInScreen,
+                              extra: {'userType': widget.userType}
+                            );
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -371,7 +374,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {_isSigningUp = false;});
  
       if(response.successful){
-        routerConfig.push(RoutePaths.verificationScreen, extra: {'email': email, 'password': password});
+        if(mounted){
+          GoRouter.of(context).push(
+            RoutePaths.verificationScreen,
+            extra: {'email': email, 'password': password}
+          );
+        }
       }
     }
   }

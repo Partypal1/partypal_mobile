@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:partypal/configs/router_config.dart';
+import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/services/session_manager.dart';
 import 'package:partypal/utils/router_util.dart';
@@ -35,7 +35,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onTap: (){
                 Provider.of<SessionManager>(context, listen: false).setAccessToken(null);
                 Provider.of<SessionManager>(context, listen: false).setRefreshToken(null);
-                routerConfig.clearAndNavigate(RoutePaths.selectUserProfileScreen);
+                GoRouter.of(context).clearAndNavigate(RoutePaths.selectUserProfileScreen);
               },
             )
           )

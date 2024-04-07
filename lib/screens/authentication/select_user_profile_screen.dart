@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
-import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/models/user_model.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
@@ -33,7 +33,7 @@ class SelectUserProfileScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   onTap: (){
-                    routerConfig.push(RoutePaths.signUpScreen, extra: {'userType': UserType.user});
+                    GoRouter.of(context).push(RoutePaths.signUpScreen, extra: {'userType': UserType.user});
                   },
                 ),
 
@@ -52,7 +52,7 @@ class SelectUserProfileScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   onTap: (){
-                    routerConfig.push(RoutePaths.signUpScreen, extra: {'userType': UserType.promoter});
+                    GoRouter.of(context).push(RoutePaths.signUpScreen, extra: {'userType': UserType.promoter});
                   },
                 ),
               ],

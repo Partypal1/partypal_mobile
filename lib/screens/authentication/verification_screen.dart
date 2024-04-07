@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:partypal/configs/router_config.dart';
+import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/network/network.dart';
 import 'package:partypal/services/auth_provider.dart';
@@ -195,7 +195,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
       setState(() => _isVerifying = false);
       if(response.successful){
         _saveTokens(response);
-        routerConfig.clearAndNavigate(RoutePaths.welcomeScreen);
+        if(mounted){
+          GoRouter.of(context).clearAndNavigate(RoutePaths.welcomeScreen);
+        }
       }
     }
   }
