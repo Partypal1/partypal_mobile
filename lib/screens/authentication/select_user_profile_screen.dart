@@ -6,14 +6,13 @@ import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/models/user_model.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
-import 'package:partypal/widgets/others/tonal_elevation.dart';
 class SelectUserProfileScreen extends StatelessWidget {
   const SelectUserProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level0, context),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
         children: [
           const CustomAppBar(title: 'Select user profile', hasBackButton: false,),

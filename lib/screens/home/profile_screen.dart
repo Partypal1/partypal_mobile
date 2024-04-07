@@ -9,7 +9,6 @@ import 'package:partypal/widgets/cards/circle_profile_image.dart';
 import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/scrim.dart';
 import 'package:partypal/widgets/others/shimmer.dart';
-import 'package:partypal/widgets/others/tonal_elevation.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -37,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
   Widget build(BuildContext context) {
     ProfileProvider profile = Provider.of<ProfileProvider>(context);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level1, context),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: RefreshIndicator(
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         onRefresh: () async{

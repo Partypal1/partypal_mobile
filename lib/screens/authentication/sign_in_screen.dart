@@ -13,8 +13,6 @@ import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
 import 'package:provider/provider.dart';
 
-import '../../widgets/others/tonal_elevation.dart';
-
 class SignInScreen extends StatefulWidget {
   final UserType userType;
   const SignInScreen({
@@ -57,7 +55,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level0, context),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SingleChildScrollView(
         child: Column(
           children: [

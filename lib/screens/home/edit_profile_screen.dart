@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
-import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -13,7 +12,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level1, context),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: CustomScrollView(
         slivers: [
           SliverPersistentHeader(

@@ -4,7 +4,6 @@ import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/cards/moment_card.dart';
 import 'package:partypal/widgets/others/scrim.dart';
 import 'package:partypal/widgets/others/shimmer.dart';
-import 'package:partypal/widgets/others/tonal_elevation.dart';
 import 'package:provider/provider.dart';
 
 class MomentsScreen extends StatefulWidget {
@@ -28,7 +27,7 @@ class _MomentsScreenState extends State<MomentsScreen> {
   Widget build(BuildContext context) {
     MomentProvider momentProvider = Provider.of<MomentProvider>(context); 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level1, context),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Shimmer(
         child: RefreshIndicator(
             onRefresh: () async{
