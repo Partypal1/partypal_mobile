@@ -35,7 +35,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onTap: (){
                 Provider.of<SessionManager>(context, listen: false).setAccessToken(null);
                 Provider.of<SessionManager>(context, listen: false).setRefreshToken(null);
-                GoRouter.of(context).clearAndNavigate(RoutePaths.selectUserProfileScreen);
+                GoRouter.of(context).clearStackAndNavigate(RoutePaths.selectUserProfileScreen);
               },
             )
           )

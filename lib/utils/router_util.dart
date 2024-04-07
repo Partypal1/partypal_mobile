@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 
-extension ClearAndNavigate on GoRouter{
-  void clearAndNavigate(String location, {Object? extra}){
+extension RouterUtil on GoRouter{
+  void clearStackAndNavigate(String location, {Object? extra}){
     while(canPop()){
       pop();
     }

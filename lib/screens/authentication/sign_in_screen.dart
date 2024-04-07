@@ -292,7 +292,7 @@ class _SignInScreenState extends State<SignInScreen> {
       if(response.successful){
         _saveTokens(response);
         if(mounted){
-          GoRouter.of(context).clearAndNavigate(RoutePaths.welcomeScreen);
+          GoRouter.of(context).clearStackAndNavigate(RoutePaths.welcomeScreen);
         }
       }
       else if(response.body?['data']['message'].toString().contains('not verified') ?? false){ // user not verified

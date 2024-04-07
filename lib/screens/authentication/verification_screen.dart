@@ -196,7 +196,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
       if(response.successful){
         _saveTokens(response);
         if(mounted){
-          GoRouter.of(context).clearAndNavigate(RoutePaths.welcomeScreen);
+          GoRouter.of(context).clearStackAndNavigate(RoutePaths.welcomeScreen);
         }
       }
     }

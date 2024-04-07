@@ -212,13 +212,13 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
       if(response.successful){
         log('uploaded sucessfully');
         if(mounted){
-          GoRouter.of(context).clearAndNavigate(RoutePaths.home);
+          GoRouter.of(context).clearStackAndNavigate(RoutePaths.home);
         }
       }
       else{
         //TODO: remove this
         if(mounted){
-          GoRouter.of(context).clearAndNavigate(RoutePaths.home);
+          GoRouter.of(context).clearStackAndNavigate(RoutePaths.home);
         }
       }
     }
