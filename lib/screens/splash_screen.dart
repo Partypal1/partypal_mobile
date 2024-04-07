@@ -25,11 +25,20 @@ class _SplashScreenState extends State<SplashScreen> {
         if(mounted){
           GoRouter.of(context).pushReplacement(RoutePaths.onboaringScreen);
         }
-      } else {
-        //TODO: pushReplacement to auth or home screen depending on authentication state
+      } 
+      else if(mounted && await Provider.of<SessionManager>(context, listen: false).accessToken == null){
+        if(mounted){
+          GoRouter.of(context).pushReplacement(RoutePaths.selectUserProfileScreen);
+        }
       }
+      else{
+        if(mounted){
+          GoRouter.of(context).pushReplacement(RoutePaths.home);
+        }
+      }      
     });    
   }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
