@@ -10,7 +10,10 @@ import 'package:partypal/screens/authentication/set_password_screen.dart';
 import 'package:partypal/screens/authentication/sign_in_screen.dart';
 import 'package:partypal/screens/authentication/sign_up_screen.dart';
 import 'package:partypal/screens/authentication/verification_screen.dart';
+import 'package:partypal/screens/home/category_screen.dart';
+import 'package:partypal/screens/home/edit_profile_screen.dart';
 import 'package:partypal/screens/home/home.dart';
+import 'package:partypal/screens/home/place_screen.dart';
 import 'package:partypal/screens/home/settings_screen.dart';
 import 'package:partypal/screens/onboarding/onboarding_screen.dart';
 import 'package:partypal/screens/profile_setup/choose_favourite_clubs_screen.dart';
@@ -24,7 +27,7 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
   routes: [
     GoRoute(
       path: RoutePaths.splashScreen,
-      pageBuilder: (context, state) => CupertinoPage<void>(
+      pageBuilder: (context, state) => CupertinoPage(
         child: const SplashScreen(),
         key: state.pageKey,
       ),
@@ -32,7 +35,7 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
 
     GoRoute(
       path: RoutePaths.onboaringScreen,
-      pageBuilder: (context, state) => CupertinoPage<void>(
+      pageBuilder: (context, state) => CupertinoPage(
         child: const OnboaringScreen(),
         key: state.pageKey,
       ),
@@ -40,7 +43,7 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
 
     GoRoute(
       path: RoutePaths.selectUserProfileScreen,
-      pageBuilder: (context, state) => CupertinoPage<void>(
+      pageBuilder: (context, state) => CupertinoPage(
         child: const SelectUserProfileScreen(),
         key: state.pageKey,
       ),
@@ -51,14 +54,14 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
       pageBuilder: (context, state){
         if(state.extra != null){
           Map<String, dynamic> args = state.extra as Map<String, dynamic>;
-          return CupertinoPage<void>(
+          return CupertinoPage(
             child: SignInScreen(
               userType: args['userType'] ?? UserType.user,
             ),
             key: state.pageKey,
           );
         }
-        return CupertinoPage<void>(
+        return CupertinoPage(
           child: const ErrorBuilder(),
           key: state.pageKey
         );
@@ -70,14 +73,14 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
       pageBuilder: (context, state){
         if(state.extra != null){
           Map<String, dynamic> args = state.extra as Map<String, dynamic>;
-          return CupertinoPage<void>(
+          return CupertinoPage(
             child: SignUpScreen(
               userType: args['userType'] ?? UserType.user,
             ),
             key: state.pageKey,
           );
         }
-        return CupertinoPage<void>(
+        return CupertinoPage(
           child: const ErrorBuilder(),
           key: state.pageKey
         );
@@ -89,7 +92,7 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
       pageBuilder: (context, state){
         if (state.extra!=null){
           Map<String, dynamic> args = state.extra as Map<String, dynamic>;
-          return CupertinoPage<void>(
+          return CupertinoPage(
             child: VerificationScreen(
               email: args['email'] ?? '',
               password: args['password'] ?? '',
@@ -106,7 +109,7 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
 
     GoRoute(
       path: RoutePaths.resetPasswordScreen,
-      pageBuilder: (context, state) => CupertinoPage<void>(
+      pageBuilder: (context, state) => CupertinoPage(
         child: const ResetPasswordScreen(),
         key: state.pageKey,
       ),
@@ -114,7 +117,7 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
 
     GoRoute(
       path: RoutePaths.setPasswordScreen,
-      pageBuilder: (context, state) => CupertinoPage<void>(
+      pageBuilder: (context, state) => CupertinoPage(
         child: const SetPasswordScreen(),
         key: state.pageKey,
       ),
@@ -122,7 +125,7 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
 
     GoRoute(
       path: RoutePaths.welcomeScreen,
-      pageBuilder: (context, state) => CupertinoPage<void>(
+      pageBuilder: (context, state) => CupertinoPage(
         child: const WelcomeScreen(),
         key: state.pageKey,
       ),
@@ -130,7 +133,7 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
 
     GoRoute(
       path: RoutePaths.chooseFavouriteClubsScreen,
-      pageBuilder: (context, state) => CupertinoPage<void>(
+      pageBuilder: (context, state) => CupertinoPage(
         child: const ChooseFavouriteClubs(),
         key: state.pageKey,
       ),
@@ -138,7 +141,7 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
 
     GoRoute(
       path: RoutePaths.setProfileScreen,
-      pageBuilder: (context, state) => CupertinoPage<void>(
+      pageBuilder: (context, state) => CupertinoPage(
         child: const SetProfileScreen(),
         key: state.pageKey,
       ),
@@ -146,18 +149,84 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
 
     GoRoute(
       path: RoutePaths.home,
-      pageBuilder: (context, state) => CupertinoPage<void>(
-        child: const Home(),
+      pageBuilder: ((context, state) {
+        return CustomTransitionPage(
+          child: const Home(),
+          transitionDuration: const Duration(milliseconds: 500),
+          transitionsBuilder: (context, animation, _, child){
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          }
+        );
+      })
+    ),
+
+    GoRoute(
+      path: RoutePaths.editProfileScreen,
+      pageBuilder: (context, state) => CupertinoPage(
+        child: const EditProfileScreen(),
         key: state.pageKey,
       ),
     ),
 
     GoRoute(
       path: RoutePaths.settingsScreen,
-      pageBuilder: (context, state) => CupertinoPage<void>(
+      pageBuilder: (context, state) => CupertinoPage(
         child: const SettingsScreen(),
         key: state.pageKey,
       ),
+    ),
+
+   GoRoute(
+      path: RoutePaths.categoryScreen,
+      pageBuilder: (context, state){
+        if (state.extra!=null){
+          Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: CategoryScreen(
+              categoryName: args['categoryName'],
+            ),
+            transitionsBuilder: (context, animation, _, child){
+               return SlideTransition(
+                position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero).animate(animation),
+                child: child,
+              );    
+            }
+          );
+        }
+        return CupertinoPage(
+          child: const ErrorBuilder(),
+          key: state.pageKey
+        );
+      }
+    ),
+
+   GoRoute(
+      path: RoutePaths.placeScreen,
+      pageBuilder: (context, state){
+        if (state.extra!=null){
+          Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: PlaceScreen(
+              place: args['place'],
+            ),
+            transitionsBuilder: (context, animation, _, child){
+               return SlideTransition(
+                position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
+                child: child,
+              );    
+            }
+          );
+        }
+        return CupertinoPage(
+          child: const ErrorBuilder(),
+          key: state.pageKey
+        );
+      }
     ),
   ]
 );

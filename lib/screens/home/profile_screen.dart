@@ -116,13 +116,14 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
-                        const CustomFilledButton(label: 'Edit profile',),
+                        CustomFilledButton(
+                          label: 'Edit profile',
+                          onTap: () => GoRouter.of(context).push(RoutePaths.editProfileScreen),
+                        ),
                         10.horizontalSpace,
                         CustomFilledButton(
                           label: 'Settings',
-                          onTap: (){
-                            GoRouter.of(context).push(RoutePaths.settingsScreen);
-                          },
+                          onTap: () => GoRouter.of(context).push(RoutePaths.settingsScreen),
                         ),
                       ]
                     ),
