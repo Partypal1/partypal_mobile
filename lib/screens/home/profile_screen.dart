@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:partypal/configs/router_config.dart';
+import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/services/profile_provider.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/filled_button.dart';
@@ -116,7 +118,12 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                       children: [
                         const CustomFilledButton(label: 'Edit profile',),
                         10.horizontalSpace,
-                        const CustomFilledButton(label: 'Settings',),
+                        CustomFilledButton(
+                          label: 'Settings',
+                          onTap: (){
+                            routerConfig.push(RoutePaths.settingsScreen);
+                          },
+                        ),
                       ]
                     ),
                   ),

@@ -20,46 +20,49 @@ class CustomFilledButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: FittedBox(
-        child: SizedBox(
-          height: 40,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: backgroundColor ?? Theme.of(context).colorScheme.inverseSurface
-            ),
-            child: Padding(
-              padding: iconData == null
-                ? const EdgeInsets.symmetric(horizontal: 24)
-                : const EdgeInsets.only(left: 16, right: 24),
-              child: Center(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    iconData != null
-                    ? Icon(
-                      iconData,
-                      size: 18,
-                      color: labelColor ?? Theme.of(context).colorScheme.onInverseSurface,
-                    )
-                    : const SizedBox.shrink(),
-
-                    iconData != null
-                    ? 8.horizontalSpace
-                    : const SizedBox.shrink(),
-
-                    Text(
-                      label,
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: labelColor ?? Theme.of(context).colorScheme.onInverseSurface
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: 40,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: backgroundColor ?? Theme.of(context).colorScheme.inverseSurface
+              ),
+              child: Padding(
+                padding: iconData == null
+                  ? const EdgeInsets.symmetric(horizontal: 24)
+                  : const EdgeInsets.only(left: 16, right: 24),
+                child: Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      iconData != null
+                      ? Icon(
+                        iconData,
+                        size: 18,
+                        color: labelColor ?? Theme.of(context).colorScheme.onInverseSurface,
+                      )
+                      : const SizedBox.shrink(),
+          
+                      iconData != null
+                      ? 8.horizontalSpace
+                      : const SizedBox.shrink(),
+          
+                      Text(
+                        label,
+                        style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: labelColor ?? Theme.of(context).colorScheme.onInverseSurface
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
