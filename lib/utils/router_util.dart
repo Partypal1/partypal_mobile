@@ -1,10 +1,10 @@
 import 'package:go_router/go_router.dart';
 
 extension ClearAndNavigate on GoRouter{
-  void clearAndNavigate(String location){
+  void clearAndNavigate(String location, {Object? extra}){
     while(canPop()){
       pop();
     }
-    pushReplacement(location);
+    pushReplacement(location, extra: extra);
   }
 }
