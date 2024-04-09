@@ -11,7 +11,7 @@ BoxShadow customBoxShadow(Elevation level, BuildContext context){
     Elevation.level5 => 12
   };
   return BoxShadow(
-    color: Theme.of(context).colorScheme.shadow.withOpacity(0.25),
+    color: Theme.of(context).colorScheme.shadow,
     spreadRadius: elevation * 0.1,
     blurRadius: elevation * 0.25,
     offset: Offset(0, elevation * 0.25),
