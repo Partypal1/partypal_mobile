@@ -43,7 +43,7 @@ class _MomentsScreenState extends State<MomentsScreen> {
             child: CustomScrollView(
               slivers: [
                 SliverPersistentHeader(
-                  delegate: SliverCustomAppBarDelegate(title: 'Moments', hasBackButton: false),
+                  delegate: CustomSliverAppBar(title: 'Moments', hasBackButton: false),
                   floating: true,
                 ),
                SliverList.builder(

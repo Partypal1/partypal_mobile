@@ -54,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
             child: CustomScrollView(
               slivers: [
                 SliverPersistentHeader(
-                  delegate: SliverCustomAppBarDelegate(
+                  delegate: CustomSliverAppBar(
                     title: 'Profile',
                     hasBackButton: false
                   ),
@@ -130,7 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                 ),
             
                 SliverPersistentHeader(
-                  delegate: PersitentProfileHeaderDelegate(tabController: _tabController),
+                  delegate: ProfileTab(tabController: _tabController),
                   pinned: true,
                 ),
             
@@ -147,9 +147,9 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
   }
 }
 
-class PersitentProfileHeaderDelegate extends SliverPersistentHeaderDelegate{
+class ProfileTab extends SliverPersistentHeaderDelegate{
   final TabController tabController;
-  PersitentProfileHeaderDelegate({
+  ProfileTab({
     required this.tabController,
   });
 
@@ -160,7 +160,7 @@ class PersitentProfileHeaderDelegate extends SliverPersistentHeaderDelegate{
   double get maxExtent => 80;
 
   @override
-  bool shouldRebuild(PersitentProfileHeaderDelegate oldDelegate){
+  bool shouldRebuild(ProfileTab oldDelegate){
     return false;
   }
   @override

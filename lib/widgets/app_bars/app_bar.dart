@@ -72,11 +72,11 @@ class CustomAppBar extends StatelessWidget {
   }
 }
 
-class SliverCustomAppBarDelegate extends SliverPersistentHeaderDelegate {
+class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
   final String title;
   final String? subtitle;
   final bool hasBackButton;
-  SliverCustomAppBarDelegate(
+  CustomSliverAppBar(
       {required this.title, this.subtitle, this.hasBackButton = true});
 
   @override
@@ -86,7 +86,7 @@ class SliverCustomAppBarDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => 100;
 
   @override
-  bool shouldRebuild(SliverCustomAppBarDelegate oldDelegate) {
+  bool shouldRebuild(CustomSliverAppBar oldDelegate) {
     return false;
   }
 

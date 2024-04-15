@@ -41,7 +41,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       body: CustomScrollView(
         slivers: [
           SliverPersistentHeader(
-            delegate: SliverCustomAppBarDelegate(title: widget.categoryName),
+            delegate: CustomSliverAppBar(title: widget.categoryName),
           ),
           SliverToBoxAdapter(
             child: Padding(

@@ -35,7 +35,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: CustomScrollView(
         slivers: [
-          SliverPersistentHeader(delegate: SliverCustomAppBarDelegate(title: 'Reset password')),
+          SliverPersistentHeader(delegate: CustomSliverAppBar(title: 'Reset password')),
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(0.03.sw),

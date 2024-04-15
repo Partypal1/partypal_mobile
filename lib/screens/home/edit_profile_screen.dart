@@ -16,7 +16,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: CustomScrollView(
         slivers: [
           SliverPersistentHeader(
-            delegate: SliverCustomAppBarDelegate(title: 'Edit profile'),
+            delegate: CustomSliverAppBar(title: 'Edit profile'),
             pinned: true,
           )
         ],

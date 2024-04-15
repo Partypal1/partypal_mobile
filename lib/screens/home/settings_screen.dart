@@ -22,7 +22,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: CustomScrollView(
         slivers: [
           SliverPersistentHeader(
-            delegate: SliverCustomAppBarDelegate(title: 'Settings'),
+            delegate: CustomSliverAppBar(title: 'Settings'),
             pinned: true,
           ),
           SliverToBoxAdapter(
