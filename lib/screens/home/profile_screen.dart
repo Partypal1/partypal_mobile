@@ -130,7 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                 ),
             
                 SliverPersistentHeader(
-                  delegate: ProfileTab(tabController: _tabController),
+                  delegate: _ProfileTab(tabController: _tabController),
                   pinned: true,
                 ),
             
@@ -147,9 +147,9 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
   }
 }
 
-class ProfileTab extends SliverPersistentHeaderDelegate{
+class _ProfileTab extends SliverPersistentHeaderDelegate{
   final TabController tabController;
-  ProfileTab({
+  _ProfileTab({
     required this.tabController,
   });
 
@@ -160,7 +160,7 @@ class ProfileTab extends SliverPersistentHeaderDelegate{
   double get maxExtent => 80;
 
   @override
-  bool shouldRebuild(ProfileTab oldDelegate){
+  bool shouldRebuild(_ProfileTab oldDelegate){
     return false;
   }
   @override
