@@ -5,7 +5,7 @@ import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/services/profile_provider.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/filled_button.dart';
-import 'package:partypal/widgets/cards/circle_profile_image.dart';
+import 'package:partypal/widgets/cards/circle_image.dart';
 import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/scrim.dart';
 import 'package:partypal/widgets/others/shimmer.dart';
@@ -70,8 +70,8 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           profile.user == null
-                          ? const CircleProfileImageLoading(radius: 40,)
-                          : CircleProfileImage(imageUrl: profile.user!.profileImageUrl, radius: 40,),
+                          ? const CircleImageLoading(radius: 40,)
+                          : CircleImage(imageUrl: profile.user!.profileImageUrl, radius: 40,),
                           10.horizontalSpace,
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

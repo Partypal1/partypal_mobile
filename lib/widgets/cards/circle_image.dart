@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 
-class CircleProfileImage extends StatelessWidget {
+class CircleImage extends StatelessWidget {
   final String imageUrl;
   final double radius;
-  const CircleProfileImage({
+  const CircleImage({
     required this.imageUrl,
     this.radius = 25,
     super.key});
@@ -68,9 +68,9 @@ class CircleProfileImage extends StatelessWidget {
   }
 }
 
-class CircleProfileImageLoading extends StatelessWidget {
+class CircleImageLoading extends StatelessWidget {
   final double radius;
-  const CircleProfileImageLoading({
+  const CircleImageLoading({
     this.radius = 25,
     super.key});
 
