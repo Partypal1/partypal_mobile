@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/asset_paths.dart';
+import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/services/profile_provider.dart';
 import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
@@ -148,7 +149,7 @@ class HomeAppBar extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: (){
-            //TODO: navigate to notification screen
+            GoRouter.of(context).push(RoutePaths.notificationScreen);
           },
         )
       ],

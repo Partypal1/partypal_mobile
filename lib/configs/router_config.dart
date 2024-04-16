@@ -13,6 +13,7 @@ import 'package:partypal/screens/authentication/verification_screen.dart';
 import 'package:partypal/screens/home/category_screen.dart';
 import 'package:partypal/screens/home/edit_profile_screen.dart';
 import 'package:partypal/screens/home/home.dart';
+import 'package:partypal/screens/home/notification_screen.dart';
 import 'package:partypal/screens/home/place_screen.dart';
 import 'package:partypal/screens/home/settings_screen.dart';
 import 'package:partypal/screens/onboarding/onboarding_screen.dart';
@@ -190,7 +191,7 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
               categoryName: args['categoryName'],
             ),
             transitionsBuilder: (context, animation, _, child){
-               return SlideTransition(
+              return SlideTransition(
                 position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero).animate(animation),
                 child: child,
               );    
@@ -215,7 +216,7 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
               place: args['place'],
             ),
             transitionsBuilder: (context, animation, _, child){
-               return SlideTransition(
+              return SlideTransition(
                 position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
                 child: child,
               );    
@@ -227,6 +228,21 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
           key: state.pageKey
         );
       }
+    ),
+    GoRoute(
+      path: RoutePaths.notificationScreen,
+      pageBuilder: ((context, state) {
+        return CustomTransitionPage(
+          child: const NotificationScreen(),
+          transitionDuration: const Duration(milliseconds: 500),
+          transitionsBuilder: (context, animation, _, child){
+            return SlideTransition(
+              position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero).animate(animation),
+              child: child,
+            );  
+          }
+        );
+      })
     ),
   ]
 );
