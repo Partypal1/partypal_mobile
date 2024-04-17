@@ -196,7 +196,7 @@ class _EventCardState extends State<EventCard> {
                       image: DecorationImage(
                         image: imageProvider,
                         
-                        colorFilter: ColorFilter.mode(Color.fromRGBO(0, 0, 0, 0.5), BlendMode.colorBurn),
+                        colorFilter: const ColorFilter.mode(Color.fromRGBO(0, 0, 0, 0.5), BlendMode.colorBurn),
                         fit: BoxFit.cover
                       )
                     ),

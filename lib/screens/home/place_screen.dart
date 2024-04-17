@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/models/place_model.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
