@@ -272,14 +272,14 @@ class _GraphPainter extends CustomPainter{
         Offset(0, size.height * i/heatMapForTheDay.length),
         Offset(size.width, size.height * i/heatMapForTheDay.length),
         Paint()
-          ..color = Theme.of(context).colorScheme.outline.withOpacity(0.1)
+          ..color = Theme.of(context).colorScheme.outline.withOpacity(0.2)
           ..strokeCap = StrokeCap.round
       );
       canvas.drawLine( // vertical
         Offset(size.width * i/heatMapForTheDay.length, 0),
         Offset(size.width * i/heatMapForTheDay.length, size.height),
         Paint()
-          ..color = Theme.of(context).colorScheme.outline.withOpacity(0.1)
+          ..color = Theme.of(context).colorScheme.outline.withOpacity(0.2)
           ..strokeCap = StrokeCap.round
       );
     }
@@ -317,7 +317,7 @@ class _GraphPainter extends CustomPainter{
     canvas.drawPath(
       path,
       Paint()
-        ..color = Theme.of(context).colorScheme.outline.withOpacity(0.1)
+        ..color = Theme.of(context).colorScheme.outline.withOpacity(0.25)
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round
         ..strokeWidth = 4
