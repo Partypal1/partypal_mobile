@@ -13,6 +13,7 @@ import 'package:partypal/screens/authentication/verification_screen.dart';
 import 'package:partypal/screens/home/category_screen.dart';
 import 'package:partypal/screens/home/edit_profile_screen.dart';
 import 'package:partypal/screens/home/home.dart';
+import 'package:partypal/screens/home/message_screen.dart';
 import 'package:partypal/screens/home/notification_screen.dart';
 import 'package:partypal/screens/home/place_screen.dart';
 import 'package:partypal/screens/home/settings_screen.dart';
@@ -234,6 +235,21 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
       pageBuilder: ((context, state) {
         return CustomTransitionPage(
           child: const NotificationScreen(),
+          transitionDuration: const Duration(milliseconds: 500),
+          transitionsBuilder: (context, animation, _, child){
+            return SlideTransition(
+              position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero).animate(animation),
+              child: child,
+            );  
+          }
+        );
+      })
+    ),
+    GoRoute(
+      path: RoutePaths.messageScreen,
+      pageBuilder: ((context, state) {
+        return CustomTransitionPage(
+          child: const MessageScreen(),
           transitionDuration: const Duration(milliseconds: 500),
           transitionsBuilder: (context, animation, _, child){
             return SlideTransition(

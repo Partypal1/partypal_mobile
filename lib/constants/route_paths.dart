@@ -19,4 +19,5 @@ class RoutePaths {
   static const String placeScreen = '/place_screen';
   static const String editProfileScreen = '/edit_profile_screen';
   static const String notificationScreen = '/notification_screen';
+  static const String messageScreen = '/message_screen';
 }

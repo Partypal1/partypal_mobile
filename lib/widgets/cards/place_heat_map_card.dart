@@ -14,13 +14,14 @@ class PlaceHeatMapCard extends StatefulWidget {
   State<PlaceHeatMapCard> createState() => _PlaceHeatMapCardState();
 }
 
-class _PlaceHeatMapCardState extends State<PlaceHeatMapCard>{
+class _PlaceHeatMapCardState extends State<PlaceHeatMapCard> with AutomaticKeepAliveClientMixin{
   late List<List<double>> heatMap;
-  int selectedDayIndex = DateTime.now().weekday;
+  late int selectedDayIndex;
 
   @override
-  void initState(){
+  void initState(){ // TODO: animate heatmap when the day of the week is switched
     super.initState();
+    selectedDayIndex = DateTime.now().weekday;
     heatMap = _generateHeatMap();
   }
 
@@ -28,6 +29,9 @@ class _PlaceHeatMapCardState extends State<PlaceHeatMapCard>{
   void dispose(){
     super.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 
   List<List<double>> _generateHeatMap(){ //TODO: get the actual heat map from place model
     final random = math.Random();
@@ -39,6 +43,7 @@ class _PlaceHeatMapCardState extends State<PlaceHeatMapCard>{
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SizedBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -267,14 +272,14 @@ class _GraphPainter extends CustomPainter{
         Offset(0, size.height * i/heatMapForTheDay.length),
         Offset(size.width, size.height * i/heatMapForTheDay.length),
         Paint()
-          ..color = Theme.of(context).colorScheme.outline.withOpacity(0.5)
+          ..color = Theme.of(context).colorScheme.outline.withOpacity(0.1)
           ..strokeCap = StrokeCap.round
       );
       canvas.drawLine( // vertical
         Offset(size.width * i/heatMapForTheDay.length, 0),
         Offset(size.width * i/heatMapForTheDay.length, size.height),
         Paint()
-          ..color = Theme.of(context).colorScheme.outline.withOpacity(0.5)
+          ..color = Theme.of(context).colorScheme.outline.withOpacity(0.1)
           ..strokeCap = StrokeCap.round
       );
     }
@@ -298,6 +303,26 @@ class _GraphPainter extends CustomPainter{
         );
     }
 
+    Path path = Path();
+    path.moveTo(
+      size.width/ (2 * heatMapForTheDay.length),
+      (1 - heatMapForTheDay[0]) * size.height
+    );
+    for(int i = 1; i < heatMapForTheDay.length; i++){
+      path.lineTo(
+        size.width * i/heatMapForTheDay.length + (size.width/ (2 * heatMapForTheDay.length)),
+        (1 - heatMapForTheDay[i]) * size.height
+      );
+    }
+    canvas.drawPath(
+      path,
+      Paint()
+        ..color = Theme.of(context).colorScheme.outline.withOpacity(0.1)
+        ..style = PaintingStyle.stroke
+        ..strokeCap = StrokeCap.round
+        ..strokeWidth = 4
+    );
+
     for (int i = 0; i < heatMapForTheDay.length; i++){ // draw points
       canvas.drawCircle(
         Offset(
@@ -308,6 +333,6 @@ class _GraphPainter extends CustomPainter{
         Paint()
           ..color = _interpolateColor(Colors.blue, Colors.red, heatMapForTheDay[i])
       );
-    }    
+    }
   }
 }

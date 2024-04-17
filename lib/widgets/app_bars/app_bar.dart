@@ -145,6 +145,15 @@ class HomeAppBar extends StatelessWidget {
       actions: [
         IconButton(
           icon: const Icon(
+            Icons.mail,
+            color: Colors.white,
+          ),
+          onPressed: (){
+            GoRouter.of(context).push(RoutePaths.messageScreen);
+          },
+        ),
+        IconButton(
+          icon: const Icon(
             Icons.notifications,
             color: Colors.white,
           ),

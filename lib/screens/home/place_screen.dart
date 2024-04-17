@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_lazy_indexed_stack/flutter_lazy_indexed_stack.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/models/place_model.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
@@ -19,11 +18,17 @@ class PlaceScreen extends StatefulWidget {
 }
 
 class _PlaceScreenState extends State<PlaceScreen> with SingleTickerProviderStateMixin{
+  late List<Widget> _tabViews;
   late TabController _tabController;
 
   @override
   void initState(){
     super.initState();
+    _tabViews = [
+      PlaceHeatMapCard(place: widget.place),
+      const SizedBox(height: 1000),
+      const SizedBox(height: 1000),
+    ];
     _tabController = TabController(length: 3, vsync: this)
       ..addListener(() {
         setState(() {});
@@ -44,7 +49,7 @@ class _PlaceScreenState extends State<PlaceScreen> with SingleTickerProviderStat
         slivers: [
           SliverPersistentHeader(
             delegate: CustomSliverAppBar(title: widget.place.name),
-            pinned: true,
+            floating: true,
           ),
           SliverToBoxAdapter(
             child: Padding(
@@ -87,17 +92,13 @@ class _PlaceScreenState extends State<PlaceScreen> with SingleTickerProviderStat
               ),
             ),
           ),
-          SliverPersistentHeader(delegate: _PlaceTab(tabController: _tabController)),
-          SliverToBoxAdapter(
-            child: LazyIndexedStack(
-              index: _tabController.index,
-              children: [
-                PlaceHeatMapCard(place: widget.place),
-                const SizedBox(),
-                const SizedBox(),
-              ],
-            ),
+          SliverPersistentHeader(
+            delegate: _PlaceTab(tabController: _tabController),
+            pinned: true,
           ),
+          SliverToBoxAdapter( // TODO: retain state without using indexedstack
+            child: _tabViews[_tabController.index],
+          )
         ],
       ),
     );
