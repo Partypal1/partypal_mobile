@@ -65,7 +65,7 @@ class _PlaceHeatMapCardState extends State<PlaceHeatMapCard> with AutomaticKeepA
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     child: Text(
-                      'Heat map',
+                      'Popular hours',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       ),
                     ),
