@@ -29,22 +29,17 @@ class CircleImage extends StatelessWidget {
             child:  CachedNetworkImage(
               imageUrl: imageUrl,
               errorWidget: (context,_, __){
-                return  Center(
-                  child: SizedBox.square(
-                    dimension: 2 * radius,
-                    child: Container(
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(radius),
-                        color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level4, context)
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.person_rounded,
-                          size: radius,
-                          color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level2, context),
-                        ),
-                      ),
+                return  Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(radius),
+                    color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level4, context)
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.error_rounded,
+                      size: radius,
+                      color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level2, context),
                     ),
                   ),
                 );
@@ -54,7 +49,6 @@ class CircleImage extends StatelessWidget {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: imageProvider,
-                      colorFilter: const ColorFilter.mode(Color.fromRGBO(0, 0, 0, 0.5), BlendMode.colorBurn),
                       fit: BoxFit.cover
                     )
                   ),
