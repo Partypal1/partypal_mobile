@@ -11,12 +11,15 @@ import 'package:partypal/screens/authentication/sign_in_screen.dart';
 import 'package:partypal/screens/authentication/sign_up_screen.dart';
 import 'package:partypal/screens/authentication/verification_screen.dart';
 import 'package:partypal/screens/home/category_screen.dart';
+import 'package:partypal/screens/home/dress_code_screen.dart';
 import 'package:partypal/screens/home/edit_profile_screen.dart';
+import 'package:partypal/screens/home/event_screen.dart';
 import 'package:partypal/screens/home/home.dart';
 import 'package:partypal/screens/home/message_screen.dart';
 import 'package:partypal/screens/home/notification_screen.dart';
 import 'package:partypal/screens/home/place_screen.dart';
 import 'package:partypal/screens/home/settings_screen.dart';
+import 'package:partypal/screens/home/ticket_screen.dart';
 import 'package:partypal/screens/onboarding/onboarding_screen.dart';
 import 'package:partypal/screens/profile_setup/choose_favourite_clubs_screen.dart';
 import 'package:partypal/screens/profile_setup/set_profile_screen.dart';
@@ -230,6 +233,82 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
         );
       }
     ),
+
+   GoRoute(
+      path: RoutePaths.eventScreen,
+      pageBuilder: (context, state){
+        if (state.extra!=null){
+          Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: EventScreen(
+              event: args['event'],
+            ),
+            transitionsBuilder: (context, animation, _, child){
+              return SlideTransition(
+                position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
+                child: child,
+              );    
+            }
+          );
+        }
+        return CupertinoPage(
+          child: const ErrorBuilder(),
+          key: state.pageKey
+        );
+      }
+    ),
+
+   GoRoute(
+      path: RoutePaths.ticketScreen,
+      pageBuilder: (context, state){
+        if (state.extra!=null){
+          Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: TicketScreen(
+              event: args['event'],
+            ),
+            transitionsBuilder: (context, animation, _, child){
+              return SlideTransition(
+                position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero).animate(animation),
+                child: child,
+              );    
+            }
+          );
+        }
+        return CupertinoPage(
+          child: const ErrorBuilder(),
+          key: state.pageKey
+        );
+      }
+    ),
+
+   GoRoute(
+      path: RoutePaths.dressCodeScreen,
+      pageBuilder: (context, state){
+        if (state.extra!=null){
+          Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: DressCodeScreen(
+              event: args['event'],
+            ),
+            transitionsBuilder: (context, animation, _, child){
+              return SlideTransition(
+                position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero).animate(animation),
+                child: child,
+              );    
+            }
+          );
+        }
+        return CupertinoPage(
+          child: const ErrorBuilder(),
+          key: state.pageKey
+        );
+      }
+    ),
+
     GoRoute(
       path: RoutePaths.notificationScreen,
       pageBuilder: ((context, state) {

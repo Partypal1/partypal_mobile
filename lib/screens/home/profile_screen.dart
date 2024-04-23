@@ -25,11 +25,17 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
   void initState(){
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(() {
+      setState((){});
+    });
   }
 
   @override
   void dispose(){
     _tabController.dispose();
+    _tabController.removeListener(() {
+      setState((){});
+    });
     super.dispose();
   }
   @override
@@ -142,7 +148,20 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
             ),
           ),
         ),
-      )
+      ),
+      floatingActionButton: _tabController.index == 2
+        ? FloatingActionButton.extended(
+          onPressed: (){},
+          label: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.add),
+              8.horizontalSpace,
+              const Text('Create event'),
+            ],
+          ),
+        )
+        : const SizedBox.shrink(),
      );
   }
 }
@@ -186,7 +205,7 @@ class _ProfileTab extends SliverPersistentHeaderDelegate{
           SizedBox(
             height: 50,
             child: Center(
-              child: Text('Following'),
+              child: Text('Events'),
             ),
           ),
         ],
