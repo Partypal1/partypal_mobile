@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:partypal/widgets/others/tonal_elevation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});
@@ -9,17 +8,17 @@ class ExploreScreen extends StatefulWidget {
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
-  late GoogleMapController _googleMapController;
+  // late GoogleMapController _googleMapController;
   final LatLng _center = const LatLng(6.52704, 3.38874);
 
   void _onMapCreated(GoogleMapController controller){
-    _googleMapController = controller;
+    // _googleMapController = controller;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level1, context),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
         child:GoogleMap(
           initialCameraPosition: CameraPosition(

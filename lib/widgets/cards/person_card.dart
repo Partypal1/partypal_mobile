@@ -64,15 +64,15 @@ class _PersonCardState extends State<PersonCard> {
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Text(
-                      widget.user.userId,
+                      widget.user.username,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    Text(
-                      'Partypal points: ${widget.user.partypalPoints}',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.secondary
-                      ),
-                    ),
+                    // Text(
+                    //   'Partypal points: ${widget.user.partypalPoints}',
+                    //   style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    //     color: Theme.of(context).colorScheme.secondary
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

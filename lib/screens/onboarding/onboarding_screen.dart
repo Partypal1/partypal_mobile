@@ -1,9 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
-import 'package:partypal/configs/router_config.dart';
+import 'package:partypal/services/session_manager.dart';
 import 'package:partypal/widgets/cards/onboarding_card.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboaringScreen extends StatefulWidget {
@@ -84,8 +86,8 @@ class _OnboaringScreenState extends State<OnboaringScreen> {
               padding: const EdgeInsets.all(30),
               child: GestureDetector(
                 onTap: (){
-                  //TODO: setFirstRun to false in session manager
-                  routerConfig.pushReplacement(RoutePaths.selectUserProfileScreen);
+                  Provider.of<SessionManager>(context, listen: false).setFirstRun(false);
+                  GoRouter.of(context).pushReplacement(RoutePaths.selectUserProfileScreen);
                 },
                 child: Text(
                   (activeIndex == titles.length - 1) ? 'Next' : 'Skip',

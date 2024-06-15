@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/models/place_model.dart';
 import 'package:partypal/widgets/buttons/filled_button.dart';
 import 'package:partypal/widgets/buttons/text_button.dart';
@@ -30,66 +32,74 @@ class _PlaceCardState extends State<PlaceCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        clipBehavior: Clip.antiAlias,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-          child: Row(
-            children: [
-              SizedBox.square(
-                dimension: 50,
-                child: Container(
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
+    return GestureDetector(
+      onTap: (){
+        GoRouter.of(context).push(
+          RoutePaths.placeScreen,
+          extra: {'place': widget.place}
+        );
+      },
+      child: Center(
+        child: Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+            child: Row(
+              children: [
+                SizedBox.square(
+                  dimension: 50,
+                  child: Container(
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: widget.place.imageUrl,
+                      placeholder: (context, url) => const ImagePlaceholder(),
+                      fit: BoxFit.cover,
+                    )
                   ),
-                  child: CachedNetworkImage(
-                    imageUrl: widget.place.imageUrl,
-                    placeholder: (context, url) => const ImagePlaceholder(),
-                    fit: BoxFit.cover,
+                ),
+                10.horizontalSpace,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.place.name,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      Text(
+                        widget.place.type,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      widget.place.isPopularWithFriends //TODO: check for: (num friends going / num total friends) instead
+                        ? Text(
+                            'popular with friends',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          )
+                        : Text(
+                            'not popular with friends',
+                            style:  Theme.of(context).textTheme.bodySmall,
+                          ),
+                    ],
+                  ),
+                ),
+                isFollowing
+                ? CustomTextButton(
+                    label: 'Unfollow',
+                    onTap: _changeFollowingState,
                   )
-                ),
-              ),
-              10.horizontalSpace,
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.place.name,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Text(
-                      widget.place.type,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    widget.place.isPopularWithFriends //TODO: check for: (num friends going / num total friends) instead
-                      ? Text(
-                          'popular with friends',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        )
-                      : Text(
-                          'not popular with friends',
-                          style:  Theme.of(context).textTheme.bodySmall,
-                        ),
-                  ],
-                ),
-              ),
-              isFollowing
-              ? CustomTextButton(
-                  label: 'Unfollow',
-                  onTap: _changeFollowingState,
-                )
-              : CustomFilledButton(
-                  label: 'follow',
-                  onTap: _changeFollowingState,
-                )
-            ],
+                : CustomFilledButton(
+                    label: 'follow',
+                    onTap: _changeFollowingState,
+                  )
+              ],
+            ),
           ),
         ),
       ),

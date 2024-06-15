@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:partypal/configs/router_config.dart';
+import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
-import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -55,7 +54,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level0, context),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Padding(
         padding: EdgeInsets.all(0.05.sw),
         child: Column(
@@ -74,13 +73,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateM
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox.square(
-                    dimension: 55,
+                    dimension: 40,
                     child: Image.asset(AssetPaths.logoImage),
                   ),
                   10.horizontalSpace,
                   Text(
                     'Partypal',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.onSurface
                     ),
@@ -124,7 +123,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateM
                 child: WideButton(
                   label: 'Set profile',
                   onTap: (){
-                    routerConfig.push(RoutePaths.setProfileScreen);
+                    GoRouter.of(context).push(RoutePaths.setProfileScreen);
                   },
                 )
               ),

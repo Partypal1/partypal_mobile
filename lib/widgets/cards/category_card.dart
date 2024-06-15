@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/models/category_model.dart';
 import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/shimmer.dart';
@@ -15,58 +17,66 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox.square(
-        dimension: 0.7.sw,
-        child: Container(
-          clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: CachedNetworkImage(
-                  imageUrl: category.imageUrl,
-                  placeholder: (context, url) => const ImagePlaceholder(),
-                  fit: BoxFit.cover,
-                )
-              ),
-              Container(
-                decoration: const BoxDecoration(
-                  color: Colors.black
+    return GestureDetector(
+      onTap: (){
+        GoRouter.of(context).push(
+          RoutePaths.categoryScreen,
+          extra: {'categoryName': category.name}
+        );
+      },
+      child: Center(
+        child: SizedBox.square(
+          dimension: 0.7.sw,
+          child: Container(
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: CachedNetworkImage(
+                    imageUrl: category.imageUrl,
+                    placeholder: (context, url) => const ImagePlaceholder(),
+                    fit: BoxFit.cover,
+                  )
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    bottom: 20,
-                    top: 10,
+                Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.black
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        category.name,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.white
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      bottom: 20,
+                      top: 10,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          category.name,
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: Colors.white
+                          ),
                         ),
-                      ),
-                      3.verticalSpace,
-                      Text(
-                        category.desciption,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white.withOpacity(0.8),
-                          fontWeight: FontWeight.w400
-                        ),
-                      )
-                    ],
+                        3.verticalSpace,
+                        Text(
+                          category.desciption,
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Colors.white.withOpacity(0.8),
+                            fontWeight: FontWeight.w400
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

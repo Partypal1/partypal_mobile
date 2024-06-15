@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
-import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/models/user_model.dart';
 import 'package:partypal/network/network.dart';
 import 'package:partypal/services/auth_provider.dart';
@@ -10,7 +10,6 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
-import 'package:partypal/widgets/others/tonal_elevation.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -65,7 +64,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level0, context),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -86,7 +85,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         GestureDetector(
                           onTap: (){
-                            routerConfig.pushReplacement(RoutePaths.signInScreen, extra: {'userType': widget.userType});
+                            GoRouter.of(context).pushReplacement(
+                              RoutePaths.signInScreen,
+                              extra: {'userType': widget.userType}
+                            );
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -371,7 +373,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {_isSigningUp = false;});
  
       if(response.successful){
-        routerConfig.push(RoutePaths.verificationScreen, extra: {'email': email, 'password': password});
+        if(mounted){
+          GoRouter.of(context).push(
+            RoutePaths.verificationScreen,
+            extra: {'email': email, 'password': password}
+          );
+        }
       }
     }
   }

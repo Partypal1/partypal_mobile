@@ -2,15 +2,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:partypal/configs/router_config.dart';
+import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/network/network.dart';
 import 'package:partypal/services/auth_provider.dart';
 import 'package:partypal/services/session_manager.dart';
+import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/outlined_button.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
-import 'package:partypal/widgets/others/tonal_elevation.dart';
 import 'package:provider/provider.dart';
 
 class VerificationScreen extends StatefulWidget {
@@ -77,7 +77,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level0, context),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -194,7 +194,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
       setState(() => _isVerifying = false);
       if(response.successful){
         _saveTokens(response);
-        routerConfig.push(RoutePaths.welcomeScreen);
+        if(mounted){
+          GoRouter.of(context).clearStackAndNavigate(RoutePaths.welcomeScreen);
+        }
       }
     }
   }

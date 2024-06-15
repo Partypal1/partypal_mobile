@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
-import 'package:partypal/configs/router_config.dart';
 import 'package:partypal/models/user_model.dart';
 import 'package:partypal/network/network.dart';
 import 'package:partypal/services/auth_provider.dart';
 import 'package:partypal/services/session_manager.dart';
+import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
 import 'package:provider/provider.dart';
-
-import '../../widgets/others/tonal_elevation.dart';
 
 class SignInScreen extends StatefulWidget {
   final UserType userType;
@@ -56,7 +55,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level0, context),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -71,13 +70,13 @@ class _SignInScreenState extends State<SignInScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox.square(
-                          dimension: 55,
+                          dimension: 40,
                           child: Image.asset(AssetPaths.logoImage),
                         ),
                         10.horizontalSpace,
                         Text(
                           'Partypal',
-                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          style: Theme.of(context).textTheme.displaySmall?.copyWith(
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).colorScheme.onSurface
                           ),
@@ -89,7 +88,7 @@ class _SignInScreenState extends State<SignInScreen> {
             
                     Text(
                       'Hey pal! Welcome Back.',
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Theme.of(context).colorScheme.primary
                       ),
                     ),
@@ -190,7 +189,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         GestureDetector(
                           onTap: (){
-                            routerConfig.pushReplacement(RoutePaths.signUpScreen, extra: {'userType': widget.userType});
+                            GoRouter.of(context).pushReplacement(RoutePaths.signUpScreen, extra: {'userType': widget.userType});
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -207,7 +206,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     0.01.sh.verticalSpace,
                     GestureDetector(
                       onTap: (){
-                        routerConfig.push(RoutePaths.resetPasswordScreen);
+                        GoRouter.of(context).push(RoutePaths.resetPasswordScreen);
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -290,10 +289,17 @@ class _SignInScreenState extends State<SignInScreen> {
       setState(() => _isSigningIn = false);
       if(response.successful){
         _saveTokens(response);
-        routerConfig.push(RoutePaths.welcomeScreen);
+        if(mounted){
+          GoRouter.of(context).clearStackAndNavigate(RoutePaths.welcomeScreen);
+        }
       }
       else if(response.body?['data']['message'].toString().contains('not verified') ?? false){ // user not verified
-        routerConfig.push(RoutePaths.verificationScreen, extra: {'email': email, 'password': password});
+        if(mounted){
+          GoRouter.of(context).push(
+            RoutePaths.verificationScreen,
+            extra: {'email': email, 'password': password}
+          );
+        }
         auth.resendOTP(email: email, purpose: VerificationPurpose.registration);
       }
     }

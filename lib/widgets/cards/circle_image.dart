@@ -1,12 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 
-class CircleProfileImage extends StatelessWidget {
-  final String imagePath;
+class CircleImage extends StatelessWidget {
+  final String imageUrl;
   final double radius;
-  const CircleProfileImage({
-    required this.imagePath,
+  const CircleImage({
+    required this.imageUrl,
     this.radius = 25,
     super.key});
 
@@ -25,9 +26,34 @@ class CircleProfileImage extends StatelessWidget {
               borderRadius: BorderRadius.circular(radius),
               color: Theme.of(context).colorScheme.surfaceVariant
             ),
-            child: Image.asset(
-              imagePath,
-              fit: BoxFit.cover,
+            child:  CachedNetworkImage(
+              imageUrl: imageUrl,
+              errorWidget: (context,_, __){
+                return  Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(radius),
+                    color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level4, context)
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.error_rounded,
+                      size: radius,
+                      color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level2, context),
+                    ),
+                  ),
+                );
+              },
+              imageBuilder: (context, imageProvider){
+                return Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover
+                    )
+                  ),
+                );
+              },
             )
           ),
         ),
@@ -36,9 +62,9 @@ class CircleProfileImage extends StatelessWidget {
   }
 }
 
-class CircleProfileImageLoading extends StatelessWidget {
+class CircleImageLoading extends StatelessWidget {
   final double radius;
-  const CircleProfileImageLoading({
+  const CircleImageLoading({
     this.radius = 25,
     super.key});
 

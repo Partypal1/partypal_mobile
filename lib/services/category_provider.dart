@@ -16,7 +16,7 @@ class CategoryProvider extends ChangeNotifier{
         imageUrl: 'https://file.visittallinn.ee/5zkas9/clubstudio.jpg'
       ),
       Category(
-        name: 'Beach',
+        name: 'Beaches',
         desciption: 'Beach vibes',
         imageUrl: 'https://i0.wp.com/blog.bambatravel.com/wp-content/uploads/2015/08/Ibiza-Spain-e1438694304394.jpg?fit=800%2C470&ssl=1'
       ),

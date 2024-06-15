@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
     PlacesProvider placeProvider = Provider.of<PlacesProvider>(context);
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level0, context),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Shimmer(
         child: RefreshIndicator(
             onRefresh: () async{
@@ -70,28 +70,36 @@ class _HomeScreenState extends State<HomeScreen> {
               controller: _scrollController,
               physics: _isRefreshing ? const NeverScrollableScrollPhysics() : null,
               slivers: [
-                const HomeAppBar(name: 'Sunkanmi',),
+                const HomeAppBar(),
               
                 SliverToBoxAdapter( // events happening this week
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 20, top: 20),
+                        padding: EdgeInsets.only(left: 0.03.sw, top: 0.03.sw),
                         child: eventProvider.isFetching 
                         ? const TextPlaceHolder(height: 20, width: 200)
-                        : Text(
-                          'Events happening this week',
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.bold
-                          ),
+                        : Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                              child: Text(
+                                'Events happening this week',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                ),
+                              ),
+                            ),
                         ),
                       ),
-                      15.verticalSpace,
+                      0.03.sw.verticalSpace,
                       SizedBox(
                         height: 200,
                         child: ListView.builder(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          padding: EdgeInsets.symmetric(horizontal: 0.01.sw),
                           scrollDirection: Axis.horizontal,
                           physics: eventProvider.isFetching
                             ? const NeverScrollableScrollPhysics()
@@ -101,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             : eventProvider.eventsHappeningThisWeek.length,
                           itemBuilder: (context, index){
                             return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              padding: EdgeInsets.symmetric(horizontal: 0.02.sw),
                               child: eventProvider.isFetching
                               ? const EventCardLoading() 
                               : EventCard(event: eventProvider.eventsHappeningThisWeek[index]),
@@ -113,29 +121,37 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ),
                
-                SliverToBoxAdapter(child: 10.verticalSpace),
+                SliverToBoxAdapter(child: 0.05.sw.verticalSpace),
               
                 SliverToBoxAdapter( // events based on your location
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 20, top: 20),
+                        padding: EdgeInsets.only(left: 0.03.sw, top: 0.03.sw),
                         child: 
                           eventProvider.isFetching
                           ? const TextPlaceHolder(height: 20, width: 180)
-                          : Text(
-                            'Events based on your location',
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.bold
+                          : Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
                             ),
-                          ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                              child: Text(
+                                'Events based on your location',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                ),
+                              ),
+                            ),
+                        ),
                       ),
-                      15.verticalSpace,
+                      0.03.sw.verticalSpace,
                       SizedBox(
                         height: 200,
                         child: ListView.builder(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          padding: EdgeInsets.symmetric(horizontal: 0.01.sw),
                           scrollDirection: Axis.horizontal,
                           physics: eventProvider.isFetching
                             ? const NeverScrollableScrollPhysics()
@@ -145,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             : eventProvider.eventsBasedOnYourLocation.length,
                           itemBuilder: (context, index){
                             return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              padding: EdgeInsets.symmetric(horizontal: 0.02.sw),
                               child: eventProvider.isFetching
                               ? const EventCardLoading() 
                               : EventCard(event: eventProvider.eventsBasedOnYourLocation[index]),
@@ -157,27 +173,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ),
                
-                SliverToBoxAdapter(child: 10.verticalSpace),
+                SliverToBoxAdapter(child: 0.05.sw.verticalSpace),
                 SliverToBoxAdapter( // categories
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 20, top: 20),
+                        padding: EdgeInsets.only(left: 0.03.sw, top: 0.03.sw),
                         child: categoryProvider.isFetching
                         ? const TextPlaceHolder(height: 20, width: 120)
-                        : Text(
-                          'Categories',
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.bold
+                        : Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                              child: Text(
+                                'Categories',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                ),
+                              ),
                           ),
                         ),
                       ),
-                      15.verticalSpace,
+                      0.03.sw.verticalSpace,
                       SizedBox(
                         height: 250,
                         child: ListView.builder(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          padding: EdgeInsets.symmetric(horizontal: 0.01.sw),
                           scrollDirection: Axis.horizontal,
                           physics: categoryProvider.isFetching
                             ? const NeverScrollableScrollPhysics()
@@ -187,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             : categoryProvider.categories.length,
                           itemBuilder: (context, index){
                             return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              padding: EdgeInsets.symmetric(horizontal: 0.02.sw),
                               child: eventProvider.isFetching
                               ? const CategoryCardLoading() 
                               : CategoryCard(category: categoryProvider.categories[index]),
@@ -199,25 +223,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ),
                
-                SliverToBoxAdapter(child: 10.verticalSpace),
+                SliverToBoxAdapter(child: 0.05.sw.verticalSpace),
             
                 SliverToBoxAdapter( // high energy places
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 20, top: 20),
+                        padding: EdgeInsets.only(left: 0.03.sw, top: 0.03.sw),
                         child: placeProvider.isFetching 
                         ? const TextPlaceHolder(height: 20, width: 180)
-                        : Text(
-                          'High energy places',
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.bold
-                          ),
-                        ),
+                        : Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                              child: Text(
+                                'High energy places',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                ),
+                              ),
+                            ),
+                          )
                       ),
-                      15.verticalSpace,
-            
+                      0.03.sw.verticalSpace,
                     ]
                   )
                 ),
@@ -227,7 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       : placeProvider.places.length,
                     itemBuilder: (context, index){
                       return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        padding: EdgeInsets.symmetric(vertical: 0.02.sw, horizontal: 0.03.sw),
                         child: placeProvider.isFetching
                         ? const PlaceLoadingCard() 
                         : PlaceCard(place: placeProvider.places[index]),
@@ -235,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                 ),
                
-                SliverToBoxAdapter(child: 10.verticalSpace),
+                SliverToBoxAdapter(child: 0.03.sw.verticalSpace),
             
               ],
             ),
