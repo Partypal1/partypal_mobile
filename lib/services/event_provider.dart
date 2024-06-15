@@ -16,7 +16,7 @@ class EventProvider extends ChangeNotifier{
         name: 'Bluette',
         dateTime: DateTime.now().add(const Duration(days: 15)),
         location: 'Quilox',
-        creator: User(
+        creator: PartypalUser(
           id: '',
           firstName: 'Olasunkanmi',
           lastName: 'Beckley',
@@ -24,9 +24,7 @@ class EventProvider extends ChangeNotifier{
           email: 'beckleysunkanmi@gmail.com',
           phoneNumber: '09053221941',
           profileImageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLEPh3zspn0JSENlaxTjTC8SbtBtRp26M5bg&usqp=CAU",
-          partypalPoints: 68,
-          userType: UserType.promoter,
-          isFollowing: false
+          role: Role.promoter,
         ),
         imageUrl: "https://t4.ftcdn.net/jpg/02/61/84/27/360_F_261842772_jayDgtm4z4FTuFFzjAALnmLAbXDqsYpS.jpg",
         isLiked: false
@@ -35,7 +33,7 @@ class EventProvider extends ChangeNotifier{
         name: 'Tranquility',
         dateTime: DateTime.now().add(const Duration(days: 15)),
         location: 'Club 57',
-        creator: User(
+        creator: PartypalUser(
           id: '',
           firstName: 'Davey',
           lastName: 'Brownley',
@@ -43,9 +41,7 @@ class EventProvider extends ChangeNotifier{
           email: 'david@gmail.com',
           phoneNumber: '0901267438',
           profileImageUrl: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
-          partypalPoints: 68,
-          userType: UserType.promoter,
-          isFollowing: false
+          role: Role.promoter,
         ),
         imageUrl: "https://milcomurban.files.wordpress.com/2016/12/night-club.jpg?w=1124&h=750&crop=1",
         isLiked: false
@@ -54,7 +50,7 @@ class EventProvider extends ChangeNotifier{
         name: 'Emergence',
         dateTime: DateTime.now().add(const Duration(days: 15)),
         location: 'Club 57',
-        creator: User(
+        creator: PartypalUser(
           id: '',
           firstName: 'Davey',
           lastName: 'Brownley',
@@ -62,9 +58,7 @@ class EventProvider extends ChangeNotifier{
           email: 'david@gmail.com',
           phoneNumber: '0901267438',
           profileImageUrl: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
-          partypalPoints: 68,
-          userType: UserType.promoter,
-          isFollowing: false
+          role: Role.promoter,
         ),
         imageUrl: "https://www.morningadvertiser.co.uk/var/wrbm_gb_hospitality/storage/images/_aliases/wrbm_large/publications/hospitality/morningadvertiser.co.uk/article/2023/10/04/why-are-so-many-nightclubs-closing/6152639-1-eng-GB/Why-are-so-many-nightclubs-closing.jpg",
         isLiked: false
@@ -76,7 +70,7 @@ class EventProvider extends ChangeNotifier{
         name: 'Tranquility',
         dateTime: DateTime.now().add(const Duration(days: 15)),
         location: 'Club 57',
-        creator: User(
+        creator: PartypalUser(
           id: '',
           firstName: 'Davey',
           lastName: 'Brownley',
@@ -84,9 +78,7 @@ class EventProvider extends ChangeNotifier{
           email: 'david@gmail.com',
           phoneNumber: '0901267438',
           profileImageUrl: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
-          partypalPoints: 68,
-          userType: UserType.promoter,
-          isFollowing: false
+          role: Role.promoter,
         ),
         imageUrl: "https://www.morningadvertiser.co.uk/var/wrbm_gb_hospitality/storage/images/_aliases/wrbm_large/publications/hospitality/morningadvertiser.co.uk/article/2023/10/04/why-are-so-many-nightclubs-closing/6152639-1-eng-GB/Why-are-so-many-nightclubs-closing.jpg",
         isLiked: false
@@ -95,7 +87,7 @@ class EventProvider extends ChangeNotifier{
         name: 'Emergence',
         dateTime: DateTime.now().add(const Duration(days: 15)),
         location: 'Club 57',
-        creator: User(
+        creator: PartypalUser(
           id: '',
           firstName: 'Davey',
           lastName: 'Brownley',
@@ -103,9 +95,7 @@ class EventProvider extends ChangeNotifier{
           email: 'david@gmail.com',
           phoneNumber: '0901267438',
           profileImageUrl: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
-          partypalPoints: 68,
-          userType: UserType.promoter,
-          isFollowing: false
+          role: Role.promoter,
         ),
         imageUrl: "https://milcomurban.files.wordpress.com/2016/12/night-club.jpg?w=1124&h=750&crop=1",
         isLiked: false
@@ -114,7 +104,7 @@ class EventProvider extends ChangeNotifier{
         name: 'Bluette',
         dateTime: DateTime.now().add(const Duration(days: 15)),
         location: 'Quilox',
-        creator: User(
+        creator: PartypalUser(
           id: '',
           firstName: 'Olasunkanmi',
           lastName: 'Beckley',
@@ -122,9 +112,7 @@ class EventProvider extends ChangeNotifier{
           email: 'beckleysunkanmi@gmail.com',
           phoneNumber: '09053221941',
           profileImageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLEPh3zspn0JSENlaxTjTC8SbtBtRp26M5bg&usqp=CAU",
-          partypalPoints: 68,
-          userType: UserType.promoter,
-          isFollowing: false
+          role: Role.promoter,
         ),
         imageUrl: "https://t4.ftcdn.net/jpg/02/61/84/27/360_F_261842772_jayDgtm4z4FTuFFzjAALnmLAbXDqsYpS.jpg",
         isLiked: false

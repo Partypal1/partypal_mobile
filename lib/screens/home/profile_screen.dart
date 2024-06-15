@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/route_paths.dart';
-import 'package:partypal/services/profile_provider.dart';
+import 'package:partypal/services/profile_service.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/filled_button.dart';
 import 'package:partypal/widgets/cards/circle_image.dart';
@@ -40,7 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
   }
   @override
   Widget build(BuildContext context) {
-    ProfileProvider profile = Provider.of<ProfileProvider>(context);
+    ProfileService profile = Provider.of<ProfileService>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: RefreshIndicator(
@@ -102,7 +102,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                               profile.user == null
                               ? const TextPlaceHolder(height: 12, width: 100)
                               : Text(
-                                'Partypal points: ${profile.user!.partypalPoints}',
+                                'Partypal points: 0',
                                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: Theme.of(context).colorScheme.secondary

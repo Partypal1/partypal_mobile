@@ -1,6 +1,6 @@
-enum UserType {user, promoter}
+enum Role {user, promoter}
 
-class User{
+class PartypalUser{
   final String id;
   final String firstName;
   final String lastName;
@@ -8,13 +8,10 @@ class User{
   final String email;
   final String phoneNumber;
   final String profileImageUrl;
-  final int partypalPoints;
-  final UserType userType;
-  final bool isFollowing;
-  final DateTime? birthday;
+  final Role role;
   final String? location;
 
-  User({
+  PartypalUser({
     required this.id,
     required this.firstName,
     required this.lastName,
@@ -22,26 +19,20 @@ class User{
     required this.email,
     required this.phoneNumber,
     required this.profileImageUrl,
-    required this.partypalPoints,
-    required this.userType,
-    required this.isFollowing,
-    this.birthday,
+    required this.role,
     this.location,
   });
 
-  factory User.fromMap(Map<String, dynamic> data){
-    return User(
-      id: data['id'] ?? '',
-      firstName: data['firstname'] ?? '',
-      lastName: data['lastname'] ?? '',
+  factory PartypalUser.fromMap(String id, Map<String, dynamic> data){
+    return PartypalUser(
+      id: id,
+      firstName: data['firstName'] ?? '',
+      lastName: data['lastName'] ?? '',
       username: data['username'] ?? '',
       email: data['email'] ?? '',
       phoneNumber: data['phoneNumber'] ?? '',
-      profileImageUrl: data['imageUrl'] ?? '',
-      partypalPoints: 0,
-      userType: (data['role'] ?? 'USER') == 'USER' ? UserType.user : UserType.promoter,
-      isFollowing: false,
-      birthday: DateTime.tryParse(data['birthday'] ?? '') ?? DateTime.now(),
+      profileImageUrl: data['profileImageUrl'] ?? '',
+      role: (data['role'] ?? 'user') == 'user' ? Role.user : Role.promoter,
       location: data['location'] ?? '',
     );
   }
@@ -56,10 +47,7 @@ class User{
       'email': email,
       'phoneNumber': phoneNumber,
       'imageUrl': profileImageUrl,
-      //TODO: partypal points
-      'role': userType == UserType.user ? 'USER' : 'PROMOTER',
-      //TODO: isFollowing
-      'birthday': birthday?.toIso8601String(),
+      'role': role == Role.user ? 'user' : 'promoter',
       'location': location,
 
     };

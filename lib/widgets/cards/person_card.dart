@@ -9,7 +9,7 @@ import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class PersonCard extends StatefulWidget {
-  final User user;
+  final PartypalUser user;
 
   const PersonCard({
     required this.user,
@@ -24,7 +24,7 @@ class _PersonCardState extends State<PersonCard> {
   @override
   void initState(){
     super.initState();
-    isFollowing = widget.user.isFollowing;
+    isFollowing = false;
   }
 
   @override

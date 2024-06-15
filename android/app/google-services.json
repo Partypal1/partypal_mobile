@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "709111486362",
+    "project_id": "partypal-16857",
+    "storage_bucket": "partypal-16857.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709111486362:android:a659f46b57d2a8b902cc23",
+        "android_client_info": {
+          "package_name": "com.partypal.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "709111486362-3jmd5mcjcl1vtgsvvele0dll513s64f3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.partypal.app",
+            "certificate_hash": "f1d0de8a02f444af5fb72a0457453fba0fb1ed6b"
+          }
+        },
+        {
+          "client_id": "709111486362-8ktm3oi0rvcqejfjdfva896sbet4nohj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNsQQRMyHCWT_blOtoHdMkxk0InkBd004"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "709111486362-8ktm3oi0rvcqejfjdfva896sbet4nohj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

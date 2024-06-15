@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/models/user_model.dart';
-import 'package:partypal/network/network.dart';
-import 'package:partypal/services/auth_provider.dart';
-import 'package:partypal/services/session_manager.dart';
+import 'package:partypal/services/auth_service.dart';
 import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
+import 'package:partypal/widgets/buttons/google_sign_in_button.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
 import 'package:provider/provider.dart';
 
 class SignInScreen extends StatefulWidget {
-  final UserType userType;
+  final Role role;
   const SignInScreen({
-    required this.userType,
+    required this.role,
     super.key});
 
   @override
@@ -32,21 +30,16 @@ class _SignInScreenState extends State<SignInScreen> {
 
   late FocusNode emailFocus = FocusNode();
   late FocusNode passwordFocus = FocusNode();
-  late AuthProider auth;
 
   @override
   void initState(){
     super.initState();
-    auth = AuthProider()..addListener(() {
-      setState(() {});
-    });
     emailFocus = FocusNode();
     passwordFocus = FocusNode();
   }
 
   @override
   void dispose(){
-    auth.dispose();
     emailFocus.dispose();
     passwordFocus.dispose();
     super.dispose();
@@ -189,7 +182,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         GestureDetector(
                           onTap: (){
-                            GoRouter.of(context).pushReplacement(RoutePaths.signUpScreen, extra: {'userType': widget.userType});
+                            GoRouter.of(context).pushReplacement(RoutePaths.signUpScreen, extra: {'role': widget.role});
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -233,41 +226,7 @@ class _SignInScreenState extends State<SignInScreen> {
             
                     0.03.sh.verticalSpace,
             
-                    GestureDetector( // sign in with google
-                      onTap: () {
-                        //TODO: sign in with google
-                      },
-                      child: FittedBox( 
-                        child: SizedBox(
-                          height: 50,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(),
-                              borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                left: 16,
-                                right: 24
-                              ),
-                              child: Row(
-                                children: [
-                                  SizedBox.square(
-                                    dimension: 24,
-                                    child: SvgPicture.asset(AssetPaths.googleIcon)
-                                  ),
-                                  8.horizontalSpace,
-                                  Text(
-                                    'Sign in with google',
-                                    style: Theme.of(context).textTheme.labelLarge,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
+                    const GoogleSignInButton()
                   ],
                 ),
               ),
@@ -281,33 +240,14 @@ class _SignInScreenState extends State<SignInScreen> {
     FocusScope.of(context).requestFocus(FocusNode());
     if(_formKey.currentState!.validate()){
       setState(() => _isSigningIn = true);
-      AuthProider auth = Provider.of<AuthProider>(context, listen: false);
-      NetworkResponse response = await auth.signIn(
-        email: email, 
-        password: password
-      );
+      AuthService auth = Provider.of<AuthService>(context, listen: false);
+      bool successful = await auth.signInWithEmailAndPassword(email, password);
       setState(() => _isSigningIn = false);
-      if(response.successful){
-        _saveTokens(response);
+      if(successful){
         if(mounted){
-          GoRouter.of(context).clearStackAndNavigate(RoutePaths.welcomeScreen);
+          GoRouter.of(context).clearStackAndNavigate(RoutePaths.home);
         }
-      }
-      else if(response.body?['data']['message'].toString().contains('not verified') ?? false){ // user not verified
-        if(mounted){
-          GoRouter.of(context).push(
-            RoutePaths.verificationScreen,
-            extra: {'email': email, 'password': password}
-          );
-        }
-        auth.resendOTP(email: email, purpose: VerificationPurpose.registration);
       }
     }
-  }
-
-  void _saveTokens(NetworkResponse response) async{
-    SessionManager sessionManager = Provider.of<SessionManager>(context, listen: false);
-    sessionManager.setAccessToken(response.body!['data']['accessToken']);
-    sessionManager.setRefreshToken(response.body!['data']['refreshToken']);
   }
 }

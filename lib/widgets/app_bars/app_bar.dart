@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
-import 'package:partypal/services/profile_provider.dart';
+import 'package:partypal/services/profile_service.dart';
 import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 import 'package:provider/provider.dart';
@@ -107,7 +107,7 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProfileProvider profile = Provider.of<ProfileProvider>(context);
+    ProfileService profile = Provider.of<ProfileService>(context);
     return SliverAppBar(
       toolbarHeight: 75,
       leadingWidth: 75,

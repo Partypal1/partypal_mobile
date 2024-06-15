@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/models/user_model.dart';
-import 'package:partypal/network/network.dart';
-import 'package:partypal/services/auth_provider.dart';
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:partypal/services/auth_service.dart';
+import 'package:partypal/services/profile_service.dart';
+import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
+import 'package:partypal/widgets/buttons/google_sign_in_button.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
-  final UserType userType;
+  final Role role;
   const SignUpScreen({
-    required this.userType,
+    required this.role,
     super.key});
 
   @override
@@ -87,7 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onTap: (){
                             GoRouter.of(context).pushReplacement(
                               RoutePaths.signInScreen,
-                              extra: {'userType': widget.userType}
+                              extra: {'role': widget.role}
                             );
                           },
                           child: Padding(
@@ -313,41 +313,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             
                     0.03.sh.verticalSpace,
             
-                    GestureDetector( // sign up with google
-                      onTap: (){
-                        // TODO: sign up with google
-                      },
-                      child: FittedBox(
-                        child: SizedBox(
-                          height: 50,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(),
-                              borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                left: 16,
-                                right: 24
-                              ),
-                              child: Row(
-                                children: [
-                                  SizedBox.square(
-                                    dimension: 24,
-                                    child: SvgPicture.asset(AssetPaths.googleIcon)
-                                  ),
-                                  8.horizontalSpace,
-                                  Text(
-                                    'Sign up with google',
-                                    style: Theme.of(context).textTheme.labelLarge,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
+                    const GoogleSignInButton()
                   ],
                 )
               )
@@ -358,26 +324,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
   void _signUp() async {
-    AuthProider auth = Provider.of(context, listen: false);
+    AuthService auth = Provider.of<AuthService>(context, listen: false);
+    ProfileService profile = Provider.of<ProfileService>(context, listen: false);
     FocusScope.of(context).requestFocus(FocusNode());
     if(_formKey.currentState!.validate()){
       setState(() {_isSigningUp = true;});
-      NetworkResponse response = await auth.signUp(
-        firstName: firstName,
-        lastName: lastName,
-        phoneNumber: phoneNumber,
-        email: email,
-        password: password,
-        userType: widget.userType
-      );
+      bool successful = await auth.createAccountWithEmailAndPassword(email, password);
       setState(() {_isSigningUp = false;});
  
-      if(response.successful){
+      if(successful){
+        await profile.updateProfile(
+          firstName: firstName,
+          lastName: lastName,
+          phoneNumber: phoneNumber,
+          email: email,
+          role: widget.role,
+        );
         if(mounted){
-          GoRouter.of(context).push(
-            RoutePaths.verificationScreen,
-            extra: {'email': email, 'password': password}
-          );
+          GoRouter.of(context).clearStackAndNavigate(RoutePaths.welcomeScreen);
         }
       }
     }

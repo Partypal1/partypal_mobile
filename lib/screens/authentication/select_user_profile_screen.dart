@@ -32,7 +32,7 @@ class SelectUserProfileScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   onTap: (){
-                    GoRouter.of(context).push(RoutePaths.signUpScreen, extra: {'userType': UserType.user});
+                    GoRouter.of(context).push(RoutePaths.signUpScreen, extra: {'role': Role.user});
                   },
                 ),
 
@@ -51,7 +51,7 @@ class SelectUserProfileScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   onTap: (){
-                    GoRouter.of(context).push(RoutePaths.signUpScreen, extra: {'userType': UserType.promoter});
+                    GoRouter.of(context).push(RoutePaths.signUpScreen, extra: {'role': Role.promoter});
                   },
                 ),
               ],

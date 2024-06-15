@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/route_paths.dart';
-import 'package:partypal/network/network_response.dart';
-import 'package:partypal/services/profile_provider.dart';
+import 'package:partypal/services/profile_service.dart';
 import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
@@ -201,25 +200,20 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
   void _uploadProfile() async{
     if(_formKey.currentState?.validate() ?? false){
       setState(() => _isUploadingProfile = true);
-      ProfileProvider profile = Provider.of<ProfileProvider>(context, listen: false);
-      NetworkResponse response = await profile.uploadProfile(
-        context: context,
+      ProfileService profile = Provider.of<ProfileService>(context, listen: false);
+      bool successful = await profile.updateProfile(
         username: username,
-        location: location,
-        image: 'binaryImage' //TODO: upload actual image
+        location: location
       );
       setState(() => _isUploadingProfile = false);
-      if(response.successful){
+      if(successful){
         log('uploaded sucessfully');
-        if(mounted){
-          GoRouter.of(context).clearStackAndNavigate(RoutePaths.home);
-        }
       }
       else{
-        //TODO: remove this
-        if(mounted){
-          GoRouter.of(context).clearStackAndNavigate(RoutePaths.home);
-        }
+        log('problem updating profile');
+      }
+      if(mounted){
+        GoRouter.of(context).clearStackAndNavigate(RoutePaths.home);
       }
     }
   }

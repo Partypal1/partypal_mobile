@@ -9,7 +9,6 @@ import 'package:partypal/screens/authentication/select_user_profile_screen.dart'
 import 'package:partypal/screens/authentication/set_password_screen.dart';
 import 'package:partypal/screens/authentication/sign_in_screen.dart';
 import 'package:partypal/screens/authentication/sign_up_screen.dart';
-import 'package:partypal/screens/authentication/verification_screen.dart';
 import 'package:partypal/screens/home/category_screen.dart';
 import 'package:partypal/screens/home/dress_code_screen.dart';
 import 'package:partypal/screens/home/edit_profile_screen.dart';
@@ -61,7 +60,7 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
           Map<String, dynamic> args = state.extra as Map<String, dynamic>;
           return CupertinoPage(
             child: SignInScreen(
-              userType: args['userType'] ?? UserType.user,
+              role: args['role'] ?? Role.user,
             ),
             key: state.pageKey,
           );
@@ -80,32 +79,12 @@ final GoRouter routerConfig = GoRouter( // TODO: add routing animations
           Map<String, dynamic> args = state.extra as Map<String, dynamic>;
           return CupertinoPage(
             child: SignUpScreen(
-              userType: args['userType'] ?? UserType.user,
+              role: args['role'] ?? Role.user,
             ),
             key: state.pageKey,
           );
         }
         return CupertinoPage(
-          child: const ErrorBuilder(),
-          key: state.pageKey
-        );
-      }
-    ),
-
-    GoRoute(
-      path: RoutePaths.verificationScreen,
-      pageBuilder: (context, state){
-        if (state.extra!=null){
-          Map<String, dynamic> args = state.extra as Map<String, dynamic>;
-          return CupertinoPage(
-            child: VerificationScreen(
-              email: args['email'] ?? '',
-              password: args['password'] ?? '',
-            ),
-            key: state.pageKey,
-          );
-        }
-        return CupertinoPage<void>(
           child: const ErrorBuilder(),
           key: state.pageKey
         );

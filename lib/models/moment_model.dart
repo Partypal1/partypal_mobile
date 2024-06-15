@@ -1,7 +1,7 @@
 import 'package:partypal/models/user_model.dart';
 
 class Moment{
-  final User creator;
+  final PartypalUser creator;
   final DateTime dateTime;
   final List<String> imageUrls;
   final String? caption;

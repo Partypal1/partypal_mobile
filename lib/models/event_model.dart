@@ -4,7 +4,7 @@ class Event{
   final String name;
   final DateTime dateTime;
   final String location;
-  final User creator;
+  final PartypalUser creator;
   final String imageUrl;
   final bool isLiked;
 
