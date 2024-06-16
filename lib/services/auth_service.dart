@@ -91,6 +91,18 @@ class AuthService extends ChangeNotifier {
     }
   }
 
+  Future<void> sendPasswordResetEmail(String email) async {
+    try{
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      log('reset email sent');
+      Toasts.showToast('we sent a reset link to your email');
+    }
+    catch(e){
+      log(e.toString());
+      Toasts.showToast('something went wrong');
+    }
+  }
+
   Future<bool> signOut() async {
     await _googleSignIn.signOut();
     notifyListeners();

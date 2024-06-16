@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:partypal/utils/toasts.dart';
+import 'package:partypal/services/auth_service.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/wide_button.dart';
+import 'package:provider/provider.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
@@ -87,13 +86,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       ),
     );
   }
-  void _sendResetlink(){
+  void _sendResetlink() async {
+    final auth = Provider.of<AuthService>(context, listen: false);
     if(formKey.currentState!.validate()){
       FocusScope.of(context).requestFocus(FocusNode());
       emailController.text = '';
-      // TODO: send a reset link
-      log('sending a reset link to $email');
-      Toasts.showToast('We sent you an email to reset your password');
+      await auth.sendPasswordResetEmail(email);
     }
   }
 }
