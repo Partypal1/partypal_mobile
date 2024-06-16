@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/models/category_model.dart';
 import 'package:partypal/widgets/others/placeholders.dart';
-import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -89,66 +88,63 @@ class CategoryCardLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShimmerLoading(
-      isLoading: true,
-      child: Center(
-        child: SizedBox.square(
-          dimension: 0.7.sw,
-          child: Container(
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              
-              children: [
-                const Expanded(child: SizedBox()),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level5, context)
+    return Center(
+      child: SizedBox.square(
+        dimension: 0.7.sw,
+        child: Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            
+            children: [
+              const Expanded(child: SizedBox()),
+              Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level5, context)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                    bottom: 20,
+                    top: 10,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                      bottom: 20,
-                      top: 10,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 22,
-                          width: 80,
-                          child: Container(
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(11),
-                              color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level3, context)
-                            ),
-                          )
-                        ), 
-                        3.verticalSpace,
-                        SizedBox(
-                          height: 14,
-                          width: 100,
-                          child: Container(
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(7),
-                              color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level3, context)
-                            ),
-                          )
-                        ),
-                      ],
-                    ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 22,
+                        width: 80,
+                        child: Container(
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(11),
+                            color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level3, context)
+                          ),
+                        )
+                      ), 
+                      3.verticalSpace,
+                      SizedBox(
+                        height: 14,
+                        width: 100,
+                        child: Container(
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(7),
+                            color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level3, context)
+                          ),
+                        )
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

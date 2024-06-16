@@ -7,7 +7,6 @@ import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/models/event_model.dart';
 import 'package:partypal/utils/toasts.dart';
 import 'package:partypal/widgets/others/placeholders.dart';
-import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class EventCard extends StatefulWidget {
@@ -164,81 +163,78 @@ class EventCardLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShimmerLoading(
-      isLoading: true,
-      child: Center(
-        child: SizedBox(
-          height: 200,
-          width: 0.8.sw,
-          child: Container(
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context),
-              borderRadius: BorderRadius.circular(20),
-              
-            ),
-            child: Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 36,
-                      width: 150,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
-                          borderRadius: BorderRadius.circular(25)
-              
-                        ),
+    return Center(
+      child: SizedBox(
+        height: 200,
+        width: 0.8.sw,
+        child: Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context),
+            borderRadius: BorderRadius.circular(20),
+            
+          ),
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 36,
+                    width: 150,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
+                        borderRadius: BorderRadius.circular(25)
+            
                       ),
                     ),
-                    10.verticalSpace,
-                    SizedBox(
-                      height: 14,
-                      width: 175,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
-                          borderRadius: BorderRadius.circular(10)
-              
-                        ),
+                  ),
+                  10.verticalSpace,
+                  SizedBox(
+                    height: 14,
+                    width: 175,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
+                        borderRadius: BorderRadius.circular(10)
+            
                       ),
                     ),
-                    10.verticalSpace,
-                    SizedBox(
-                      height: 14,
-                      width: 80,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
-                          borderRadius: BorderRadius.circular(10)
-              
-                        ),
+                  ),
+                  10.verticalSpace,
+                  SizedBox(
+                    height: 14,
+                    width: 80,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
+                        borderRadius: BorderRadius.circular(10)
+            
                       ),
                     ),
-                    10.verticalSpace,
-                    SizedBox(
-                      height: 14,
-                      width: 100,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
-                          borderRadius: BorderRadius.circular(10)
-                  
-                        ),
+                  ),
+                  10.verticalSpace,
+                  SizedBox(
+                    height: 14,
+                    width: 100,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
+                        borderRadius: BorderRadius.circular(10)
+                
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
             ),
-          )
-        ),
-      )
+          ),
+        )
+      ),
     );
   }
 }

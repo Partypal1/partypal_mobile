@@ -6,7 +6,6 @@ import 'package:partypal/models/moment_model.dart';
 import 'package:partypal/utils/datetime_util.dart';
 import 'package:partypal/widgets/cards/circle_image.dart';
 import 'package:partypal/widgets/others/placeholders.dart';
-import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -161,87 +160,84 @@ class MomentCardLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     return ShimmerLoading(
-      isLoading: true,
-       child: Center(
-         child: Column(
-          children: [
-            Row(
-              children: [
-                0.04.sw.horizontalSpace,
-                SizedBox.square(
-                  dimension: 50,
-                  child: Container(
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
-                    ),
-                  )
-                ),
-                10.horizontalSpace,
-                SizedBox(
-                  height: 14,
-                  width: 60,
-                  child: Container(
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7),
-                      color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
-                    ),
-                  )
-                ),
-                10.horizontalSpace,
-                SizedBox(
-                  height: 12,
-                  width: 20,
-                  child: Container(
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7),
-                      color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
-                    ),
-                  )
-                ),     
-              ],
-            ),
-            15.verticalSpace,
-            SizedBox(
-              height: 1.sw,
-              width: 0.95.sw,
-              child: Container(
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
-                ),
-              )
-            ),
-            10.verticalSpace,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ...List.generate(3, (index){
-                  return Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: SizedBox.square(
-                      dimension: 8,
-                      child: Container(
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7),
-                          color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
-                        ),
-                      )
-                    ),
-                  );
-                })
-                
-              ],
-            ),
-          ],
-             ),
-       ),
-    );
+     return Center(
+       child: Column(
+        children: [
+          Row(
+            children: [
+              0.04.sw.horizontalSpace,
+              SizedBox.square(
+                dimension: 50,
+                child: Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
+                  ),
+                )
+              ),
+              10.horizontalSpace,
+              SizedBox(
+                height: 14,
+                width: 60,
+                child: Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(7),
+                    color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
+                  ),
+                )
+              ),
+              10.horizontalSpace,
+              SizedBox(
+                height: 12,
+                width: 20,
+                child: Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(7),
+                    color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
+                  ),
+                )
+              ),     
+            ],
+          ),
+          15.verticalSpace,
+          SizedBox(
+            height: 1.sw,
+            width: 0.95.sw,
+            child: Container(
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
+              ),
+            )
+          ),
+          10.verticalSpace,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ...List.generate(3, (index){
+                return Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: SizedBox.square(
+                    dimension: 8,
+                    child: Container(
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(7),
+                        color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
+                      ),
+                    )
+                  ),
+                );
+              })
+              
+            ],
+          ),
+        ],
+           ),
+     );
   }
 }

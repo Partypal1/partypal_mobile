@@ -8,7 +8,6 @@ import 'package:partypal/widgets/buttons/filled_button.dart';
 import 'package:partypal/widgets/cards/circle_image.dart';
 import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/scrim.dart';
-import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -56,86 +55,84 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
         ,
         child: Scrim(
           active: _isRefreshing,
-          child: Shimmer(
-            child: CustomScrollView(
-              slivers: [
-                SliverPersistentHeader(
-                  delegate: CustomSliverAppBar(
-                    title: 'Profile',
-                    hasBackButton: false
-                  ),
-                  floating: true,
+          child: CustomScrollView(
+            slivers: [
+              SliverPersistentHeader(
+                delegate: CustomSliverAppBar(
+                  title: 'Profile',
+                  hasBackButton: false
                 ),
-            
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: SizedBox(
-                      height: 80,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          profile.user == null
-                          ? const CircleImageLoading(radius: 40,)
-                          : CircleImage(imageUrl: profile.user!.profileImageUrl, radius: 40,),
-                          10.horizontalSpace,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              profile.user == null
-                              ? const TextPlaceHolder(height: 16, width: 120)
-                              : Text(
-                                  '${profile.user!.firstName} ${profile.user!.lastName}',
-                                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                    fontWeight: FontWeight.bold
-                                ),
-                              ),
-            
-                              profile.user == null
-                              ? const TextPlaceHolder(height: 12, width: 80)
-                              : Text(
-                                profile.user!.username,
-                                style: Theme.of(context).textTheme.bodySmall
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-            
-                SliverToBoxAdapter(
-                  child:  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                floating: true,
+              ),
+          
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: SizedBox(
+                    height: 80,
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        CustomFilledButton(
-                          label: 'Edit profile',
-                          onTap: () => GoRouter.of(context).push(RoutePaths.editProfileScreen),
-                        ),
+                        profile.user == null
+                        ? const CircleImageLoading(radius: 40,)
+                        : CircleImage(imageUrl: profile.user!.profileImageUrl, radius: 40,),
                         10.horizontalSpace,
-                        CustomFilledButton(
-                          label: 'Settings',
-                          onTap: () => GoRouter.of(context).push(RoutePaths.settingsScreen),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            profile.user == null
+                            ? const TextPlaceHolder(height: 16, width: 120)
+                            : Text(
+                                '${profile.user!.firstName} ${profile.user!.lastName}',
+                                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+          
+                            profile.user == null
+                            ? const TextPlaceHolder(height: 12, width: 80)
+                            : Text(
+                              profile.user!.username,
+                              style: Theme.of(context).textTheme.bodySmall
+                            ),
+                          ],
                         ),
-                      ]
+                      ],
                     ),
                   ),
                 ),
-            
-                SliverPersistentHeader(
-                  delegate: _ProfileTab(tabController: _tabController),
-                  pinned: true,
+              ),
+          
+              SliverToBoxAdapter(
+                child:  Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      CustomFilledButton(
+                        label: 'Edit profile',
+                        onTap: () => GoRouter.of(context).push(RoutePaths.editProfileScreen),
+                      ),
+                      10.horizontalSpace,
+                      CustomFilledButton(
+                        label: 'Settings',
+                        onTap: () => GoRouter.of(context).push(RoutePaths.settingsScreen),
+                      ),
+                    ]
+                  ),
                 ),
-            
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 2500,),
-                )
-            
-              ],
-            ),
+              ),
+          
+              SliverPersistentHeader(
+                delegate: _ProfileTab(tabController: _tabController),
+                pinned: true,
+              ),
+          
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 2500,),
+              )
+          
+            ],
           ),
         ),
       ),

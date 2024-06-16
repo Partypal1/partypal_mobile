@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:partypal/widgets/others/shimmer.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class CircleImage extends StatelessWidget {
@@ -70,23 +69,20 @@ class CircleImageLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShimmerLoading(
-      isLoading: true,
-      child: Center(
-        child: SizedBox.square(
-          dimension: 2 * radius,
-          child: Container(
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(radius),
-              color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
-            ),
-            child: Center(
-              child: Icon(
-                Icons.person_rounded,
-                size: radius,
-                color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
-              ),
+    return Center(
+      child: SizedBox.square(
+        dimension: 2 * radius,
+        child: Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(radius),
+            color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
+          ),
+          child: Center(
+            child: Icon(
+              Icons.person_rounded,
+              size: radius,
+              color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
             ),
           ),
         ),

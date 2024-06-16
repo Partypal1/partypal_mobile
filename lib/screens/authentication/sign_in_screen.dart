@@ -232,7 +232,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         if (await Provider.of<ProfileService>(context, listen: false).hasProfile && context.mounted) {
                           GoRouter.of(context).clearStackAndNavigate(RoutePaths.home);
                         } else if (context.mounted) {
-                          Provider.of<ProfileService>(context).updateProfile();
+                          Provider.of<ProfileService>(context, listen: false).updateProfile();
                           GoRouter.of(context).clearStackAndNavigate(RoutePaths.welcomeScreen);
                         }
                       },
