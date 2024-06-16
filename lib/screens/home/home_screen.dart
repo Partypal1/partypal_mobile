@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/services/category_provider.dart';
 import 'package:partypal/services/event_provider.dart';
 import 'package:partypal/services/places_provider.dart';
+import 'package:partypal/services/profile_service.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/cards/category_card.dart';
 import 'package:partypal/widgets/cards/event_card.dart';
@@ -51,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     EventProvider eventProvider = Provider.of<EventProvider>(context);
     CategoryProvider categoryProvider = Provider.of<CategoryProvider>(context);
     PlacesProvider placeProvider = Provider.of<PlacesProvider>(context);
+    ProfileService profileService = Provider.of<ProfileService>(context);
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
@@ -58,10 +60,11 @@ class _HomeScreenState extends State<HomeScreen> {
         child: RefreshIndicator(
             onRefresh: () async{
               setState(() => _isRefreshing = true);
-              await Future.delayed(Durations.extralong4).then((_){
+              await Future.wait([
+                profileService.fetchCurrentUserProfile(),
+              ]).then((_){
                 setState(() => _isRefreshing = false);
               });
-              // TODO: refresh home page content
               return Future.delayed(Duration.zero);
             },
           child: Scrim(

@@ -21,7 +21,7 @@ class _PlaceHeatMapCardState extends State<PlaceHeatMapCard> with AutomaticKeepA
   @override
   void initState(){ // TODO: animate heatmap when the day of the week is switched
     super.initState();
-    selectedDayIndex = DateTime.now().weekday;
+    selectedDayIndex = DateTime.now().weekday - 1;
     heatMap = _generateHeatMap();
   }
 

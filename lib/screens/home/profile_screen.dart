@@ -47,7 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         onRefresh: () async{
           setState(() => _isRefreshing = true);
-          await Future.delayed(Durations.extralong4).then((_){
+          await profile.fetchCurrentUserProfile().then((_){
             setState(() => _isRefreshing = false);
           });
           // TODO: refresh profile page content
@@ -97,16 +97,6 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                               : Text(
                                 profile.user!.username,
                                 style: Theme.of(context).textTheme.bodySmall
-                              ),
-            
-                              profile.user == null
-                              ? const TextPlaceHolder(height: 12, width: 100)
-                              : Text(
-                                'Partypal points: 0',
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).colorScheme.secondary
-                                ),
                               ),
                             ],
                           ),

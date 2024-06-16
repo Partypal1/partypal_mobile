@@ -67,12 +67,6 @@ class _PersonCardState extends State<PersonCard> {
                       widget.user.username,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    // Text(
-                    //   'Partypal points: ${widget.user.partypalPoints}',
-                    //   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    //     color: Theme.of(context).colorScheme.secondary
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

@@ -5,6 +5,7 @@ import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/models/user_model.dart';
 import 'package:partypal/services/auth_service.dart';
+import 'package:partypal/services/profile_service.dart';
 import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/google_sign_in_button.dart';
@@ -226,7 +227,16 @@ class _SignInScreenState extends State<SignInScreen> {
             
                     0.03.sh.verticalSpace,
             
-                    const GoogleSignInButton()
+                    GoogleSignInButton(
+                      onSignedIn: () async {
+                        if (await Provider.of<ProfileService>(context, listen: false).hasProfile && context.mounted) {
+                          GoRouter.of(context).clearStackAndNavigate(RoutePaths.home);
+                        } else if (context.mounted) {
+                          Provider.of<ProfileService>(context).updateProfile();
+                          GoRouter.of(context).clearStackAndNavigate(RoutePaths.welcomeScreen);
+                        }
+                      },
+                    )
                   ],
                 ),
               ),

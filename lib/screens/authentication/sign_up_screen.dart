@@ -313,7 +313,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             
                     0.03.sh.verticalSpace,
             
-                    const GoogleSignInButton()
+                    GoogleSignInButton(
+                      onSignedIn: () async {
+                        if (await Provider.of<ProfileService>(context, listen: false).hasProfile && context.mounted) {
+                          GoRouter.of(context).clearStackAndNavigate(RoutePaths.home);
+                        } else if (context.mounted) {
+                          Provider.of<ProfileService>(context, listen: false).updateProfile();
+                          GoRouter.of(context).clearStackAndNavigate(RoutePaths.welcomeScreen);
+                        }
+                      },
+                    )
                   ],
                 )
               )

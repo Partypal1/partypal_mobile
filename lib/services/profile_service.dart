@@ -79,16 +79,16 @@ class ProfileService extends ChangeNotifier{
         .collection('users')
         .doc(_currentFirebaseUser!.uid)
         .set({
-          'firstName': firstName ?? data?['firstName'],
-          'lastName': lastName ?? data?['lastName'],
-          'phoneNumber': phoneNumber ?? data?['phoneNumber'],
-          'email': email ?? data?['email'],
-          'role': role?.name ?? data?['role'],
-          'username': username ?? data?['username'],
+          'firstName': firstName ?? data?['firstName'] ?? _splitName(_currentFirebaseUser?.displayName)[0],
+          'lastName': lastName ?? data?['lastName'] ?? _splitName(_currentFirebaseUser?.displayName)[1],
+          'phoneNumber': phoneNumber ?? data?['phoneNumber'] ?? _currentFirebaseUser?.phoneNumber,
+          'email': email ?? data?['email'] ?? _currentFirebaseUser?.email,
+          'role': role?.name ?? data?['role'] ?? 'user',
+          'username': username ?? data?['username'] ?? _currentFirebaseUser?.displayName,
           'profileImageUrl': profileImageUrl ?? data?['profileImageUrl'] ?? _currentFirebaseUser?.photoURL,
           'location': location ?? data?['location']
         }).then((_) {
-          Toasts.showToast('profile updated');
+          log('profile updated');
           return true;
         });
       } else {
@@ -105,12 +105,30 @@ class ProfileService extends ChangeNotifier{
     return usersReference.doc(userId).get().then((u) => u.data());
   }
 
-  void fetchCurrentUserProfile(){
+  Future<void> fetchCurrentUserProfile() async {
     if(isSignedIn){
       getProfile(_currentFirebaseUser!.uid).then((u){
         _user = u;
         notifyListeners();
       });
+    }
+  }
+
+  void removeCurrentUser(){
+    log('deleted user ${_user?.id}');
+    _user = null;
+  }
+
+  List<String?> _splitName(String? joinedName){
+    if(joinedName == null){
+      return [null, null];
+    }
+    else if(joinedName.split(' ').length > 1){
+      List<String> split = joinedName.split(' ');
+      return [split.first, split.last];
+    }
+    else{
+      return [joinedName, null];
     }
   }
 }
