@@ -22,10 +22,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late ScrollController _scrollController;
-  late EventProvider eventProvider;
-  late CategoryProvider categoryProvider;
-  late PlacesProvider placeProvider;
-  late ProfileService profileService;
   bool _isRefreshing = false;
 
   @override
@@ -42,24 +38,20 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies(){
     super.didChangeDependencies();
-    eventProvider = Provider.of<EventProvider>(context);
-    categoryProvider = Provider.of<CategoryProvider>(context);
-    placeProvider = Provider.of<PlacesProvider>(context);
-    profileService = Provider.of<ProfileService>(context);
   }
 
   @override
   void dispose(){
     _scrollController.dispose();
-    eventProvider.dispose();
-    categoryProvider.dispose();
-    placeProvider.dispose();
-    profileService.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final eventProvider = Provider.of<EventProvider>(context);
+    final categoryProvider = Provider.of<CategoryProvider>(context);
+    final placeProvider = Provider.of<PlacesProvider>(context);
+    final profileService = Provider.of<ProfileService>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: RefreshIndicator(
