@@ -36,15 +36,9 @@ ColorScheme lightScheme =  ColorScheme.light(
 
   surface: neutralColor[98]!,
   onSurface: neutralColor[10]!,
-  
-  surfaceVariant: neutralVariantColor[90],
-  onSurfaceVariant: neutralVariantColor[30],
 
   inverseSurface: neutralColor[20],
   onInverseSurface: neutralColor[95],
-
-  background: neutralColor[98]!,
-  onBackground: neutralColor[10]!,
 
   shadow: shadowColor.withOpacity(0.25)
 );
@@ -77,14 +71,8 @@ ColorScheme darkScheme =  ColorScheme.dark(
   surface: neutralColor[6]!,
   onSurface: neutralColor[90]!,
 
-  surfaceVariant: neutralVariantColor[20],
-  onSurfaceVariant: neutralVariantColor[80],
-
   inverseSurface: neutralColor[80],
   onInverseSurface: neutralColor[5],
-
-  background: neutralColor[6]!,
-  onBackground: neutralColor[90]!,
 
   shadow: shadowColor
 );

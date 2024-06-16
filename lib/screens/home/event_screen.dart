@@ -197,7 +197,7 @@ class _EventAppBar extends SliverPersistentHeaderDelegate{
                     color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context).withOpacity(0.4),
                     borderRadius: BorderRadius.circular(20)
                   ),
-                  child: Icon(CupertinoIcons.xmark),
+                  child: const Icon(CupertinoIcons.xmark),
                 ),
               ),
             ),
