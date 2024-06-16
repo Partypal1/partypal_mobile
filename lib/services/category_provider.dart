@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:partypal/models/category_model.dart';
 
 class CategoryProvider extends ChangeNotifier{
+  bool _disposed = false;
   List<Category> categories = [];
   bool isFetching = false;
 
@@ -30,4 +31,16 @@ class CategoryProvider extends ChangeNotifier{
     notifyListeners();
   }
   
+  @override
+  void notifyListeners(){
+    if(!_disposed){
+      super.notifyListeners();
+    }
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
 }

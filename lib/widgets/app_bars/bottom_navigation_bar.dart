@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
@@ -84,33 +85,34 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> with SingleTick
                           _currentIndex = index;
                         });
                       },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox.square(
-                            dimension: 18,
-                            child: SvgPicture.asset(
-                              widget.iconPaths[index],
-                              colorFilter: index == _currentIndex
-                                  ? const ColorFilter.mode(
-                                      Colors.white, BlendMode.srcIn)
-                                  : ColorFilter.mode(
-                                      Colors.white.withOpacity(0.32),
-                                      BlendMode.srcIn),
+                      child: Container(
+                        constraints: const BoxConstraints(minWidth: 40),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox.square(
+                              dimension: 24,
+                              child: SvgPicture.asset(
+                                widget.iconPaths[index],
+                                colorFilter: index == _currentIndex
+                                    ? const ColorFilter.mode(
+                                        Colors.white, BlendMode.srcIn)
+                                    : ColorFilter.mode(
+                                        Colors.white.withOpacity(0.32),
+                                        BlendMode.srcIn),
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            widget.labels[index],
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(
-                                    color: index == _currentIndex
-                                        ? Colors.white
-                                        : Colors.white.withOpacity(0.32)),
-                          )
-                        ],
+                            8.verticalSpace,
+                            Text(
+                              widget.labels[index],
+                              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                                color: index == _currentIndex
+                                  ? Colors.white
+                                  : Colors.white.withOpacity(0.32)
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     );
                   })),

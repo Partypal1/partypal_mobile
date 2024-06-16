@@ -3,6 +3,7 @@ import 'package:partypal/models/event_model.dart';
 import 'package:partypal/models/user_model.dart';
 
 class EventProvider extends ChangeNotifier{
+  bool _disposed = false;
   List<Event> eventsHappeningThisWeek = [];
   List<Event> eventsBasedOnYourLocation = [];
   bool isFetching = false;
@@ -120,5 +121,18 @@ class EventProvider extends ChangeNotifier{
     ];
     isFetching = false;
     notifyListeners();
+  }
+  
+  @override
+  void notifyListeners(){
+    if(!_disposed){
+      super.notifyListeners();
+    }
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
   }
 }

@@ -3,6 +3,7 @@ import 'package:partypal/models/moment_model.dart';
 import 'package:partypal/models/user_model.dart';
 
 class MomentProvider extends ChangeNotifier{
+  bool _disposed = false;
   List<Moment> moments = [];
   bool isFetching = false;
   void fetchMoments() async {
@@ -50,5 +51,18 @@ class MomentProvider extends ChangeNotifier{
     ];
     isFetching = false;
     notifyListeners();
+  }
+  
+  @override
+  void notifyListeners(){
+    if(!_disposed){
+      super.notifyListeners();
+    }
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
   }
 }

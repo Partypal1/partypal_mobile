@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:partypal/models/place_model.dart';
 
 class PlacesProvider extends ChangeNotifier{
+  bool _disposed = false;
   List<Place> places = [];
   bool isFetching = false;
 
@@ -34,5 +35,18 @@ class PlacesProvider extends ChangeNotifier{
     ];
     isFetching = false;
     notifyListeners();
+  }
+
+  @override
+  void notifyListeners(){
+    if(!_disposed){
+      super.notifyListeners();
+    }
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
   }
 }
