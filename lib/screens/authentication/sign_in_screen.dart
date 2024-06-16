@@ -8,8 +8,8 @@ import 'package:partypal/services/auth_service.dart';
 import 'package:partypal/services/profile_service.dart';
 import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
+import 'package:partypal/widgets/buttons/filled_button.dart';
 import 'package:partypal/widgets/buttons/google_sign_in_button.dart';
-import 'package:partypal/widgets/buttons/wide_button.dart';
 import 'package:provider/provider.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -78,85 +78,93 @@ class _SignInScreenState extends State<SignInScreen> {
                       ],
                     ),
                     
-                    0.01.sh.verticalSpace,
+                    // 0.01.sh.verticalSpace,
             
-                    Text(
-                      'Hey pal! Welcome Back.',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.primary
-                      ),
-                    ),
+                    // Text(
+                    //   'Hey pal! Welcome Back.',
+                    //   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    //     color: Theme.of(context).colorScheme.primary
+                    //   ),
+                    // ),
             
                     0.05.sh.verticalSpace,
             
                     AutofillGroup(
-                      child: TextFormField( // email
-                        focusNode: emailFocus,
-                        autofillHints: const [AutofillHints.email, AutofillHints.username],
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          hintText: 'Enter your email',
-                          hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
+                      child: SizedBox(
+                        height: 50,
+                        child: TextFormField( // email
+                          focusNode: emailFocus,
+                          autofillHints: const [AutofillHints.email, AutofillHints.username],
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            hintText: 'Enter your email',
+                            hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25)
+                            ),
+                            
                           ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)
-                          ),
-                          
+                          validator: (value){
+                                            
+                            if (value == null || value.isEmpty){
+                              return 'Email is required';
+                            }
+                            email = value;
+                            return null;
+                          },
+                          onFieldSubmitted: (value){
+                            FocusScope.of(context).requestFocus(passwordFocus);
+                          },
                         ),
-                        validator: (value){
-                    
-                          if (value == null || value.isEmpty){
-                            return 'Email is required';
-                          }
-                          email = value;
-                          return null;
-                        },
-                        onFieldSubmitted: (value){
-                          FocusScope.of(context).requestFocus(passwordFocus);
-                        },
                       ),
                     ),
             
                     0.02.sh.verticalSpace,
             
                     AutofillGroup(
-                      child: TextFormField( // password
-                        focusNode: passwordFocus,
-                        autocorrect: false,
-                        autofillHints: const [AutofillHints.password],
-                        keyboardType: TextInputType.visiblePassword,
-                        obscureText: passwordVisible,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          hintText: 'Enter your password',
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                passwordVisible = !passwordVisible;
-                              });
-                            },
-                            child: Icon(
-                              passwordVisible
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined,
+                      child: SizedBox(
+                        height: 50,
+                        child: TextFormField( // password
+                          focusNode: passwordFocus,
+                          autocorrect: false,
+                          autofillHints: const [AutofillHints.password],
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: !passwordVisible,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            hintText: 'Enter your password',
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  passwordVisible = !passwordVisible;
+                                });
+                              },
+                              child: Icon(
+                                passwordVisible
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                                size: 18,
+                              ),
                             ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25)
+                            )
                           ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)
-                          )
+                          validator: (value){
+                            if(value == null || value.isEmpty){
+                              return 'Password is required';
+                            }
+                            password = value;
+                            return null;
+                          },
+                          onFieldSubmitted: (value){
+                            FocusScope.of(context).requestFocus(FocusNode());
+                          },
                         ),
-                        validator: (value){
-                          if(value == null || value.isEmpty){
-                            return 'Password is required';
-                          }
-                          password = value;
-                          return null;
-                        },
-                        onFieldSubmitted: (value){
-                          FocusScope.of(context).requestFocus(FocusNode());
-                        },
                       ),
                     ),
             
@@ -167,7 +175,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         dimension: 40,
                         child: CircularProgressIndicator(),
                       )
-                    : WideButton(
+                    : CustomFilledButton(
                         label: 'Sign in',
                         onTap: _signIn,
                       ),
@@ -198,17 +206,28 @@ class _SignInScreenState extends State<SignInScreen> {
                       ],
                     ),
                     0.01.sh.verticalSpace,
-                    GestureDetector(
-                      onTap: (){
-                        GoRouter.of(context).push(RoutePaths.resetPasswordScreen);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          'forgot your password?',
-                          style: Theme.of(context).textTheme.labelLarge
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Forgot your password?',
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
-                      ),
+                        GestureDetector(
+                          onTap: (){
+                            GoRouter.of(context).push(RoutePaths.resetPasswordScreen);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(
+                              'click here',
+                              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                color: Theme.of(context).colorScheme.primary
+                              )
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
             
                     0.03.sh.verticalSpace,

@@ -8,8 +8,8 @@ import 'package:partypal/services/auth_service.dart';
 import 'package:partypal/services/profile_service.dart';
 import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
+import 'package:partypal/widgets/buttons/filled_button.dart';
 import 'package:partypal/widgets/buttons/google_sign_in_button.dart';
-import 'package:partypal/widgets/buttons/wide_button.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -111,6 +111,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Expanded(
                             child: SizedBox(
+                              height: 50,
                               child: TextFormField(
                                 focusNode: firstNameFocus,
                                 autofillHints: const [AutofillHints.givenName],
@@ -122,7 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
                                   ),
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20)
+                                    borderRadius: BorderRadius.circular(25)
                                   )
                                 ),
                                 validator: (value){
@@ -143,6 +144,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               
                           Expanded(
                             child: SizedBox(
+                              height: 50,
                               child: TextFormField(
                                 focusNode: lastNameFocus,
                                 autofillHints: const [AutofillHints.familyName],
@@ -154,7 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
                                   ),
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20)
+                                    borderRadius: BorderRadius.circular(25)
                                   )
                                 ),
                                 validator: (value){
@@ -177,111 +179,122 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     0.03.sh.verticalSpace,
                 
                     AutofillGroup(
-                      child: TextFormField( // email
-                        focusNode: emailFocus,
-                        autofillHints: const [AutofillHints.email, AutofillHints.username],
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          hintText: 'example@email.com',
-                          hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
+                      child: SizedBox(
+                        height: 50,
+                        child: TextFormField( // email
+                          focusNode: emailFocus,
+                          autofillHints: const [AutofillHints.email, AutofillHints.username],
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            hintText: 'example@email.com',
+                            hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25)
+                            ),
+                            
                           ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)
-                          ),
-                          
+                          validator: (value){
+                            String pattern = r"""(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])""";
+                            
+                            RegExp regex = RegExp(pattern);
+                            if (value == null || !regex.hasMatch(value)){
+                              return 'Enter a valid email';
+                            }
+                            email = value;
+                            return null;
+                          },
+                          onFieldSubmitted: (value){
+                            FocusScope.of(context).requestFocus(phoneNumberFocus);
+                          },
                         ),
-                        validator: (value){
-                          String pattern = r"""(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])""";
-                          
-                          RegExp regex = RegExp(pattern);
-                          if (value == null || !regex.hasMatch(value)){
-                            return 'Enter a valid email';
-                          }
-                          email = value;
-                          return null;
-                        },
-                        onFieldSubmitted: (value){
-                          FocusScope.of(context).requestFocus(phoneNumberFocus);
-                        },
                       ),
                     ),
                 
                     0.03.sh.verticalSpace,
                 
                     AutofillGroup(
-                      child: TextFormField( // phone number
-                        focusNode: phoneNumberFocus,
-                        autofillHints: const [AutofillHints.telephoneNumber],
-                        keyboardType: TextInputType.phone,
-                        decoration: InputDecoration(
-                          labelText: 'Phone number',
-                          hintText: '000-000-0000',
-                          hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)
-                          ),
-                          prefixIcon:  CountryCodePicker(
-                            initialSelection: 'NG',
-                            onChanged: (value){
-                              countryCode = value.toString();
-                            },
-                          ),
-                        ),
-                        validator: (value){
-                          if(value == null || value.length < 4 || value.length > 15 || (int.tryParse(value) == null)){
-                            return 'Enter a valid Phone number';
-                          }
-                          phoneNumber = value;
-                          return null;
-                        },
-                        onFieldSubmitted: (value){
-                          FocusScope.of(context).requestFocus(passwordFocus);
-                        },
-                      ),
-                    ),
-                
-                    0.03.sh.verticalSpace,
-                
-                    AutofillGroup(
-                      child: TextFormField( // password
-                        focusNode: passwordFocus,
-                        autocorrect: false,
-                        autofillHints: const [AutofillHints.password],
-                        keyboardType: TextInputType.visiblePassword,
-                        obscureText: passwordVisible,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          hintText: 'At least 8 characters',
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                passwordVisible = !passwordVisible;
-                              });
-                            },
-                            child: Icon(
-                              passwordVisible
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined,
+                      child: SizedBox(
+                        height: 50,
+                        child: TextFormField( // phone number
+                          focusNode: phoneNumberFocus,
+                          autofillHints: const [AutofillHints.telephoneNumber],
+                          keyboardType: TextInputType.phone,
+                          decoration: InputDecoration(
+                            labelText: 'Phone number',
+                            hintText: '000-000-0000',
+                            hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25)
+                            ),
+                            prefixIcon:  CountryCodePicker(
+                              initialSelection: 'NG',
+                              onChanged: (value){
+                                countryCode = value.toString();
+                              },
                             ),
                           ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)
-                          )
+                          validator: (value){
+                            if(value == null || value.length < 4 || value.length > 15 || (int.tryParse(value) == null)){
+                              return 'Enter a valid Phone number';
+                            }
+                            phoneNumber = value;
+                            return null;
+                          },
+                          onFieldSubmitted: (value){
+                            FocusScope.of(context).requestFocus(passwordFocus);
+                          },
                         ),
-                        validator: (value){
-                          if(value == null || value.length < 8){
-                            return 'password should be 8 characters or more';
-                          }
-                          password = value;
-                          return null;
-                        },
-                        onFieldSubmitted: (value){
-                          FocusScope.of(context).requestFocus(FocusNode());
-                        },
+                      ),
+                    ),
+                
+                    0.03.sh.verticalSpace,
+                
+                    AutofillGroup(
+                      child: SizedBox(
+                        height: 50,
+                        child: TextFormField( // password
+                          focusNode: passwordFocus,
+                          autocorrect: false,
+                          autofillHints: const [AutofillHints.password],
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: passwordVisible,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            hintText: 'At least 8 characters',
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  passwordVisible = !passwordVisible;
+                                });
+                              },
+                              child: Icon(
+                                passwordVisible
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                                size: 18,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25)
+                            )
+                          ),
+                          validator: (value){
+                            if(value == null || value.length < 8){
+                              return 'password should be 8 characters or more';
+                            }
+                            password = value;
+                            return null;
+                          },
+                          onFieldSubmitted: (value){
+                            FocusScope.of(context).requestFocus(FocusNode());
+                          },
+                        ),
                       ),
                     ),
             
@@ -292,7 +305,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       dimension: 40,
                       child: CircularProgressIndicator(),
                     )
-                    : WideButton(
+                    : CustomFilledButton(
                       label: 'Sign up',
                       onTap: _signUp,
                     ),

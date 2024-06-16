@@ -69,13 +69,13 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: SizedBox(
-                    height: 80,
+                    height: 70,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         profile.user == null
-                        ? const CircleImageLoading(radius: 40,)
-                        : CircleImage(imageUrl: profile.user!.profileImageUrl, radius: 40,),
+                        ? const CircleImageLoading(radius: 35,)
+                        : CircleImage(imageUrl: profile.user!.profileImageUrl, radius: 35,),
                         10.horizontalSpace,
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

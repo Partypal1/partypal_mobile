@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:partypal/services/auth_service.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
-import 'package:partypal/widgets/buttons/wide_button.dart';
+import 'package:partypal/widgets/buttons/filled_button.dart';
 import 'package:provider/provider.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -47,36 +47,41 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
                   Form( // email
                     key: formKey,
-                    child: TextFormField( 
-                      controller: emailController,
-                      autofillHints: const [AutofillHints.email, AutofillHints.username],
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        hintText: 'enter your email address',
-                        hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
+                    child: SizedBox(
+                      height: 50,
+                      child: TextFormField( 
+                        controller: emailController,
+                        autofillHints: const [AutofillHints.email, AutofillHints.username],
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          hintText: 'enter your email address',
+                          hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25)
+                          ),
+                          
                         ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20)
-                        ),
-                        
+                        validator: (value){
+                          String pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+                          RegExp regex = RegExp(pattern);
+                          if (value == null || !regex.hasMatch(value)){
+                            return 'Enter a valid email';
+                          }
+                          email = value;
+                          return null;
+                        },
                       ),
-                      validator: (value){
-                        String pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
-                        RegExp regex = RegExp(pattern);
-                        if (value == null || !regex.hasMatch(value)){
-                          return 'Enter a valid email';
-                        }
-                        email = value;
-                        return null;
-                      },
                     ),
                   ),
                   0.05.sh.verticalSpace,
-                  WideButton(
-                    label: 'Send reset link',
-                    onTap: _sendResetlink,
+                  Center(
+                    child: CustomFilledButton(
+                      label: 'Send reset link',
+                      onTap: _sendResetlink,
+                    ),
                   )
                 ],
               ),

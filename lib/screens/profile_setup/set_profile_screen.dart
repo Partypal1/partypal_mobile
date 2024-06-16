@@ -8,7 +8,8 @@ import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/services/profile_service.dart';
 import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
-import 'package:partypal/widgets/buttons/wide_button.dart';
+import 'package:partypal/widgets/buttons/filled_button.dart';
+import 'package:partypal/widgets/cards/circle_image.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 import 'package:provider/provider.dart';
 
@@ -27,6 +28,7 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
   bool _isUploadingProfile = false;
   @override
   Widget build(BuildContext context) {
+    final profile = Provider.of<ProfileService>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SingleChildScrollView(
@@ -40,15 +42,9 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
               padding: EdgeInsets.all(0.03.sw),
               child: Column(
                 children: [
-                  SizedBox.square(
-                    dimension: 70,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceVariant,
-                        borderRadius: BorderRadius.circular(35)
-                      ),
-                    ),
-                  ),
+                  profile.user != null
+                    ? CircleImage(imageUrl: profile.user!.profileImageUrl, radius: 35,)
+                    : const CircleImageLoading(radius: 35,),
       
                   0.02.sh.verticalSpace,
       
@@ -72,15 +68,9 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
                                   child: Column(
                                     children: [
                                       0.03.sw.verticalSpace,
-                                      SizedBox.square( // picture
-                                        dimension: 60,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: Theme.of(context).colorScheme.surfaceVariant,
-                                            borderRadius: BorderRadius.circular(35)
-                                          ),
-                                        ),
-                                      ),
+                                      profile.user != null
+                                        ? CircleImage(imageUrl: profile.user!.profileImageUrl, radius: 35,)
+                                        : const CircleImageLoading(radius: 35,),
                                       0.03.sw.verticalSpace,
                                       const ListTile(
                                         leading: Icon(Icons.image_outlined),
@@ -92,7 +82,7 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
                                         title: Text('Remove current picture'),
                                       ),
                                       0.03.sw.verticalSpace,
-                                      WideButton(
+                                      CustomFilledButton(
                                         label: 'Save changes',
                                         onTap: (){
                                           //TODO: save changes
@@ -123,56 +113,62 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        TextFormField( // username
-                          autofillHints: const [AutofillHints.username],
-                          keyboardType: TextInputType.name,
-                          decoration: InputDecoration(
-                            labelText: 'Username',
-                            hintText: 'Enter a username',
-                            hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-                              color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
+                        SizedBox(
+                          height: 50,
+                          child: TextFormField( // username
+                            autofillHints: const [AutofillHints.username],
+                            keyboardType: TextInputType.name,
+                            decoration: InputDecoration(
+                              labelText: 'Username',
+                              hintText: 'Enter a username',
+                              hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(25)
+                              ),
+                              
                             ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)
-                            ),
-                            
+                            onChanged: (value){
+                              username = value;
+                            },
+                            validator: (value){ //TODO: validate if the username is available
+                              if(value == null || value.length < 3){
+                                return 'Usernames should be at least 3 characters';
+                              }
+                              return null;
+                            },
                           ),
-                          onChanged: (value){
-                            username = value;
-                          },
-                          validator: (value){ //TODO: validate if the username is available
-                            if(value == null || value.length < 3){
-                              return 'Usernames should be at least 3 characters';
-                            }
-                            return null;
-                          },
                         ),
                     
                          0.02.sh.verticalSpace,
                           
-                        TextFormField( // location TODO: change this to a dropdown list
-                          autofillHints: const [AutofillHints.location],
-                          keyboardType: TextInputType.streetAddress,
-                          decoration: InputDecoration(
-                            labelText: 'Location',
-                            hintText: 'Preferred location',
-                            hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-                              color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
+                        SizedBox(
+                          height: 50,
+                          child: TextFormField( // location TODO: change this to a dropdown list
+                            autofillHints: const [AutofillHints.location],
+                            keyboardType: TextInputType.streetAddress,
+                            decoration: InputDecoration(
+                              labelText: 'Location',
+                              hintText: 'Preferred location',
+                              hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                color: Theme.of(context).textTheme.labelLarge?.color?.withOpacity(0.5)
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(25)
+                              ),
+                              
                             ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)
-                            ),
-                            
+                            onChanged: (value){
+                              location = value;
+                            },
+                            validator: (value){
+                              if(value == null || value.length < 3){
+                                return 'Enter a valid location';
+                              }
+                              return null;
+                            },
                           ),
-                          onChanged: (value){
-                            location = value;
-                          },
-                          validator: (value){
-                            if(value == null || value.length < 3){
-                              return 'Enter a valid location';
-                            }
-                            return null;
-                          },
                         ),
                       ],
                     ),
@@ -185,7 +181,7 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
                       dimension: 50,
                       child: CircularProgressIndicator(),
                     )
-                  : WideButton(
+                  : CustomFilledButton(
                       label: 'Done',
                       onTap: _uploadProfile
                     )

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
-import 'package:partypal/widgets/buttons/wide_button.dart';
+import 'package:partypal/widgets/buttons/filled_button.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -120,7 +120,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateM
                     child: child
                   );
                 },
-                child: WideButton(
+                child: CustomFilledButton(
                   label: 'Set profile',
                   onTap: (){
                     GoRouter.of(context).push(RoutePaths.setProfileScreen);
