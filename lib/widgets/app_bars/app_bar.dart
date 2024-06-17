@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/route_paths.dart';
-import 'package:partypal/services/profile_service.dart';
+import 'package:partypal/services/profile_management_service.dart';
 import 'package:partypal/widgets/cards/circle_image.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 import 'package:provider/provider.dart';
@@ -109,7 +109,7 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProfileService profile = Provider.of<ProfileService>(context);
+    ProfileManagementService profile = Provider.of<ProfileManagementService>(context);
     return SliverAppBar(
       toolbarHeight: 75,
       leadingWidth: 75,
@@ -130,7 +130,7 @@ class HomeAppBar extends StatelessWidget {
       //   ),
       // ),
       leading: profile.user != null
-        ? CircleImage(imageUrl: profile.user!.profileImageUrl, radius: 20,)
+        ? CircleImage(imageURL: profile.user!.profileImageURL, radius: 20,)
         : const CircleImageLoading(radius: 20,),
      
       // title: Column(

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:partypal/models/user_model.dart';
 import 'package:partypal/utils/toasts.dart';
 
-class ProfileService extends ChangeNotifier{
+class ProfileManagementService extends ChangeNotifier{
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   PartypalUser? _user;
   User? get _currentFirebaseUser => FirebaseAuth.instance.currentUser;
@@ -63,7 +63,7 @@ class ProfileService extends ChangeNotifier{
     String? email,
     Role? role,
     String? username,
-    String? profileImageUrl,
+    String? profileImageURL,
     String? location
     
   }) async {
@@ -85,7 +85,7 @@ class ProfileService extends ChangeNotifier{
           'email': email ?? data?['email'] ?? _currentFirebaseUser?.email,
           'role': role?.name ?? data?['role'] ?? 'user',
           'username': username ?? data?['username'] ?? _currentFirebaseUser?.displayName,
-          'profileImageUrl': profileImageUrl ?? data?['profileImageUrl'] ?? _currentFirebaseUser?.photoURL,
+          'profileImageURL': profileImageURL ?? data?['profileImageURL'] ?? _currentFirebaseUser?.photoURL,
           'location': location ?? data?['location']
         }).then((_) {
           log('profile updated');

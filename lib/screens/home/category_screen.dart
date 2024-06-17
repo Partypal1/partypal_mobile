@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:partypal/services/places_provider.dart';
+import 'package:partypal/models/place_model.dart';
+import 'package:partypal/services/place_provider_service.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/cards/place_card.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
@@ -19,12 +20,39 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   late FocusNode searchFocus;
   late TextEditingController searchController;
+  List<Place>? places;
+  List<Place>? placesToDisplay;
+  List<Place>? searchResult;
 
   @override
   void initState(){
     super.initState();
     searchFocus = FocusNode();
     searchController = TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _fetchPlaces();
+    });
+  }
+
+  void _fetchPlaces(){
+    Provider.of<PlaceProviderService>(context, listen: false)
+      .getPlaces(type: widget.categoryName)
+      .then((p){
+        places = p;
+        placesToDisplay = places;
+        if(mounted) setState((){});
+      });
+  }
+
+  void _searchForPlace(String query){
+    if (places == null){
+      searchResult = [];
+    }
+    else{
+      searchResult = places!
+        .where((p) => p.name.toLowerCase().contains(query.toLowerCase())).toList();
+    }
+
   }
 
   @override
@@ -65,7 +93,19 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           hintText: 'Search for ${widget.categoryName.toLowerCase()}'
                         ),
                         onTapOutside: (_) => FocusScope.of(context).requestFocus(FocusNode()),
-                        
+                        onChanged: (value){
+                          if (value.isEmpty){
+                            setState(() {
+                              placesToDisplay = places;
+                            });
+                          }
+                          else{
+                            _searchForPlace(value);
+                            setState(() {
+                              placesToDisplay = searchResult;
+                            });
+                          }
+                        },
                       ),
                     ),
                   ),
@@ -98,13 +138,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
           // ),
 
           SliverToBoxAdapter(child: 20.verticalSpace),
-
           SliverList.builder(
-            itemCount: Provider.of<PlacesProvider>(context).places.length,
+            itemCount: placesToDisplay == null ? 5 : placesToDisplay!.length,
             itemBuilder: (context, index){
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-                child: PlaceCard(place: Provider.of<PlacesProvider>(context).places[index]),
+                child: placesToDisplay == null
+                ? const PlaceLoadingCard()
+                : PlaceCard(place: placesToDisplay![index]),
               );
             }
           )

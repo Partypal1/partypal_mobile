@@ -58,7 +58,7 @@ class _PlaceScreenState extends State<PlaceScreen> with SingleTickerProviderStat
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    CircleImage(imageUrl: widget.place.imageUrl, radius: 40,),
+                    CircleImage(imageURL: widget.place.imageURL, radius: 40,),
                     10.horizontalSpace,
                     const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

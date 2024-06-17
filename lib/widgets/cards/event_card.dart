@@ -44,7 +44,7 @@ class _EventCardState extends State<EventCard> {
               fit: StackFit.expand,
               children: [
                 CachedNetworkImage(
-                  imageUrl: widget.event.imageUrl,
+                  imageUrl: widget.event.imageURL,
                   imageBuilder: (context, imageProvider){
                     return Container(
                       decoration: BoxDecoration(

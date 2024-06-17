@@ -5,7 +5,7 @@ import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/models/user_model.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:partypal/services/auth_service.dart';
-import 'package:partypal/services/profile_service.dart';
+import 'package:partypal/services/profile_management_service.dart';
 import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/filled_button.dart';
@@ -328,10 +328,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
             
                     GoogleSignInButton(
                       onSignedIn: () async {
-                        if (await Provider.of<ProfileService>(context, listen: false).hasProfile && context.mounted) {
+                        if (await Provider.of<ProfileManagementService>(context, listen: false).hasProfile && context.mounted) {
                           GoRouter.of(context).clearStackAndNavigate(RoutePaths.home);
                         } else if (context.mounted) {
-                          Provider.of<ProfileService>(context, listen: false).updateProfile();
+                          Provider.of<ProfileManagementService>(context, listen: false).updateProfile();
                           GoRouter.of(context).clearStackAndNavigate(RoutePaths.welcomeScreen);
                         }
                       },
@@ -347,7 +347,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
   void _signUp() async {
     AuthService auth = Provider.of<AuthService>(context, listen: false);
-    ProfileService profile = Provider.of<ProfileService>(context, listen: false);
+    ProfileManagementService profile = Provider.of<ProfileManagementService>(context, listen: false);
     FocusScope.of(context).requestFocus(FocusNode());
     if(_formKey.currentState!.validate()){
       setState(() {_isSigningUp = true;});

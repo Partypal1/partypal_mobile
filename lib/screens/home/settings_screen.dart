@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/services/auth_service.dart';
-import 'package:partypal/services/profile_service.dart';
+import 'package:partypal/services/profile_management_service.dart';
 import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/filled_button.dart';
@@ -34,7 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               labelColor: Theme.of(context).colorScheme.onErrorContainer,
               onTap: (){
                 Provider.of<AuthService>(context, listen: false).signOut();
-                Provider.of<ProfileService>(context, listen: false).removeCurrentUser();
+                Provider.of<ProfileManagementService>(context, listen: false).removeCurrentUser();
                 GoRouter.of(context).clearStackAndNavigate(RoutePaths.selectUserProfileScreen);
               },
             )

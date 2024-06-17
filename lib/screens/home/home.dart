@@ -8,7 +8,7 @@ import 'package:partypal/screens/home/home_screen.dart';
 import 'package:partypal/screens/home/moments_screen.dart';
 import 'package:partypal/screens/home/post_screen.dart';
 import 'package:partypal/screens/home/profile_screen.dart';
-import 'package:partypal/services/profile_service.dart';
+import 'package:partypal/services/profile_management_service.dart';
 import 'package:partypal/widgets/app_bars/bottom_navigation_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -44,7 +44,7 @@ class HomeState extends State<Home> {
   void initState(){
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<ProfileService>(context, listen: false).fetchCurrentUserProfile();
+      Provider.of<ProfileManagementService>(context, listen: false).fetchCurrentUserProfile();
     });
   }
 

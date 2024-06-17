@@ -37,7 +37,7 @@ class _TicketCardState extends State<TicketCard> {
               SizedBox.square(
                 dimension: 0.3.sw,
                 child: CachedNetworkImage(
-                  imageUrl: widget.event.imageUrl,
+                  imageUrl: widget.event.imageURL,
                   imageBuilder: (context, imageProvider){
                     return Container(
                       decoration: BoxDecoration(

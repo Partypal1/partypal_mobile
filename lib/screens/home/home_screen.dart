@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:partypal/models/place_model.dart';
 import 'package:partypal/services/category_provider.dart';
 import 'package:partypal/services/event_provider.dart';
-import 'package:partypal/services/places_provider.dart';
-import 'package:partypal/services/profile_service.dart';
+import 'package:partypal/services/place_provider_service.dart';
+import 'package:partypal/services/profile_management_service.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/cards/category_card.dart';
 import 'package:partypal/widgets/cards/event_card.dart';
@@ -23,7 +24,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late ScrollController _scrollController;
   bool _isRefreshing = false;
-
+  List<Place>? highEnergyPlaces;
   @override
   void initState(){
     super.initState();
@@ -31,13 +32,22 @@ class _HomeScreenState extends State<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<EventProvider>(context, listen: false).fetchEvents();
       Provider.of<CategoryProvider>(context, listen: false).fetchCategories();
-      Provider.of<PlacesProvider>(context, listen: false).fetchPlaces();
+      _fetchHighEnergyPlaces();
     });
   }
 
   @override
   void didChangeDependencies(){
     super.didChangeDependencies();
+  }
+
+  void _fetchHighEnergyPlaces(){
+    Provider.of<PlaceProviderService>(context, listen: false)
+      .getPlaces()
+      .then((p){
+        highEnergyPlaces = p;
+        if(mounted) setState((){});
+      });
   }
 
   @override
@@ -50,8 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final eventProvider = Provider.of<EventProvider>(context);
     final categoryProvider = Provider.of<CategoryProvider>(context);
-    final placeProvider = Provider.of<PlacesProvider>(context);
-    final profileService = Provider.of<ProfileService>(context);
+    final profileService = Provider.of<ProfileManagementService>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: RefreshIndicator(
@@ -231,7 +240,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(left: 0.03.sw, top: 0.03.sw),
-                      child: placeProvider.isFetching 
+                      child: highEnergyPlaces == null 
                       ? const TextPlaceHolder(height: 20, width: 180)
                       : Container(
                           decoration: BoxDecoration(
@@ -253,15 +262,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ),
               SliverList.builder(
-                  itemCount: placeProvider.isFetching
+                  itemCount: highEnergyPlaces == null
                     ? 3
-                    : placeProvider.places.length,
+                    : highEnergyPlaces!.length,
                   itemBuilder: (context, index){
                     return Padding(
                       padding: EdgeInsets.symmetric(vertical: 0.02.sw, horizontal: 0.03.sw),
-                      child: placeProvider.isFetching
+                      child: highEnergyPlaces == null
                       ? const PlaceLoadingCard() 
-                      : PlaceCard(place: placeProvider.places[index]),
+                      : PlaceCard(place: highEnergyPlaces![index]),
                     );
                   }
               ),

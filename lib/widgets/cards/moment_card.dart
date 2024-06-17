@@ -37,7 +37,7 @@ class _MomentCardState extends State<MomentCard> {
         Row(
           children: [
             0.04.sw.horizontalSpace,
-            CircleImage(imageUrl: widget.moment.creator.profileImageUrl),
+            CircleImage(imageURL: widget.moment.creator.profileImageURL),
             10.horizontalSpace,
             Text(
               widget.moment.creator.username,
@@ -64,7 +64,7 @@ class _MomentCardState extends State<MomentCard> {
         ),
         15.verticalSpace,
         CarouselSlider.builder(
-          itemCount: widget.moment.imageUrls.length,
+          itemCount: widget.moment.imageURLs.length,
           itemBuilder: (context, index, realIndex) {
             return _buildImageCard(index);
           },
@@ -83,12 +83,12 @@ class _MomentCardState extends State<MomentCard> {
           )
         ),
         10.verticalSpace,
-        widget.moment.imageUrls.length > 1
+        widget.moment.imageURLs.length > 1
         ? Padding(
             padding: const EdgeInsets.all(8.0),
             child: AnimatedSmoothIndicator(
               activeIndex: activeIndex,
-              count: widget.moment.imageUrls.length,
+              count: widget.moment.imageURLs.length,
               effect: WormEffect(
                 activeDotColor: Theme.of(context).colorScheme.inverseSurface,
                 dotColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level5, context),
@@ -145,7 +145,7 @@ class _MomentCardState extends State<MomentCard> {
             borderRadius: BorderRadius.circular(15),
           ),
           child: CachedNetworkImage(
-            imageUrl: widget.moment.imageUrls[index],
+            imageUrl: widget.moment.imageURLs[index],
             placeholder: (context, url) => const ImagePlaceholder(),
             fit: BoxFit.cover,
           )

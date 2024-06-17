@@ -26,7 +26,8 @@ class _PlaceCardState extends State<PlaceCard> {
   @override
   void initState(){
     super.initState();
-    isFollowing = widget.place.isFollowing;
+    //TODO: get isFollowing from firebase somehow
+    isFollowing = false;
   }
 
   @override
@@ -57,7 +58,7 @@ class _PlaceCardState extends State<PlaceCard> {
                       borderRadius: BorderRadius.circular(25),
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: widget.place.imageUrl,
+                      imageUrl: widget.place.imageURL,
                       placeholder: (context, url) => const ImagePlaceholder(),
                       fit: BoxFit.cover,
                     )
@@ -76,15 +77,6 @@ class _PlaceCardState extends State<PlaceCard> {
                         widget.place.type,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
-                      widget.place.isPopularWithFriends //TODO: check for: (num friends going / num total friends) instead
-                        ? Text(
-                            'popular with friends',
-                            style: Theme.of(context).textTheme.bodySmall,
-                          )
-                        : Text(
-                            'not popular with friends',
-                            style:  Theme.of(context).textTheme.bodySmall,
-                          ),
                     ],
                   ),
                 ),

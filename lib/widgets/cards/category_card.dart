@@ -36,7 +36,7 @@ class CategoryCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: CachedNetworkImage(
-                    imageUrl: category.imageUrl,
+                    imageUrl: category.imageURL,
                     placeholder: (context, url) => const ImagePlaceholder(),
                     fit: BoxFit.cover,
                   )

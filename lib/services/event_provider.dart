@@ -24,10 +24,10 @@ class EventProvider extends ChangeNotifier{
           username: 'Sunkanm1',
           email: 'beckleysunkanmi@gmail.com',
           phoneNumber: '09053221941',
-          profileImageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLEPh3zspn0JSENlaxTjTC8SbtBtRp26M5bg&usqp=CAU",
+          profileImageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLEPh3zspn0JSENlaxTjTC8SbtBtRp26M5bg&usqp=CAU",
           role: Role.promoter,
         ),
-        imageUrl: "https://t4.ftcdn.net/jpg/02/61/84/27/360_F_261842772_jayDgtm4z4FTuFFzjAALnmLAbXDqsYpS.jpg",
+        imageURL: "https://t4.ftcdn.net/jpg/02/61/84/27/360_F_261842772_jayDgtm4z4FTuFFzjAALnmLAbXDqsYpS.jpg",
         isLiked: false
       ),
       Event(
@@ -41,10 +41,10 @@ class EventProvider extends ChangeNotifier{
           username: 'David',
           email: 'david@gmail.com',
           phoneNumber: '0901267438',
-          profileImageUrl: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
+          profileImageURL: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
           role: Role.promoter,
         ),
-        imageUrl: "https://milcomurban.files.wordpress.com/2016/12/night-club.jpg?w=1124&h=750&crop=1",
+        imageURL: "https://milcomurban.files.wordpress.com/2016/12/night-club.jpg?w=1124&h=750&crop=1",
         isLiked: false
       ),
       Event(
@@ -58,10 +58,10 @@ class EventProvider extends ChangeNotifier{
           username: 'David',
           email: 'david@gmail.com',
           phoneNumber: '0901267438',
-          profileImageUrl: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
+          profileImageURL: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
           role: Role.promoter,
         ),
-        imageUrl: "https://www.morningadvertiser.co.uk/var/wrbm_gb_hospitality/storage/images/_aliases/wrbm_large/publications/hospitality/morningadvertiser.co.uk/article/2023/10/04/why-are-so-many-nightclubs-closing/6152639-1-eng-GB/Why-are-so-many-nightclubs-closing.jpg",
+        imageURL: "https://www.morningadvertiser.co.uk/var/wrbm_gb_hospitality/storage/images/_aliases/wrbm_large/publications/hospitality/morningadvertiser.co.uk/article/2023/10/04/why-are-so-many-nightclubs-closing/6152639-1-eng-GB/Why-are-so-many-nightclubs-closing.jpg",
         isLiked: false
       ),
     ];
@@ -78,10 +78,10 @@ class EventProvider extends ChangeNotifier{
           username: 'David',
           email: 'david@gmail.com',
           phoneNumber: '0901267438',
-          profileImageUrl: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
+          profileImageURL: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
           role: Role.promoter,
         ),
-        imageUrl: "https://www.morningadvertiser.co.uk/var/wrbm_gb_hospitality/storage/images/_aliases/wrbm_large/publications/hospitality/morningadvertiser.co.uk/article/2023/10/04/why-are-so-many-nightclubs-closing/6152639-1-eng-GB/Why-are-so-many-nightclubs-closing.jpg",
+        imageURL: "https://www.morningadvertiser.co.uk/var/wrbm_gb_hospitality/storage/images/_aliases/wrbm_large/publications/hospitality/morningadvertiser.co.uk/article/2023/10/04/why-are-so-many-nightclubs-closing/6152639-1-eng-GB/Why-are-so-many-nightclubs-closing.jpg",
         isLiked: false
       ),
       Event(
@@ -95,10 +95,10 @@ class EventProvider extends ChangeNotifier{
           username: 'David',
           email: 'david@gmail.com',
           phoneNumber: '0901267438',
-          profileImageUrl: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
+          profileImageURL: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D",
           role: Role.promoter,
         ),
-        imageUrl: "https://milcomurban.files.wordpress.com/2016/12/night-club.jpg?w=1124&h=750&crop=1",
+        imageURL: "https://milcomurban.files.wordpress.com/2016/12/night-club.jpg?w=1124&h=750&crop=1",
         isLiked: false
       ),
       Event(
@@ -112,10 +112,10 @@ class EventProvider extends ChangeNotifier{
           username: 'Sunkanm1',
           email: 'beckleysunkanmi@gmail.com',
           phoneNumber: '09053221941',
-          profileImageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLEPh3zspn0JSENlaxTjTC8SbtBtRp26M5bg&usqp=CAU",
+          profileImageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLEPh3zspn0JSENlaxTjTC8SbtBtRp26M5bg&usqp=CAU",
           role: Role.promoter,
         ),
-        imageUrl: "https://t4.ftcdn.net/jpg/02/61/84/27/360_F_261842772_jayDgtm4z4FTuFFzjAALnmLAbXDqsYpS.jpg",
+        imageURL: "https://t4.ftcdn.net/jpg/02/61/84/27/360_F_261842772_jayDgtm4z4FTuFFzjAALnmLAbXDqsYpS.jpg",
         isLiked: false
       ),
     ];

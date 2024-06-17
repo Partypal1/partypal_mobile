@@ -19,11 +19,11 @@ class MomentProvider extends ChangeNotifier{
           username: 'Sunkanm1',
           email: 'beckleysunkanmi@gmail.com',
           phoneNumber: '09053221941',
-          profileImageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLEPh3zspn0JSENlaxTjTC8SbtBtRp26M5bg&usqp=CAU",
+          profileImageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLEPh3zspn0JSENlaxTjTC8SbtBtRp26M5bg&usqp=CAU",
           role: Role.promoter,
         ),
         dateTime: DateTime.now().subtract(const Duration(hours: 1)),
-        imageUrls: [
+        imageURLs: [
           "https://assets.unation.com/wp-content/uploads/2023/02/1-4.png"
         ],
         caption: "Best night ever",
@@ -37,11 +37,11 @@ class MomentProvider extends ChangeNotifier{
           username: 'Dave',
           email: 'adavid@gmail.com',
           phoneNumber: '09053221541',
-          profileImageUrl: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
+          profileImageURL: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
           role: Role.promoter,
         ),
         dateTime: DateTime.now().subtract(const Duration(hours: 1)),
-        imageUrls: [
+        imageURLs: [
           "https://assets.unation.com/wp-content/uploads/2023/02/1-4.png",
           "https://assets.unation.com/wp-content/uploads/2023/02/1-4.png",
         ],

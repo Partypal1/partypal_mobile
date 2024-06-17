@@ -158,7 +158,7 @@ class _EventAppBar extends SliverPersistentHeaderDelegate{
         Opacity( // image
           opacity: min(1, max(0, 1 - shrinkOffset / (maxExtent - minExtent))),
           child: CachedNetworkImage(
-            imageUrl: event.imageUrl,
+            imageUrl: event.imageURL,
             imageBuilder: (context, imageProvider){
               return Container(
                 decoration: BoxDecoration(

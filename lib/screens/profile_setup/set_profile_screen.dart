@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/route_paths.dart';
-import 'package:partypal/services/profile_service.dart';
+import 'package:partypal/services/profile_management_service.dart';
 import 'package:partypal/utils/router_util.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/filled_button.dart';
@@ -28,7 +28,7 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
   bool _isUploadingProfile = false;
   @override
   Widget build(BuildContext context) {
-    final profile = Provider.of<ProfileService>(context);
+    final profile = Provider.of<ProfileManagementService>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SingleChildScrollView(
@@ -43,7 +43,7 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
               child: Column(
                 children: [
                   profile.user != null
-                    ? CircleImage(imageUrl: profile.user!.profileImageUrl, radius: 35,)
+                    ? CircleImage(imageURL: profile.user!.profileImageURL, radius: 35,)
                     : const CircleImageLoading(radius: 35,),
       
                   0.02.sh.verticalSpace,
@@ -69,7 +69,7 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
                                     children: [
                                       0.03.sw.verticalSpace,
                                       profile.user != null
-                                        ? CircleImage(imageUrl: profile.user!.profileImageUrl, radius: 35,)
+                                        ? CircleImage(imageURL: profile.user!.profileImageURL, radius: 35,)
                                         : const CircleImageLoading(radius: 35,),
                                       0.03.sw.verticalSpace,
                                       const ListTile(
@@ -196,7 +196,7 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
   void _uploadProfile() async{
     if(_formKey.currentState?.validate() ?? false){
       setState(() => _isUploadingProfile = true);
-      ProfileService profile = Provider.of<ProfileService>(context, listen: false);
+      ProfileManagementService profile = Provider.of<ProfileManagementService>(context, listen: false);
       bool successful = await profile.updateProfile(
         username: username,
         location: location

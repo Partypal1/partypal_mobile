@@ -47,7 +47,7 @@ class _PersonCardState extends State<PersonCard> {
                     borderRadius: BorderRadius.circular(25),
                   ),
                   child: CachedNetworkImage(
-                    imageUrl: widget.user.profileImageUrl,
+                    imageUrl: widget.user.profileImageURL,
                     placeholder: (context, url) => const ImagePlaceholder(),
                     fit: BoxFit.cover,
                   )

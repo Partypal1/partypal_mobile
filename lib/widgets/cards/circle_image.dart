@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class CircleImage extends StatelessWidget {
-  final String imageUrl;
+  final String imageURL;
   final double radius;
   const CircleImage({
-    required this.imageUrl,
+    required this.imageURL,
     this.radius = 25,
     super.key});
 
@@ -26,7 +26,7 @@ class CircleImage extends StatelessWidget {
               color: Theme.of(context).colorScheme.surfaceVariant
             ),
             child:  CachedNetworkImage(
-              imageUrl: imageUrl,
+              imageUrl: imageURL,
               errorWidget: (context,_, __){
                 return  Container(
                   clipBehavior: Clip.antiAlias,

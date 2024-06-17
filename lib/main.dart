@@ -5,8 +5,8 @@ import 'package:partypal/services/auth_service.dart';
 import 'package:partypal/services/category_provider.dart';
 import 'package:partypal/services/event_provider.dart';
 import 'package:partypal/services/moment_provider.dart';
-import 'package:partypal/services/places_provider.dart';
-import 'package:partypal/services/profile_service.dart';
+import 'package:partypal/services/place_provider_service.dart';
+import 'package:partypal/services/profile_management_service.dart';
 import 'package:partypal/services/session_manager.dart';
 import 'package:partypal/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,11 +32,11 @@ class Partypal extends StatelessWidget {
     return MultiProvider(
       providers: [
         ListenableProvider<AuthService>(create: (_) => AuthService()),
-        ListenableProvider<ProfileService>(create: (_) => ProfileService()),
+        ListenableProvider<ProfileManagementService>(create: (_) => ProfileManagementService()),
         ListenableProvider<CategoryProvider>(create: (_) => CategoryProvider()),
         ListenableProvider<EventProvider>(create: (_) => EventProvider()),
         ListenableProvider<MomentProvider>(create: (_) => MomentProvider()),
-        ListenableProvider<PlacesProvider>(create: (_) => PlacesProvider()),
+        ListenableProvider<PlaceProviderService>(create: (_) => PlaceProviderService()),
         ListenableProvider<SessionManager>(create: (_) => SessionManager()),
       ],
       child: MaterialApp.router(

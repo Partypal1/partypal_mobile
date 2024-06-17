@@ -7,7 +7,7 @@ class PartypalUser{
   final String username;
   final String email;
   final String phoneNumber;
-  final String profileImageUrl;
+  final String profileImageURL;
   final Role role;
   final String? location;
 
@@ -18,7 +18,7 @@ class PartypalUser{
     required this.username,
     required this.email,
     required this.phoneNumber,
-    required this.profileImageUrl,
+    required this.profileImageURL,
     required this.role,
     this.location,
   });
@@ -31,7 +31,7 @@ class PartypalUser{
       username: data['username'] ?? '',
       email: data['email'] ?? '',
       phoneNumber: data['phoneNumber'] ?? '',
-      profileImageUrl: data['profileImageUrl'] ?? '',
+      profileImageURL: data['profileImageURL'] ?? '',
       role: (data['role'] ?? 'user') == 'user' ? Role.user : Role.promoter,
       location: data['location'] ?? '',
     );
@@ -46,7 +46,7 @@ class PartypalUser{
       'username': username,
       'email': email,
       'phoneNumber': phoneNumber,
-      'imageUrl': profileImageUrl,
+      'imageURL': profileImageURL,
       'role': role == Role.user ? 'user' : 'promoter',
       'location': location,
 

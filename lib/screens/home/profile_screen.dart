@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/route_paths.dart';
-import 'package:partypal/services/profile_service.dart';
+import 'package:partypal/services/profile_management_service.dart';
 import 'package:partypal/widgets/app_bars/app_bar.dart';
 import 'package:partypal/widgets/buttons/filled_button.dart';
 import 'package:partypal/widgets/cards/circle_image.dart';
@@ -39,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
   }
   @override
   Widget build(BuildContext context) {
-    ProfileService profile = Provider.of<ProfileService>(context);
+    ProfileManagementService profile = Provider.of<ProfileManagementService>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: RefreshIndicator(
@@ -75,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                       children: [
                         profile.user == null
                         ? const CircleImageLoading(radius: 35,)
-                        : CircleImage(imageUrl: profile.user!.profileImageUrl, radius: 35,),
+                        : CircleImage(imageURL: profile.user!.profileImageURL, radius: 35,),
                         10.horizontalSpace,
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
