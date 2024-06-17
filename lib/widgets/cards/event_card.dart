@@ -187,7 +187,7 @@ class EventCardLoading extends StatelessWidget {
                     width: 150,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
+                        color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context),
                         borderRadius: BorderRadius.circular(25)
             
                       ),
@@ -199,7 +199,7 @@ class EventCardLoading extends StatelessWidget {
                     width: 175,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
+                        color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context),
                         borderRadius: BorderRadius.circular(10)
             
                       ),
@@ -211,7 +211,7 @@ class EventCardLoading extends StatelessWidget {
                     width: 80,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
+                        color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context),
                         borderRadius: BorderRadius.circular(10)
             
                       ),
@@ -223,7 +223,7 @@ class EventCardLoading extends StatelessWidget {
                     width: 100,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
+                        color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context),
                         borderRadius: BorderRadius.circular(10)
                 
                       ),

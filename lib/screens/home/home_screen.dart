@@ -221,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index){
                           return Padding(
                             padding: EdgeInsets.symmetric(horizontal: 0.02.sw),
-                            child: eventProvider.isFetching
+                            child: categoryProvider.isFetching
                             ? const CategoryCardLoading() 
                             : CategoryCard(category: categoryProvider.categories[index]),
                           );

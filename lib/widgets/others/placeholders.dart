@@ -46,7 +46,7 @@ class TextPlaceHolder extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(height/2),
-          color: color ?? Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context)
+          color: color ?? Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
         ),
       )
     );

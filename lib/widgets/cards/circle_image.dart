@@ -23,7 +23,7 @@ class CircleImage extends StatelessWidget {
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(radius),
-              color: Theme.of(context).colorScheme.surfaceVariant
+              color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level1, context)
             ),
             child:  CachedNetworkImage(
               imageUrl: imageURL,
@@ -38,7 +38,7 @@ class CircleImage extends StatelessWidget {
                     child: Icon(
                       Icons.error_rounded,
                       size: radius,
-                      color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level2, context),
+                      color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context),
                     ),
                   ),
                 );
@@ -82,7 +82,7 @@ class CircleImageLoading extends StatelessWidget {
             child: Icon(
               Icons.person_rounded,
               size: radius,
-              color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context),
+              color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context),
             ),
           ),
         ),

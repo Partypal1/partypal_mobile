@@ -116,8 +116,6 @@ class UIColors{
 
   Color get surface => darkMode ? _neutralColor[10]! : _neutralColor[99]!;
   Color get onSurface => darkMode ? _neutralColor[90]! : _neutralColor[10]!;
-  Color get surfaceVariant => darkMode ? _neutralVariantColor[30]! : _neutralVariantColor[90]!;
-  Color get onSurfaceVariant => darkMode ? _neutralVariantColor[80]! : _neutralVariantColor[30]!;
   Color get inverseSurface => darkMode ? _neutralColor[90]! : _neutralColor[20]!;
   Color get onInverseSurface => darkMode ? _neutralColor[5]! : _neutralColor[95]!;
 

@@ -124,7 +124,7 @@ class CategoryCardLoading extends StatelessWidget {
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(11),
-                            color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level3, context)
+                            color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
                           ),
                         )
                       ), 
@@ -136,7 +136,7 @@ class CategoryCardLoading extends StatelessWidget {
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(7),
-                            color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level3, context)
+                            color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
                           ),
                         )
                       ),

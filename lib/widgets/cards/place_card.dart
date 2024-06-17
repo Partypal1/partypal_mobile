@@ -126,7 +126,7 @@ class PlaceLoadingCard extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
-                  color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context)
+                  color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
                 ),
               )
             ),
@@ -142,7 +142,7 @@ class PlaceLoadingCard extends StatelessWidget {
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(7),
-                      color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context)
+                      color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
                     ),
                   )
                 ),
@@ -154,7 +154,7 @@ class PlaceLoadingCard extends StatelessWidget {
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(7),
-                      color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context)
+                      color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
                     ),
                   )
                 ),
@@ -166,7 +166,7 @@ class PlaceLoadingCard extends StatelessWidget {
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(7),
-                      color: Theme.of(context).colorScheme.surfaceVariant.tonalElevation(Elevation.level1, context)
+                      color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
                     ),
                   )
                 ),
