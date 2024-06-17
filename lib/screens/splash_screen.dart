@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/asset_paths.dart';
 import 'package:partypal/constants/route_paths.dart';
+import 'package:partypal/services/auth_service.dart';
 import 'package:partypal/services/session_manager.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
           GoRouter.of(context).pushReplacement(RoutePaths.onboaringScreen);
         }
       } 
-      else if(mounted && await Provider.of<SessionManager>(context, listen: false).accessToken == null){
+      else if(mounted && Provider.of<AuthService>(context, listen: false).user == null){
         if(mounted){
           GoRouter.of(context).pushReplacement(RoutePaths.selectUserProfileScreen);
         }

@@ -7,6 +7,6 @@ class PreferenceKeys{
 class SecureStorageKeys{
   SecureStorageKeys._();
   /// define keys of values that need to be secured here
-  static String accessToken = 'accessToken';
-  static String refreshToken = 'refreshToken';
+  // static String accessToken = 'accessToken';
+  // static String refreshToken = 'refreshToken';
 }

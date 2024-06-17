@@ -21,19 +21,19 @@ class SessionManager extends ChangeNotifier{
     preferences.setBool(PreferenceKeys.isFirstRun, value);
   }
 
-  Future<void> setAccessToken(String? token) async{
-    flutterSecureStorage.write(key: SecureStorageKeys.accessToken, value: token);
-  }
+  // Future<void> setAccessToken(String? token) async{
+  //   flutterSecureStorage.write(key: SecureStorageKeys.accessToken, value: token);
+  // }
 
-  Future<String?> get accessToken async {
-    return flutterSecureStorage.read(key: SecureStorageKeys.accessToken);
-  }
+  // Future<String?> get accessToken async {
+  //   return flutterSecureStorage.read(key: SecureStorageKeys.accessToken);
+  // }
 
-  Future<void> setRefreshToken(String? token) async{
-    flutterSecureStorage.write(key: SecureStorageKeys.refreshToken, value: token);
-  }
+  // Future<void> setRefreshToken(String? token) async{
+  //   flutterSecureStorage.write(key: SecureStorageKeys.refreshToken, value: token);
+  // }
 
-  Future<String?> get refreshToken async {
-    return flutterSecureStorage.read(key: SecureStorageKeys.refreshToken);
-  }
+  // Future<String?> get refreshToken async {
+  //   return flutterSecureStorage.read(key: SecureStorageKeys.refreshToken);
+  // }
 }
