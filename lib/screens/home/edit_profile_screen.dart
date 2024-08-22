@@ -49,15 +49,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     final profile = Provider.of<ProfileManagementService>(context, listen: false);
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        // backgroundColor: Theme.of(context).colorScheme.surface,
         leading: IconButton(
           icon: const Icon(CupertinoIcons.back),
           onPressed: () => context.pop(),
         ),
         centerTitle: true,
         title: Text(
-            'Edit profile',
+          'Edit profile',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold
           ),
