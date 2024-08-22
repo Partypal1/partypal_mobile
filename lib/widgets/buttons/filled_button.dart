@@ -28,7 +28,9 @@ class CustomFilledButton extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: backgroundColor ?? Theme.of(context).colorScheme.inverseSurface
+                  color: onTap == null
+                    ? Theme.of(context).colorScheme.inverseSurface.withOpacity(0.5)
+                    : backgroundColor ?? Theme.of(context).colorScheme.inverseSurface
               ),
               child: Padding(
                 padding: iconData == null
@@ -42,7 +44,9 @@ class CustomFilledButton extends StatelessWidget {
                       ? Icon(
                         iconData,
                         size: 18,
-                        color: labelColor ?? Theme.of(context).colorScheme.onInverseSurface,
+                        color: onTap == null
+                          ? Theme.of(context).colorScheme.onInverseSurface.withOpacity(0.5)
+                          : labelColor ?? Theme.of(context).colorScheme.onInverseSurface,
                       )
                       : const SizedBox.shrink(),
           
@@ -53,7 +57,9 @@ class CustomFilledButton extends StatelessWidget {
                       Text(
                         label,
                         style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: labelColor ?? Theme.of(context).colorScheme.onInverseSurface
+                          color: onTap == null
+                            ? Theme.of(context).colorScheme.onInverseSurface.withOpacity(0.5)
+                            : labelColor ?? Theme.of(context).colorScheme.onInverseSurface,
                         ),
                       ),
                     ],

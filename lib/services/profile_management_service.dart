@@ -99,6 +99,7 @@ class ProfileManagementService extends ChangeNotifier{
           'location': location ?? data?['location']
         }).then((_) {
           log('profile updated');
+          fetchCurrentUserProfile();
           return true;
         });
       } else {
