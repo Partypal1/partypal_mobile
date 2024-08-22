@@ -113,14 +113,6 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
                                           });
                                         },
                                       ),
-                                      // 0.03.sw.verticalSpace,
-                                      // CustomFilledButton(
-                                      //   label: 'Save changes',
-                                      //   onTap: (){
-                                      //     //TODO: save changes
-                                      //     GoRouter.of(context).pop();
-                                      //   },
-                                      // ),
                                       0.03.sw.verticalSpace
                                     ],
                                   ),
