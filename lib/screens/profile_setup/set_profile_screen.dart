@@ -1,9 +1,11 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/services/profile_management_service.dart';
 import 'package:partypal/utils/router_util.dart';
@@ -26,6 +28,16 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
   String location = '';
   String binaryImage = '';
   bool _isUploadingProfile = false;
+  final ImagePicker _imagePicker = ImagePicker();
+  XFile? selectedImage;
+
+  Future getImage() async {
+    final image = await _imagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      selectedImage = image ?? selectedImage;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final profile = Provider.of<ProfileManagementService>(context);
@@ -43,9 +55,23 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
               child: Column(
                 children: [
                   profile.user != null
-                    ? CircleImage(imageURL: profile.user!.profileImageURL, radius: 35,)
-                    : const CircleImageLoading(radius: 35,),
-      
+                  ? selectedImage == null
+                    ? CircleImage(imageURL: profile.user?.profileImageURL, radius: 35,)
+                    : SizedBox.square(
+                      dimension: 70,
+                      child: Container(
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(35)
+                        ),
+                        child: Image.file(
+                          File(selectedImage!.path),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
+                  : const CircleImageLoading(radius: 35,),
+
                   0.02.sh.verticalSpace,
       
                   GestureDetector(
@@ -67,28 +93,34 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
                                   padding: EdgeInsets.all(0.03.sw),
                                   child: Column(
                                     children: [
+
                                       0.03.sw.verticalSpace,
-                                      profile.user != null
-                                        ? CircleImage(imageURL: profile.user!.profileImageURL, radius: 35,)
-                                        : const CircleImageLoading(radius: 35,),
-                                      0.03.sw.verticalSpace,
-                                      const ListTile(
-                                        leading: Icon(Icons.image_outlined),
-                                        title: Text('Choose from library'),
-                                      ),
-                                      0.02.sw.verticalSpace,
-                                      const ListTile(
-                                        leading: Icon(CupertinoIcons.delete),
-                                        title: Text('Remove current picture'),
-                                      ),
-                                      0.03.sw.verticalSpace,
-                                      CustomFilledButton(
-                                        label: 'Save changes',
+                                      ListTile(
+                                        leading: const Icon(Icons.image_outlined),
+                                        title: const Text('Choose from library'),
                                         onTap: (){
-                                          //TODO: save changes
-                                          GoRouter.of(context).pop();
+                                          log('here');
+                                          getImage();
                                         },
                                       ),
+                                      0.02.sw.verticalSpace,
+                                      ListTile(
+                                        leading: const Icon(CupertinoIcons.delete),
+                                        title: const Text('Remove current picture'),
+                                        onTap: (){
+                                          setState(() {
+                                            selectedImage = null;
+                                          });
+                                        },
+                                      ),
+                                      // 0.03.sw.verticalSpace,
+                                      // CustomFilledButton(
+                                      //   label: 'Save changes',
+                                      //   onTap: (){
+                                      //     //TODO: save changes
+                                      //     GoRouter.of(context).pop();
+                                      //   },
+                                      // ),
                                       0.03.sw.verticalSpace
                                     ],
                                   ),
@@ -199,6 +231,7 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
       ProfileManagementService profile = Provider.of<ProfileManagementService>(context, listen: false);
       bool successful = await profile.updateProfile(
         username: username,
+        imagePath: selectedImage?.path,
         location: location
       );
       setState(() => _isUploadingProfile = false);

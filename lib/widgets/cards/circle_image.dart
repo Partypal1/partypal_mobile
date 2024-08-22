@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class CircleImage extends StatelessWidget {
-  final String imageURL;
+  final String? imageURL;
   final double radius;
   const CircleImage({
     required this.imageURL,
@@ -25,36 +25,41 @@ class CircleImage extends StatelessWidget {
               borderRadius: BorderRadius.circular(radius),
               color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level1, context)
             ),
-            child:  CachedNetworkImage(
-              imageUrl: imageURL,
-              errorWidget: (context,_, __){
-                return  Container(
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(radius),
-                    color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level4, context)
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.error_rounded,
-                      size: radius,
-                      color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context),
+            child: imageURL == null
+            ? _errorWidget(context)
+            : CachedNetworkImage(
+                imageUrl: imageURL!,
+                errorWidget: (context, _, __){
+                  return _errorWidget(context);
+                },
+                imageBuilder: (context, imageProvider){
+                  return Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover
+                      )
                     ),
-                  ),
-                );
-              },
-              imageBuilder: (context, imageProvider){
-                return Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.cover
-                    )
-                  ),
-                );
-              },
-            )
+                  );
+                },
+              )
           ),
+        ),
+      ),
+    );
+  }
+  Widget _errorWidget(context){
+    return Container(
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(radius),
+          color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
+      ),
+      child: Center(
+        child: Icon(
+            Icons.person_rounded,
+            size: radius,
+            color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level5, context)
         ),
       ),
     );

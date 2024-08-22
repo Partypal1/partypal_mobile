@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:partypal/widgets/others/tonal_elevation.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
   final List<String> iconPaths;
@@ -65,59 +66,63 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> with SingleTick
       position: _offsetAnimation,
       child: SizeTransition(
         sizeFactor: _sizeAnimation,
-        child: SizedBox(
-          height: 80,
-          width: double.infinity,
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.only(topLeft: Radius.elliptical(20, 10), topRight: Radius.elliptical(20, 10))
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 12, bottom: 16),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(widget.iconPaths.length, (index) {
-                    return GestureDetector(
-                      onTap: () {
-                        widget.onTap?.call(index);
-                        setState(() {
-                          _currentIndex = index;
-                        });
-                      },
-                      child: Container(
-                        constraints: const BoxConstraints(minWidth: 40),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox.square(
-                              dimension: 24,
-                              child: SvgPicture.asset(
-                                widget.iconPaths[index],
-                                colorFilter: index == _currentIndex
-                                    ? const ColorFilter.mode(
-                                        Colors.white, BlendMode.srcIn)
-                                    : ColorFilter.mode(
-                                        Colors.white.withOpacity(0.32),
-                                        BlendMode.srcIn),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context),
+                // borderRadius: const BorderRadius.only(topLeft: Radius.elliptical(20, 10), topRight: Radius.elliptical(20, 10))
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 12, bottom: 16),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: List.generate(widget.iconPaths.length, (index) {
+                      return GestureDetector(
+                        onTap: () {
+                          widget.onTap?.call(index);
+                          setState(() {
+                            _currentIndex = index;
+                          });
+                        },
+                        child: Container(
+                          constraints: const BoxConstraints(minWidth: 40),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SizedBox.square(
+                                dimension: 20,
+                                child: SvgPicture.asset(
+                                  widget.iconPaths[index],
+                                  colorFilter: index == _currentIndex
+                                      ? ColorFilter.mode(
+                                          Theme.of(context).colorScheme.onSurface,
+                                          BlendMode.srcIn
+                                        )
+                                      : ColorFilter.mode(
+                                          Theme.of(context).colorScheme.onSurface.withOpacity(0.32),
+                                          BlendMode.srcIn
+                                        ),
+                                ),
                               ),
-                            ),
-                            8.verticalSpace,
-                            Text(
-                              widget.labels[index],
-                              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                                color: index == _currentIndex
-                                  ? Colors.white
-                                  : Colors.white.withOpacity(0.32)
-                              ),
-                            )
-                          ],
+                              8.verticalSpace,
+                              Text(
+                                widget.labels[index],
+                                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                  color: index == _currentIndex
+                                    ? Theme.of(context).colorScheme.onSurface
+                                    : Theme.of(context).colorScheme.onSurface.withOpacity(0.32)
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  })),
+                      );
+                    })),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

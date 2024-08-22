@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final categoryProvider = Provider.of<CategoryProvider>(context);
     final profileService = Provider.of<ProfileManagementService>(context);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level1, context),
       body: RefreshIndicator(
           onRefresh: () async{
             setState(() => _isRefreshing = true);

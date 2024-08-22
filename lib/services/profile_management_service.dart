@@ -1,13 +1,16 @@
 import 'dart:developer';
-
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:partypal/models/user_model.dart';
 import 'package:partypal/utils/toasts.dart';
 
 class ProfileManagementService extends ChangeNotifier{
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
+
   PartypalUser? _user;
   User? get _currentFirebaseUser => FirebaseAuth.instance.currentUser;
   bool get isSignedIn => _currentFirebaseUser != null;
@@ -63,7 +66,7 @@ class ProfileManagementService extends ChangeNotifier{
     String? email,
     Role? role,
     String? username,
-    String? profileImageURL,
+    String? imagePath,
     String? location
     
   }) async {
@@ -74,6 +77,13 @@ class ProfileManagementService extends ChangeNotifier{
         .doc(_currentFirebaseUser!.uid)
         .get()
         .then((value) => value.data());
+
+        final imageRef = _storage.ref().child('profileImages/${_currentFirebaseUser!.uid}.jpg');
+        String? profileImageURL;
+        if(imagePath != null){
+          await imageRef.putFile(File(imagePath));
+          profileImageURL = await imageRef.getDownloadURL();
+        }
 
         return _firestore
         .collection('users')

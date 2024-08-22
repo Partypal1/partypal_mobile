@@ -24,7 +24,7 @@ class MomentProvider extends ChangeNotifier{
         ),
         dateTime: DateTime.now().subtract(const Duration(hours: 1)),
         imageURLs: [
-          "https://assets.unation.com/wp-content/uploads/2023/02/1-4.png"
+          "https://static01.nyt.com/images/2022/02/15/fashion/15NYFWPARTIES-laquan-lead/15NYFWPARTIES-laquan-lead-mediumSquareAt3X.jpg"
         ],
         caption: "Best night ever",
         isLiked: false
@@ -42,8 +42,8 @@ class MomentProvider extends ChangeNotifier{
         ),
         dateTime: DateTime.now().subtract(const Duration(hours: 1)),
         imageURLs: [
-          "https://assets.unation.com/wp-content/uploads/2023/02/1-4.png",
-          "https://assets.unation.com/wp-content/uploads/2023/02/1-4.png",
+          "https://static01.nyt.com/images/2022/02/15/fashion/15NYFWPARTIES-laquan-lead/15NYFWPARTIES-laquan-lead-mediumSquareAt3X.jpg",
+          "https://static01.nyt.com/images/2022/02/15/fashion/15NYFWPARTIES-laquan-lead/15NYFWPARTIES-laquan-lead-mediumSquareAt3X.jpg",
         ],
         caption: "Such a nice place",
         isLiked: false
