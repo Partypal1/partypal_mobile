@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _scrollController = ScrollController();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<EventProvider>(context, listen: false).fetchEvents(context);// TODO: keep an eye on this
+      Provider.of<EventProvider>(context, listen: false).fetchEvents(context);
       Provider.of<CategoryProvider>(context, listen: false).fetchCategories();
       _fetchHighEnergyPlaces();
     });

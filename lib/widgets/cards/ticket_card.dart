@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:partypal/models/event_model.dart';
+import 'package:partypal/services/profile_management_service.dart';
 import 'package:partypal/utils/toasts.dart';
 import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
+import 'package:provider/provider.dart';
 
 class TicketCard extends StatefulWidget {
   final Event event;
@@ -101,10 +103,25 @@ class _TicketCardState extends State<TicketCard> {
                               size: 14,
                             ),
                             3.horizontalSpace,
-                            Text(
-                              widget.event.creator,
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Theme.of(context).colorScheme.onSurface
+                            SizedBox(
+                              width: 0.25,
+                              child: FutureBuilder(
+                                future: Provider.of<ProfileManagementService>(context)
+                                    .getProfile(widget.event.creator),
+                                builder: (context, snapshot) {
+                                  return snapshot.data == null
+                                  ? const Opacity(
+                                        opacity: 0.5,
+                                        child: TextPlaceHolder(height: 12, width: 80)
+                                    )
+                                  : Text(
+                                      snapshot.data!.username,
+                                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                          color: Colors.white
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    );
+                                }
                               ),
                             ),
                             const Expanded(child: SizedBox()),
