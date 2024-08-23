@@ -5,9 +5,11 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/models/event_model.dart';
+import 'package:partypal/services/profile_management_service.dart';
 import 'package:partypal/utils/toasts.dart';
 import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
+import 'package:provider/provider.dart';
 
 class EventCard extends StatefulWidget {
   final Event event;
@@ -109,11 +111,22 @@ class _EventCardState extends State<EventCard> {
                               size: 16,
                             ),
                             5.horizontalSpace,
-                            Text(
-                              widget.event.creator.username,
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Colors.white
-                              ),
+                            FutureBuilder(
+                              future: Provider.of<ProfileManagementService>(context)
+                                .getProfile(widget.event.creator),
+                              builder: (context, snapshot) {
+                                return snapshot.data == null
+                                ? const Opacity(
+                                    opacity: 0.5,
+                                    child: TextPlaceHolder(height: 12, width: 80)
+                                  )
+                                : Text(
+                                    snapshot.data!.username,
+                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                      color: Colors.white
+                                  ),
+                                );
+                              }
                             ),
                             const Expanded(child: SizedBox()),
                             GestureDetector(

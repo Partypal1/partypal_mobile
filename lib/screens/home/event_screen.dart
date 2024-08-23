@@ -7,9 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:partypal/constants/route_paths.dart';
 import 'package:partypal/models/event_model.dart';
+import 'package:partypal/services/profile_management_service.dart';
 import 'package:partypal/widgets/cards/person_card.dart';
 import 'package:partypal/widgets/others/placeholders.dart';
 import 'package:partypal/widgets/others/tonal_elevation.dart';
+import 'package:provider/provider.dart';
 
 class EventScreen extends StatelessWidget {
   final Event event;
@@ -121,7 +123,14 @@ class EventScreen extends StatelessWidget {
                       horizontal: 0.03.sw,
                       vertical: 0.01.sw
                     ),
-                    child: PersonCard(user: event.creator),
+                    child: FutureBuilder(
+                      future: Provider.of<ProfileManagementService>(context).getProfile(event.creator),
+                      builder: (context, snapshot) {
+                        return snapshot.data != null
+                          ? PersonCard(user: snapshot.data!)
+                          : const PersonLoadingCard();
+                      }
+                    ),
                   ),
                 ],
               ),

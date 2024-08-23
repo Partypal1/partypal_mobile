@@ -25,12 +25,13 @@ class _HomeScreenState extends State<HomeScreen> {
   late ScrollController _scrollController;
   bool _isRefreshing = false;
   List<Place>? highEnergyPlaces;
+
   @override
   void initState(){
     super.initState();
     _scrollController = ScrollController();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<EventProvider>(context, listen: false).fetchEvents();
+      Provider.of<EventProvider>(context, listen: false).fetchEvents(context);// TODO: keep an eye on this
       Provider.of<CategoryProvider>(context, listen: false).fetchCategories();
       _fetchHighEnergyPlaces();
     });
@@ -76,209 +77,218 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scrim(
           active: _isRefreshing,
           child: CustomScrollView(
-            controller: _scrollController,
-            physics: _isRefreshing ? const NeverScrollableScrollPhysics() : null,
-            slivers: [
-              const HomeAppBar(),
-            
-              SliverToBoxAdapter( // events happening this week
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 0.03.sw, top: 0.03.sw),
-                      child: eventProvider.isFetching 
-                      ? const TextPlaceHolder(height: 20, width: 200)
-                      : Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                            child: Text(
-                              'Events happening this week',
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              ),
-                            ),
-                          ),
-                      ),
-                    ),
-                    0.03.sw.verticalSpace,
-                    SizedBox(
-                      height: 200,
-                      child: ListView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: 0.01.sw),
-                        scrollDirection: Axis.horizontal,
-                        physics: eventProvider.isFetching
-                          ? const NeverScrollableScrollPhysics()
-                          : const BouncingScrollPhysics(),
-                        itemCount: eventProvider.isFetching
-                          ? 3
-                          : eventProvider.eventsHappeningThisWeek.length,
-                        itemBuilder: (context, index){
-                          return Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 0.02.sw),
-                            child: eventProvider.isFetching
-                            ? const EventCardLoading() 
-                            : EventCard(event: eventProvider.eventsHappeningThisWeek[index]),
-                          );
-                        }
-                      )
-                    ),
-                  ]
-                )
-              ),
-             
-              SliverToBoxAdapter(child: 0.05.sw.verticalSpace),
-            
-              SliverToBoxAdapter( // events based on your location
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 0.03.sw, top: 0.03.sw),
-                      child: 
-                        eventProvider.isFetching
-                        ? const TextPlaceHolder(height: 20, width: 180)
-                        : Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                            child: Text(
-                              'Events based on your location',
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              ),
-                            ),
-                          ),
-                      ),
-                    ),
-                    0.03.sw.verticalSpace,
-                    SizedBox(
-                      height: 200,
-                      child: ListView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: 0.01.sw),
-                        scrollDirection: Axis.horizontal,
-                        physics: eventProvider.isFetching
-                          ? const NeverScrollableScrollPhysics()
-                          : const BouncingScrollPhysics(),
-                        itemCount: eventProvider.isFetching
-                          ? 3
-                          : eventProvider.eventsBasedOnYourLocation.length,
-                        itemBuilder: (context, index){
-                          return Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 0.02.sw),
-                            child: eventProvider.isFetching
-                            ? const EventCardLoading() 
-                            : EventCard(event: eventProvider.eventsBasedOnYourLocation[index]),
-                          );
-                        }
-                      )
-                    ),
-                  ]
-                )
-              ),
-             
-              SliverToBoxAdapter(child: 0.05.sw.verticalSpace),
-              SliverToBoxAdapter( // categories
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 0.03.sw, top: 0.03.sw),
-                      child: categoryProvider.isFetching
-                      ? const TextPlaceHolder(height: 20, width: 120)
-                      : Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                            child: Text(
-                              'Categories',
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              ),
-                            ),
-                        ),
-                      ),
-                    ),
-                    0.03.sw.verticalSpace,
-                    SizedBox(
-                      height: 250,
-                      child: ListView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: 0.01.sw),
-                        scrollDirection: Axis.horizontal,
-                        physics: categoryProvider.isFetching
-                          ? const NeverScrollableScrollPhysics()
-                          : const BouncingScrollPhysics(),
-                        itemCount: categoryProvider.isFetching
-                          ? 3
-                          : categoryProvider.categories.length,
-                        itemBuilder: (context, index){
-                          return Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 0.02.sw),
-                            child: categoryProvider.isFetching
-                            ? const CategoryCardLoading() 
-                            : CategoryCard(category: categoryProvider.categories[index]),
-                          );
-                        }
-                      )
-                    ),
-                  ]
-                )
-              ),
-             
-              SliverToBoxAdapter(child: 0.05.sw.verticalSpace),
-          
-              SliverToBoxAdapter( // high energy places
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 0.03.sw, top: 0.03.sw),
-                      child: highEnergyPlaces == null 
-                      ? const TextPlaceHolder(height: 20, width: 180)
-                      : Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level2, context)
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                            child: Text(
-                              'High energy places',
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              ),
-                            ),
-                          ),
+                controller: _scrollController,
+                // physics: snapshot.data == null ? const NeverScrollableScrollPhysics() : null,
+                slivers: [
+                  const HomeAppBar(),
+
+                  SliverToBoxAdapter( // events happening this week
+                        child: FutureBuilder(
+                          future: eventProvider.fetchEvents(context),
+                          builder: (context, snapshot) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(left: 0.03.sw, top: 0.03.sw),
+                                  child: snapshot.data == null
+                                  ? const TextPlaceHolder(height: 20, width: 200)
+                                  : Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                        child: Text(
+                                          'Events happening this week',
+                                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                          ),
+                                        ),
+                                      ),
+                                  ),
+                                ),
+                                0.03.sw.verticalSpace,
+                                SizedBox(
+                                  height: 200,
+                                  child: ListView.builder(
+                                    padding: EdgeInsets.symmetric(horizontal: 0.01.sw),
+                                    scrollDirection: Axis.horizontal,
+                                    physics: snapshot.data == null
+                                      ? const NeverScrollableScrollPhysics()
+                                      : const BouncingScrollPhysics(),
+                                    itemCount: snapshot.data == null
+                                      ? 3
+                                      : snapshot.data!.length,
+                                    itemBuilder: (context, index){
+                                      return Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: 0.02.sw),
+                                        child: snapshot.data == null
+                                        ? const EventCardLoading()
+                                        : EventCard(event: snapshot.data![index]),
+                                      );
+                                    }
+                                  )
+                                ),
+                              ]
+                            );
+                          }
                         )
-                    ),
-                    0.03.sw.verticalSpace,
-                  ]
-                )
+                      ),
+
+                  SliverToBoxAdapter(child: 0.05.sw.verticalSpace),
+
+                  SliverToBoxAdapter( // events based on your location
+                    child: FutureBuilder(
+                      future: eventProvider.fetchEvents(context),
+                      builder: (context, snapshot){return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 0.03.sw, top: 0.03.sw),
+                            child:
+                              snapshot.data == null
+                              ? const TextPlaceHolder(height: 20, width: 180)
+                              : Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                  child: Text(
+                                    'Events based on your location',
+                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    ),
+                                  ),
+                                ),
+                            ),
+                          ),
+                          0.03.sw.verticalSpace,
+                          SizedBox(
+                            height: 200,
+                            child: ListView.builder(
+                              padding: EdgeInsets.symmetric(horizontal: 0.01.sw),
+                              scrollDirection: Axis.horizontal,
+                              physics: snapshot.data == null
+                                ? const NeverScrollableScrollPhysics()
+                                : const BouncingScrollPhysics(),
+                              itemCount: snapshot.data == null
+                                ? 3
+                                : snapshot.data!.length,
+                              itemBuilder: (context, index){
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 0.02.sw),
+                                  child: snapshot.data == null
+                                  ? const EventCardLoading()
+                                  : EventCard(event: snapshot.data![index]),
+                                );
+                              }
+                            )
+                          ),
+                        ]
+                      );
+                      }
+                    )
+                  ),
+
+                  SliverToBoxAdapter(child: 0.05.sw.verticalSpace),
+                  SliverToBoxAdapter( // categories
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 0.03.sw, top: 0.03.sw),
+                          child: categoryProvider.isFetching
+                          ? const TextPlaceHolder(height: 20, width: 120)
+                          : Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                child: Text(
+                                  'Categories',
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  ),
+                                ),
+                            ),
+                          ),
+                        ),
+                        0.03.sw.verticalSpace,
+                        SizedBox(
+                          height: 250,
+                          child: ListView.builder(
+                            padding: EdgeInsets.symmetric(horizontal: 0.01.sw),
+                            scrollDirection: Axis.horizontal,
+                            physics: categoryProvider.isFetching
+                              ? const NeverScrollableScrollPhysics()
+                              : const BouncingScrollPhysics(),
+                            itemCount: categoryProvider.isFetching
+                              ? 3
+                              : categoryProvider.categories.length,
+                            itemBuilder: (context, index){
+                              return Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 0.02.sw),
+                                child: categoryProvider.isFetching
+                                ? const CategoryCardLoading()
+                                : CategoryCard(category: categoryProvider.categories[index]),
+                              );
+                            }
+                          )
+                        ),
+                      ]
+                    )
+                  ),
+
+                  SliverToBoxAdapter(child: 0.05.sw.verticalSpace),
+
+                  SliverToBoxAdapter( // high energy places
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 0.03.sw, top: 0.03.sw),
+                          child: highEnergyPlaces == null
+                          ? const TextPlaceHolder(height: 20, width: 180)
+                          : Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Theme.of(context).colorScheme.surface.tonalElevation(Elevation.level3, context)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                child: Text(
+                                  'High energy places',
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  ),
+                                ),
+                              ),
+                            )
+                        ),
+                        0.03.sw.verticalSpace,
+                      ]
+                    )
+                  ),
+                  SliverList.builder(
+                      itemCount: highEnergyPlaces == null
+                        ? 3
+                        : highEnergyPlaces!.length,
+                      itemBuilder: (context, index){
+                        return Padding(
+                          padding: EdgeInsets.symmetric(vertical: 0.02.sw, horizontal: 0.03.sw),
+                          child: highEnergyPlaces == null
+                          ? const PlaceLoadingCard()
+                          : PlaceCard(place: highEnergyPlaces![index]),
+                        );
+                      }
+                  ),
+
+                  SliverToBoxAdapter(child: 0.03.sw.verticalSpace),
+
+                ],
               ),
-              SliverList.builder(
-                  itemCount: highEnergyPlaces == null
-                    ? 3
-                    : highEnergyPlaces!.length,
-                  itemBuilder: (context, index){
-                    return Padding(
-                      padding: EdgeInsets.symmetric(vertical: 0.02.sw, horizontal: 0.03.sw),
-                      child: highEnergyPlaces == null
-                      ? const PlaceLoadingCard() 
-                      : PlaceCard(place: highEnergyPlaces![index]),
-                    );
-                  }
-              ),
-             
-              SliverToBoxAdapter(child: 0.03.sw.verticalSpace),
-          
-            ],
-          ),
         ),
       ),
     );

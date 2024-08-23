@@ -102,7 +102,7 @@ class _TicketCardState extends State<TicketCard> {
                             ),
                             3.horizontalSpace,
                             Text(
-                              widget.event.creator.username,
+                              widget.event.creator,
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: Theme.of(context).colorScheme.onSurface
                               ),

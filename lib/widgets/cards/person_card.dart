@@ -92,8 +92,8 @@ class _PersonCardState extends State<PersonCard> {
   }
 }
 
-class PeopleLoadingCard extends StatelessWidget {
-  const PeopleLoadingCard({super.key});
+class PersonLoadingCard extends StatelessWidget {
+  const PersonLoadingCard({super.key});
 
   @override
   Widget build(BuildContext context) {
